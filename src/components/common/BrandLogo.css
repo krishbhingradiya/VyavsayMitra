@@ -1,0 +1,118 @@
+/* ==========================================================================
+   VYAVSAYMITRA Brand Logo Styles
+   Faithfully matching the exact brandmark from the reference image:
+   - Orange bulb arch + Green organic leaves emblem
+   - VYAVSAY in deep Navy (#0B2545) + MITRA in Forest Green (#16834A)
+   - Tagline: "Market. Money. Mitra." in slate grey (#5A6E7C)
+   ========================================================================== */
+
+.brand-logo {
+  display: inline-flex;
+  align-items: center;
+  gap: 12px;
+  user-select: none;
+}
+
+.brand-logo-link {
+  display: inline-flex;
+  text-decoration: none;
+  color: inherit;
+}
+
+.brand-logo-link:hover .brand-emblem,
+.brand-logo-link:hover .brand-logo-img {
+  transform: scale(1.02);
+  transition: transform 0.2s ease;
+}
+
+.brand-emblem,
+.brand-logo-img {
+  display: block;
+  flex-shrink: 0;
+  transition: transform 0.2s ease;
+  user-select: none;
+}
+
+.brand-logo__text {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}
+
+.brand-logo__title {
+  font-family: 'Plus Jakarta Sans', 'Inter', -apple-system, sans-serif;
+  font-weight: 800;
+  line-height: 1.05;
+  letter-spacing: -0.02em;
+  display: flex;
+  align-items: baseline;
+}
+
+.brand-logo__vyavsay {
+  color: #0B2545;
+}
+
+.brand-logo__mitra {
+  color: #16834A;
+}
+
+.brand-logo__tagline {
+  font-family: 'Inter', -apple-system, sans-serif;
+  font-weight: 600;
+  color: #5A6E7C;
+  letter-spacing: 0.015em;
+  line-height: 1.2;
+  margin-top: 2px;
+}
+
+/* Size Variants */
+.brand-logo--sm .brand-logo__title {
+  font-size: 1.05rem;
+}
+.brand-logo--sm .brand-logo__tagline {
+  font-size: 0.65rem;
+}
+.brand-logo--sm {
+  gap: 8px;
+}
+
+.brand-logo--md .brand-logo__title {
+  font-size: 1.32rem;
+}
+.brand-logo--md .brand-logo__tagline {
+  font-size: 0.74rem;
+}
+.brand-logo--md {
+  gap: 11px;
+}
+
+.brand-logo--lg .brand-logo__title {
+  font-size: 1.65rem;
+}
+.brand-logo--lg .brand-logo__tagline {
+  font-size: 0.85rem;
+}
+.brand-logo--lg {
+  gap: 14px;
+}
+
+.brand-logo--xl .brand-logo__title {
+  font-size: 2.15rem;
+}
+.brand-logo--xl .brand-logo__tagline {
+  font-size: 1.02rem;
+}
+.brand-logo--xl {
+  gap: 16px;
+}
+
+/* Dark Theme Support */
+[data-theme="dark"] .brand-logo--theme-auto .brand-logo__vyavsay,
+.brand-logo--theme-dark .brand-logo__vyavsay {
+  color: #FFFFFF;
+}
+
+[data-theme="dark"] .brand-logo--theme-auto .brand-logo__tagline,
+.brand-logo--theme-dark .brand-logo__tagline {
+  color: #94A3B8;
+}

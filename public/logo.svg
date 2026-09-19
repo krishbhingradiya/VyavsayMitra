@@ -1,0 +1,65 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 320 80" width="320" height="80" fill="none">
+  <!-- Emblem at X=5, Y=10, 60x60 -->
+  <g transform="translate(5, 10) scale(0.6)">
+    <!-- Top Orange Peaked / Hexagonal Crest with V-dip bottom matching Photo 1 -->
+    <path
+      d="M 50 7 L 82 22 C 85 28 86 36 82 43 L 50 61 L 18 43 C 14 36 15 28 18 22 Z"
+      fill="#F58025"
+    />
+
+    <!-- White Lightbulb inside Orange Crest -->
+    <circle cx="50" cy="27" r="10" fill="#FFFFFF" />
+    <path
+      d="M 43.5 30.5 C 43.5 30.5 45 35.5 46 38 H 54 C 55 35.5 56.5 30.5 56.5 30.5 Z"
+      fill="#FFFFFF"
+    />
+    <rect x="46" y="39" width="8" height="2.2" rx="1.1" fill="#FFFFFF" />
+    <path d="M 47.5 42.5 H 52.5 L 51.5 45 H 48.5 Z" fill="#FFFFFF" />
+
+    <!-- Left Green Leaf -->
+    <path
+      d="M 15 41 C 12 66 27 88 48 94 C 47 78 43 64 35 55 C 28 47 19 43 15 41 Z"
+      fill="#16834A"
+    />
+    <!-- Left Leaf Inner Vein -->
+    <path
+      d="M 18 45 C 29 53 38 65 43 83"
+      stroke="#FFFFFF"
+      strokeWidth="2.8"
+      strokeLinecap="round"
+      fill="none"
+      opacity="0.85"
+    />
+
+    <!-- Right Green Leaf -->
+    <path
+      d="M 85 41 C 88 66 73 88 52 94 C 53 78 57 64 65 55 C 72 47 81 43 85 41 Z"
+      fill="#16834A"
+    />
+    <!-- Right Leaf Inner Vein -->
+    <path
+      d="M 82 45 C 71 53 62 65 57 83"
+      stroke="#FFFFFF"
+      strokeWidth="2.8"
+      strokeLinecap="round"
+      fill="none"
+      opacity="0.85"
+    />
+
+    <!-- White Central Stem between leaves -->
+    <path
+      d="M 50 94 V 63"
+      stroke="#FFFFFF"
+      strokeWidth="4"
+      strokeLinecap="round"
+    />
+  </g>
+
+  <!-- Typography matching Photo 2 -->
+  <text x="76" y="44" font-family="'Plus Jakarta Sans', 'Inter', 'Montserrat', sans-serif" font-size="29" font-weight="800" letter-spacing="-0.5">
+    <tspan fill="#0B2545">VYAVSAY</tspan><tspan fill="#16834A">MITRA</tspan>
+  </text>
+  <text x="77" y="63" font-family="'Inter', -apple-system, sans-serif" font-size="13.5" font-weight="600" fill="#5A6E7C" letter-spacing="0.2">
+    Market. Money. Mitra.
+  </text>
+</svg>

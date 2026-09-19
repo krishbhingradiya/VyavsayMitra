@@ -1,93 +1,73 @@
+/* ==============================================
+   Top Government-style Information Bar
+   Strictly matches IMAGE 1 Source of Truth
+   ============================================== */
+
 .info-bar {
   background: #FFFFFF;
-  color: #334155;
-  font-size: 11px;
+  color: #0B2850;
+  font-size: 12.5px;
   position: relative;
-  border-bottom: 1px solid rgba(0, 0, 0, 0.06);
-  z-index: var(--z-navbar);
+  border-bottom: 1px solid #E5E7EB;
+  z-index: 100;
+  width: 100%;
+  box-sizing: border-box;
 }
-
-[data-theme="dark"] .info-bar {
-  background: #0B1726;
-  color: #94A3B8;
-  border-bottom-color: rgba(255, 255, 255, 0.08);
-}
-
-.info-bar__tricolor {
-  position: absolute;
-  top: 0;
-  left: 0;
-  right: 0;
-  display: flex;
-  height: 2.5px;
-}
-
-.info-bar__stripe {
-  flex: 1;
-}
-
-.info-bar__stripe--saffron { background: #FF9933; }
-.info-bar__stripe--white { background: #FFFFFF; }
-.info-bar__stripe--green { background: #128807; }
 
 .info-bar__content {
   display: flex;
   align-items: center;
   justify-content: space-between;
-  padding-top: 6px;
-  padding-bottom: 6px;
-  min-height: 32px;
+  height: 36px;
+  padding: 0 clamp(20px, 3.5vw, 44px);
+  width: 100%;
+  box-sizing: border-box;
 }
 
 .info-bar__message {
-  font-weight: 500;
-  letter-spacing: 0.02em;
+  font-weight: 600;
+  font-size: 12.5px;
+  letter-spacing: 0.01em;
   display: flex;
   align-items: center;
-  gap: 6px;
-  color: #1E293B;
+  gap: 10px;
+  color: #0B2850;
 }
 
-[data-theme="dark"] .info-bar__message {
-  color: #F1F5F9;
-}
-
-.info-bar__flag-icon {
-  display: inline-flex;
-  width: 14px;
-  height: 10px;
+.info-bar__flag {
+  display: inline-block;
+  vertical-align: middle;
   border-radius: 1px;
-  overflow: hidden;
-  box-shadow: 0 0 1px rgba(0,0,0,0.3);
-  margin-left: 4px;
-}
-
-.info-bar__flag-icon span {
-  display: block;
-  height: 33.3%;
+  box-shadow: 0 0 1px rgba(0, 0, 0, 0.25);
+  flex-shrink: 0;
+  width: 22px;
+  height: 14px;
 }
 
 .info-bar__badges {
   display: flex;
   align-items: center;
-  gap: var(--space-3);
-  font-size: 11px;
-  color: #475467;
-}
-
-[data-theme="dark"] .info-bar__badges {
-  color: #94A3B8;
+  gap: 14px;
+  font-size: 12.5px;
+  color: #0B2850;
 }
 
 .info-bar__badge {
   font-weight: 500;
+  letter-spacing: 0.01em;
+  color: #0B2850;
 }
 
 .info-bar__sep {
-  opacity: 0.3;
+  color: #CBD5E1;
+  font-weight: 300;
 }
 
 @media (max-width: 768px) {
-  .info-bar__badges { display: none; }
-  .info-bar__message { font-size: 10.5px; }
+  .info-bar__badges {
+    display: none;
+  }
+  .info-bar__message {
+    font-size: 11.5px;
+  }
 }

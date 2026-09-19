@@ -1,24 +1,29 @@
 import { useState } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
-import { useTranslation } from 'react-i18next';
 import { useAuthStore } from '../../store/useAuthStore';
 import { useUIStore } from '../../store/useUIStore';
-import { INDIAN_STATES, LANGUAGES as LANG_OPTIONS } from '../../config/constants';
-import { Eye, EyeOff } from 'lucide-react';
+import { Eye, EyeOff, User, Mail, Phone, Lock } from 'lucide-react';
+import TopInfoBar from '../../components/layout/TopInfoBar';
 import './Auth.css';
 
+const ROLES = [
+  { value: 'entrepreneur', label: 'Entrepreneur' },
+  { value: 'farmer', label: 'Farmer' },
+  { value: 'investor', label: 'Investor' },
+  { value: 'government', label: 'Government Official' },
+];
+
 export default function RegisterPage() {
-  const { t } = useTranslation();
   const navigate = useNavigate();
   const register = useAuthStore((s) => s.register);
   const isLoading = useAuthStore((s) => s.isLoading);
   const addToast = useUIStore((s) => s.addToast);
   const [showPassword, setShowPassword] = useState(false);
+  const [selectedRole, setSelectedRole] = useState('entrepreneur');
+  const [agreedToTerms, setAgreedToTerms] = useState(false);
 
   const [form, setForm] = useState({
     name: '', phone: '', email: '', password: '',
-    preferredLanguage: 'en' as 'en' | 'hi' | 'gu',
-    state: '', district: '',
   });
   const [errors, setErrors] = useState<Record<string, string>>({});
 
@@ -29,11 +34,11 @@ export default function RegisterPage() {
 
   const validate = () => {
     const errs: Record<string, string> = {};
-    if (!form.name.trim()) errs.name = 'Name is required';
-    if (!form.phone.trim()) errs.phone = 'Mobile number is required';
+    if (!form.name.trim()) errs.name = 'Full name is required';
     if (!form.email.trim()) errs.email = 'Email is required';
+    if (!form.phone.trim()) errs.phone = 'Mobile number is required';
     if (!form.password || form.password.length < 6) errs.password = 'Password must be at least 6 characters';
-    if (!form.state) errs.state = 'Please select your state';
+    if (!agreedToTerms) errs.terms = 'You must agree to the Terms & Conditions';
     setErrors(errs);
     return Object.keys(errs).length === 0;
   };
@@ -45,8 +50,8 @@ export default function RegisterPage() {
       name: form.name,
       phone: form.phone,
       email: form.email,
-      preferredLanguage: form.preferredLanguage,
-      location: { state: form.state, district: form.district, block: '', village: '' },
+      preferredLanguage: 'en',
+      location: { state: '', district: '', block: '', village: '' },
     });
     if (success) {
       addToast({ type: 'success', message: 'Account created! Let\'s set up your profile.' });
@@ -55,99 +60,184 @@ export default function RegisterPage() {
   };
 
   return (
-    <div className="auth-page">
-      <div className="auth-page__left">
-        <div className="auth-brand">
-          <Link to="/" className="auth-brand__logo">
-            <div className="auth-brand__icon">V</div>
-            <span className="auth-brand__name">VYAVSAYMITRA</span>
-          </Link>
-          <h2 className="auth-brand__tagline">"{t('app.tagline')}"</h2>
-          <p className="auth-brand__sub">{t('app.taglineSecondary')}</p>
-          <div className="auth-brand__features">
-            <div className="auth-brand__feature">✓ Free to use</div>
-            <div className="auth-brand__feature">✓ Available in Hindi, English & Gujarati</div>
-            <div className="auth-brand__feature">✓ Complete business planning tools</div>
-            <div className="auth-brand__feature">✓ AI-powered guidance</div>
+    <div className="auth-fullscreen">
+      <TopInfoBar />
+
+      <div className="auth-page">
+        {/* Left Branding Panel — Green rural landscape */}
+        <div className="auth-page__left auth-page__left--signup">
+          <div className="auth-brand">
+            <Link to="/" className="auth-brand__logo-link">
+              <img src="/logo.png" alt="VYAVSAYMITRA" className="auth-brand__logo-img" />
+            </Link>
+            <h2 className="auth-brand__handwritten">
+              Be a Part of<br />Rural Growth
+            </h2>
+            <div className="auth-brand__underline" />
+            <p className="auth-brand__description">
+              Create your account and start<br />building your business dreams.
+            </p>
+            <div className="auth-brand__features">
+              <div className="auth-brand__feature-card">
+                <span className="auth-brand__feature-icon">📊</span>
+                Better Planning
+              </div>
+              <div className="auth-brand__feature-card">
+                <span className="auth-brand__feature-icon">🌱</span>
+                More Opportunities
+              </div>
+              <div className="auth-brand__feature-card">
+                <span className="auth-brand__feature-icon">🤝</span>
+                Stronger Communities
+              </div>
+            </div>
           </div>
         </div>
-      </div>
-      <div className="auth-page__right">
-        <div className="auth-form-wrapper">
-          <h1 className="auth-title">{t('auth.registerTitle')}</h1>
-          <p className="auth-subtitle">{t('auth.registerSubtitle')}</p>
 
-          <form className="auth-form" onSubmit={handleSubmit} noValidate>
-            <div className="form-group">
-              <label className="form-label" htmlFor="reg-name">{t('auth.name')}</label>
-              <input id="reg-name" type="text" className={`form-input ${errors.name ? 'form-input--error' : ''}`}
-                value={form.name} onChange={(e) => handleChange('name', e.target.value)} placeholder="Ramesh Patel" />
-              {errors.name && <span className="form-error">{errors.name}</span>}
+        {/* Right Form Panel */}
+        <div className="auth-page__right">
+          <div className="auth-form-wrapper">
+            <h1 className="auth-title">Create Your Account</h1>
+            <p className="auth-subtitle">
+              Join thousands of rural entrepreneurs
+            </p>
+
+            {/* Role Selector */}
+            <div className="role-selector">
+              <span className="role-selector__label">I am a</span>
+              <div className="role-selector__grid">
+                {ROLES.map((role) => (
+                  <button
+                    key={role.value}
+                    type="button"
+                    className={`role-selector__option ${selectedRole === role.value ? 'role-selector__option--active' : ''}`}
+                    onClick={() => setSelectedRole(role.value)}
+                  >
+                    {role.label}
+                  </button>
+                ))}
+              </div>
             </div>
 
-            <div className="auth-form-row">
+            <form className="auth-form" onSubmit={handleSubmit} noValidate>
+              {/* Full Name */}
               <div className="form-group">
-                <label className="form-label" htmlFor="reg-phone">{t('auth.phone')}</label>
-                <input id="reg-phone" type="tel" className={`form-input ${errors.phone ? 'form-input--error' : ''}`}
-                  value={form.phone} onChange={(e) => handleChange('phone', e.target.value)} placeholder="+91 98765 43210" />
-                {errors.phone && <span className="form-error">{errors.phone}</span>}
+                <div className="form-input-wrapper">
+                  <User size={18} className="form-input-icon" />
+                  <input
+                    id="reg-name"
+                    type="text"
+                    className={`form-input form-input--with-icon ${errors.name ? 'form-input--error' : ''}`}
+                    value={form.name}
+                    onChange={(e) => handleChange('name', e.target.value)}
+                    placeholder="Full Name"
+                  />
+                </div>
+                {errors.name && <span className="form-error">{errors.name}</span>}
               </div>
+
+              {/* Email */}
               <div className="form-group">
-                <label className="form-label" htmlFor="reg-email">{t('auth.email')}</label>
-                <input id="reg-email" type="email" className={`form-input ${errors.email ? 'form-input--error' : ''}`}
-                  value={form.email} onChange={(e) => handleChange('email', e.target.value)} placeholder="ramesh@example.com" />
+                <div className="form-input-wrapper">
+                  <Mail size={18} className="form-input-icon" />
+                  <input
+                    id="reg-email"
+                    type="email"
+                    className={`form-input form-input--with-icon ${errors.email ? 'form-input--error' : ''}`}
+                    value={form.email}
+                    onChange={(e) => handleChange('email', e.target.value)}
+                    placeholder="Email Address"
+                  />
+                </div>
                 {errors.email && <span className="form-error">{errors.email}</span>}
               </div>
-            </div>
 
-            <div className="form-group">
-              <label className="form-label" htmlFor="reg-password">{t('auth.password')}</label>
-              <div className="auth-password-wrapper">
-                <input id="reg-password" type={showPassword ? 'text' : 'password'}
-                  className={`form-input ${errors.password ? 'form-input--error' : ''}`}
-                  value={form.password} onChange={(e) => handleChange('password', e.target.value)}
-                  placeholder="Minimum 6 characters" />
-                <button type="button" className="auth-password-toggle" onClick={() => setShowPassword(!showPassword)} aria-label="Toggle password visibility">
-                  {showPassword ? <EyeOff size={18} /> : <Eye size={18} />}
-                </button>
-              </div>
-              {errors.password && <span className="form-error">{errors.password}</span>}
-            </div>
-
-            <div className="auth-form-row">
+              {/* Mobile Number */}
               <div className="form-group">
-                <label className="form-label" htmlFor="reg-state">{t('auth.state')}</label>
-                <select id="reg-state" className={`form-select ${errors.state ? 'form-input--error' : ''}`}
-                  value={form.state} onChange={(e) => handleChange('state', e.target.value)}>
-                  <option value="">Select State</option>
-                  {INDIAN_STATES.map((s: string) => <option key={s} value={s}>{s}</option>)}
-                </select>
-                {errors.state && <span className="form-error">{errors.state}</span>}
+                <div className="form-input-wrapper">
+                  <Phone size={18} className="form-input-icon" />
+                  <input
+                    id="reg-phone"
+                    type="tel"
+                    className={`form-input form-input--with-icon ${errors.phone ? 'form-input--error' : ''}`}
+                    value={form.phone}
+                    onChange={(e) => handleChange('phone', e.target.value)}
+                    placeholder="Mobile Number"
+                  />
+                </div>
+                {errors.phone && <span className="form-error">{errors.phone}</span>}
               </div>
+
+              {/* Password */}
               <div className="form-group">
-                <label className="form-label" htmlFor="reg-district">{t('auth.district')}</label>
-                <input id="reg-district" type="text" className="form-input"
-                  value={form.district} onChange={(e) => handleChange('district', e.target.value)} placeholder="e.g. Anand" />
+                <div className="form-input-wrapper">
+                  <Lock size={18} className="form-input-icon" />
+                  <input
+                    id="reg-password"
+                    type={showPassword ? 'text' : 'password'}
+                    className={`form-input form-input--with-icon ${errors.password ? 'form-input--error' : ''}`}
+                    value={form.password}
+                    onChange={(e) => handleChange('password', e.target.value)}
+                    placeholder="Password"
+                  />
+                  <button
+                    type="button"
+                    className="auth-password-toggle"
+                    onClick={() => setShowPassword(!showPassword)}
+                    aria-label="Toggle password visibility"
+                  >
+                    {showPassword ? <EyeOff size={18} /> : <Eye size={18} />}
+                  </button>
+                </div>
+                {errors.password && <span className="form-error">{errors.password}</span>}
               </div>
+
+              {/* Terms & Conditions */}
+              <div className="auth-terms">
+                <input
+                  type="checkbox"
+                  id="reg-terms"
+                  checked={agreedToTerms}
+                  onChange={(e) => {
+                    setAgreedToTerms(e.target.checked);
+                    if (errors.terms) {
+                      setErrors((prev) => { const n = { ...prev }; delete n.terms; return n; });
+                    }
+                  }}
+                />
+                <label htmlFor="reg-terms" className="auth-terms__text">
+                  I agree to the <a href="#">Terms &amp; Conditions</a> and <a href="#">Privacy Policy</a>
+                </label>
+              </div>
+              {errors.terms && <span className="form-error">{errors.terms}</span>}
+
+              <button type="submit" className="btn btn--green btn--full btn--lg" disabled={isLoading}>
+                {isLoading ? 'Creating Account...' : 'Sign Up'}
+              </button>
+            </form>
+
+            {/* Social and Switch Links */}
+            <div className="auth-divider">
+              <span>OR</span>
             </div>
 
-            <div className="form-group">
-              <label className="form-label" htmlFor="reg-lang">{t('auth.preferredLanguage')}</label>
-              <select id="reg-lang" className="form-select"
-                value={form.preferredLanguage} onChange={(e) => handleChange('preferredLanguage', e.target.value)}>
-                {LANG_OPTIONS.map((l) => <option key={l.code} value={l.code}>{l.label} ({l.nativeLabel})</option>)}
-              </select>
+            <div className="auth-social">
+              <button className="btn btn--google btn--full" disabled>
+                <svg width="20" height="20" viewBox="0 0 24 24" fill="none">
+                  <path d="M22.56 12.25c0-.78-.07-1.53-.2-2.25H12v4.26h5.92a5.06 5.06 0 0 1-2.2 3.32v2.77h3.57c2.08-1.92 3.28-4.74 3.28-8.1z" fill="#4285F4"/>
+                  <path d="M12 23c2.97 0 5.46-.98 7.28-2.66l-3.57-2.77c-.98.66-2.23 1.06-3.71 1.06-2.86 0-5.29-1.93-6.16-4.53H2.18v2.84C3.99 20.53 7.7 23 12 23z" fill="#34A853"/>
+                  <path d="M5.84 14.09c-.22-.66-.35-1.36-.35-2.09s.13-1.43.35-2.09V7.07H2.18C1.43 8.55 1 10.22 1 12s.43 3.45 1.18 4.93l2.85-2.22.81-.62z" fill="#FBBC05"/>
+                  <path d="M12 5.38c1.62 0 3.06.56 4.21 1.64l3.15-3.15C17.45 2.09 14.97 1 12 1 7.7 1 3.99 3.47 2.18 7.07l3.66 2.84c.87-2.6 3.3-4.53 6.16-4.53z" fill="#EA4335"/>
+                </svg>
+                Continue with Google
+              </button>
             </div>
 
-            <button type="submit" className="btn btn--green btn--full btn--lg" disabled={isLoading}>
-              {isLoading ? 'Creating Account...' : t('auth.registerBtn')}
-            </button>
-          </form>
-
-          <p className="auth-switch">
-            {t('auth.hasAccount')}{' '}
-            <Link to="/login" className="auth-link auth-link--bold">{t('nav.login')}</Link>
-          </p>
+            <p className="auth-switch">
+              Already have an account?{' '}
+              <Link to="/login" className="auth-link auth-link--bold">Login</Link>
+            </p>
+          </div>
         </div>
       </div>
     </div>

@@ -3,6 +3,7 @@ import { Link } from 'react-router-dom';
 import { useTranslation } from 'react-i18next';
 import { useUIStore } from '../../store/useUIStore';
 import { ArrowLeft } from 'lucide-react';
+import BrandLogo from '../../components/common/BrandLogo';
 import './Auth.css';
 
 export default function ForgotPasswordPage() {
@@ -21,10 +22,9 @@ export default function ForgotPasswordPage() {
   return (
     <div className="auth-page auth-page--centered">
       <div className="auth-form-wrapper auth-form-wrapper--compact">
-        <Link to="/" className="auth-brand__logo auth-brand__logo--sm">
-          <div className="auth-brand__icon">V</div>
-          <span className="auth-brand__name">VYAVSAYMITRA</span>
-        </Link>
+        <div style={{ marginBottom: 'var(--space-6)', display: 'flex', justifyContent: 'center' }}>
+          <BrandLogo asLink to="/" size="md" />
+        </div>
 
         <h1 className="auth-title">{t('auth.forgotTitle')}</h1>
         <p className="auth-subtitle">{t('auth.forgotSubtitle')}</p>

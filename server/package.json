@@ -1,0 +1,20 @@
+{
+  "name": "vyavsaymitra-server",
+  "version": "1.0.0",
+  "private": true,
+  "description": "VYAVSAYMITRA backend server for OTP authentication",
+  "main": "index.js",
+  "scripts": {
+    "start": "node index.js",
+    "dev": "node --watch index.js"
+  },
+  "dependencies": {
+    "cors": "^2.8.5",
+    "dotenv": "^16.5.0",
+    "express": "^5.1.0",
+    "express-rate-limit": "^7.5.0",
+    "helmet": "^8.1.0",
+    "nodemailer": "^7.0.3",
+    "sql.js": "^1.12.0"
+  }
+}

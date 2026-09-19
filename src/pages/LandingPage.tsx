@@ -137,9 +137,7 @@ interface HeroSectionProps {
 function HeroSection({ onStartAction }: HeroSectionProps) {
   return (
     <section className="hero" aria-label="Hero section">
-      {/* Full-width background — rural-hero.jpg already contains the composed scene:
-          signboards, milestone, India map watermark, people, wave curve, line art.
-          We only overlay text content + stats as DOM elements. */}
+      {/* Full-width background — rural-hero.jpg contains the composed scene */}
       <div className="hero__backdrop">
         <img
           src={ruralHeroImg}
@@ -149,22 +147,21 @@ function HeroSection({ onStartAction }: HeroSectionProps) {
           height="503"
           loading="eager"
         />
-        <div className="hero__gradient-overlay" />
       </div>
 
-      {/* Main Content — LEFT text column only */}
-      <div className="hero__content container">
+      {/* TOP-LEFT: Badge, Main Heading, Subtitle, CTAs, Taglines */}
+      <div className="hero__content">
         <div className="hero__text">
-          {/* Badge */}
+          {/* Badge matching Image 3 */}
           <div className="hero__badge">
-            <Sprout size={15} className="hero__badge-icon" />
+            <Sprout size={14} className="hero__badge-icon" />
             <span>Empowering Rural Entrepreneurs</span>
           </div>
 
           {/* Main Heading */}
           <h1 className="hero__heading">
-            Big Dreams,
-            <span className="hero__heading-highlight"> Stronger Villages</span>
+            <span>Big Dreams,</span>
+            <span className="hero__heading-highlight">Stronger Villages</span>
           </h1>
 
           {/* Subtitle */}
@@ -230,12 +227,12 @@ function HeroSection({ onStartAction }: HeroSectionProps) {
         </div>
       </div>
 
-      {/* BOTTOM STATISTICS — positioned over the white curve area of the background image */}
+      {/* BOTTOM-LEFT: Statistics bar cleanly seated on the white curve matching Image 3 */}
       <div className="hero__stats-bar">
-        <div className="hero__stats-bar-inner container">
+        <div className="hero__stats-bar-inner">
           <div className="hero__stats-row">
             <HeroStatCol
-              icon={<Lightbulb size={22} />}
+              icon={<Lightbulb size={24} strokeWidth={2} />}
               iconTheme="amber"
               target={500}
               suffix="+"
@@ -245,7 +242,7 @@ function HeroSection({ onStartAction }: HeroSectionProps) {
             <div className="hero__stat-divider" />
 
             <HeroStatCol
-              icon={<Landmark size={22} />}
+              icon={<Landmark size={24} strokeWidth={2} />}
               iconTheme="green"
               target={100}
               suffix="+"
@@ -255,7 +252,7 @@ function HeroSection({ onStartAction }: HeroSectionProps) {
             <div className="hero__stat-divider" />
 
             <HeroStatCol
-              icon={<Users size={22} />}
+              icon={<Users size={24} strokeWidth={2} />}
               iconTheme="blue"
               target={1000000}
               suffix="+"
@@ -266,7 +263,7 @@ function HeroSection({ onStartAction }: HeroSectionProps) {
             <div className="hero__stat-divider" />
 
             <HeroStatCol
-              icon={<MapPin size={22} />}
+              icon={<MapPin size={24} strokeWidth={2} />}
               iconTheme="orange"
               target={28}
               suffix="+"
@@ -304,7 +301,7 @@ function HeroStatCol({
   label: string;
   displayValue?: string;
 }) {
-  const { count, ref } = useCountUp(target);
+  const { count, ref } = useCountUp(target, 800);
   const display = displayValue
     ? count >= target
       ? displayValue
@@ -316,12 +313,10 @@ function HeroStatCol({
       <div className={`hero__stat-icon hero__stat-icon--${iconTheme}`}>
         {icon}
       </div>
-      <div className="hero__stat-info">
-        <span className="hero__stat-value font-data">
-          {display}{suffix}
-        </span>
-        <span className="hero__stat-label">{label}</span>
-      </div>
+      <span className="hero__stat-value font-data">
+        {display}{suffix}
+      </span>
+      <span className="hero__stat-label">{label}</span>
     </div>
   );
 }

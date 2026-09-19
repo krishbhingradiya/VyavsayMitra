@@ -8,6 +8,7 @@ import { useUIStore } from '../../store/useUIStore';
 import { BUSINESS_CATEGORIES, EXPERIENCE_LEVELS, INDIAN_STATES } from '../../types/user';
 import { LANGUAGES } from '../../config/constants';
 import { ArrowLeft, ArrowRight, CheckCircle, MapPin, Briefcase, DollarSign, Award, Globe } from 'lucide-react';
+import BrandLogo from '../../components/common/BrandLogo';
 import './Onboarding.css';
 
 export default function OnboardingPage() {
@@ -92,8 +93,7 @@ export default function OnboardingPage() {
     <div className="onboarding">
       <div className="onboarding__sidebar">
         <div className="onboarding__brand">
-          <div className="auth-brand__icon">V</div>
-          <span className="auth-brand__name" style={{ color: 'white' }}>VYAVSAYMITRA</span>
+          <BrandLogo asLink to="/" size="md" theme="dark" showTagline={false} />
         </div>
         <h2 className="onboarding__sidebar-title">{t('onboarding.title')}</h2>
         <div className="onboarding__steps-list">

@@ -1,6 +1,6 @@
 import { Link } from 'react-router-dom';
 import { useTranslation } from 'react-i18next';
-import { Sprout } from 'lucide-react';
+import BrandLogo from '../common/BrandLogo';
 import './Footer.css';
 
 export default function Footer() {
@@ -19,14 +19,7 @@ export default function Footer() {
           {/* Left: Brand */}
           <div className="footer__brand">
             <div className="footer__logo">
-              <div className="footer__logo-badge">
-                <Sprout size={16} className="footer__logo-sprout" />
-                <span className="footer__logo-v">V</span>
-              </div>
-              <div>
-                <span className="footer__name">VYAVSAYMITRA</span>
-                <span className="footer__tagline">Market. Money. Mitra.</span>
-              </div>
+              <BrandLogo size="md" theme="dark" />
             </div>
             <p className="footer__desc">
               Empowering rural entrepreneurs with better information, planning and guidance.

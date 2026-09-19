@@ -2,12 +2,24 @@ import { create } from 'zustand';
 import { persist } from 'zustand/middleware';
 import type { User } from '../types/user';
 
+/** API base URL — reads from env or defaults to localhost:5000 */
+const API_URL = import.meta.env.VITE_API_URL || 'http://localhost:5000';
+
+interface OtpResponse {
+  success: boolean;
+  message: string;
+  cooldownRemaining?: number;
+  expiresInSeconds?: number;
+}
+
 interface AuthState {
   user: User | null;
   isAuthenticated: boolean;
   isLoading: boolean;
   login: (email: string, password: string) => Promise<boolean>;
   register: (userData: Partial<User>) => Promise<boolean>;
+  sendOtp: (email: string) => Promise<OtpResponse>;
+  verifyOtp: (email: string, otp: string) => Promise<boolean>;
   logout: () => void;
   updateUser: (updates: Partial<User>) => void;
   completeOnboarding: () => void;
@@ -68,6 +80,72 @@ export const useAuthStore = create<AuthState>()(
           isLoading: false,
         });
         return true;
+      },
+
+      sendOtp: async (email: string) => {
+        set({ isLoading: true });
+        try {
+          const res = await fetch(`${API_URL}/api/auth/send-otp`, {
+            method: 'POST',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify({ email }),
+          });
+          const data = await res.json();
+          set({ isLoading: false });
+          return {
+            success: data.success,
+            message: data.message,
+            cooldownRemaining: data.cooldownRemaining,
+            expiresInSeconds: data.expiresInSeconds,
+          };
+        } catch {
+          set({ isLoading: false });
+          return {
+            success: false,
+            message: 'Unable to connect to server. Please check your connection.',
+          };
+        }
+      },
+
+      verifyOtp: async (email: string, otp: string) => {
+        set({ isLoading: true });
+        try {
+          const res = await fetch(`${API_URL}/api/auth/verify-otp`, {
+            method: 'POST',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify({ email, otp }),
+          });
+          const data = await res.json();
+
+          if (data.success && data.user) {
+            // Build user profile from server response, merging with demo defaults
+            // for fields the minimal backend doesn't track yet
+            const otpUser: User = {
+              ...DEMO_USER,
+              id: data.user.id,
+              email: data.user.email,
+              name: data.user.name || data.user.email.split('@')[0],
+              phone: data.user.phone || '',
+              onboardingComplete: false,
+            };
+            set({
+              user: otpUser,
+              isAuthenticated: true,
+              isLoading: false,
+            });
+            return true;
+          }
+
+          set({ isLoading: false });
+          // Throw with server message so the UI can display it
+          throw new Error(data.message || 'OTP verification failed.');
+        } catch (err) {
+          set({ isLoading: false });
+          if (err instanceof Error) {
+            throw err;
+          }
+          throw new Error('Unable to connect to server. Please check your connection.');
+        }
       },
 
       logout: () => {
