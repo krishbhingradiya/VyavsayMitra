@@ -1,0 +1,153 @@
+{
+  "registry_version": "1.1.0",
+  "last_updated": "2026-09-19T09:47:11.336942+00:00",
+  "governance_policy": "STRICT_LEAKAGE_FREE_ZERO_FAKE_DATA",
+  "models": [
+    {
+      "model_id": "crop_yield_predictor_v1.1.0",
+      "business": "agriculture",
+      "task": "regression",
+      "target": "yield_tonnes_per_ha",
+      "model_type": "RandomForestRegressor(n_estimators=80, max_depth=14, min_samples_leaf=3)",
+      "features": [
+        "product",
+        "season",
+        "state",
+        "area",
+        "annual_rainfall",
+        "fertilizer",
+        "pesticide"
+      ],
+      "dataset_version": "des_crop_yield_production_v1",
+      "preprocessing_version": "StandardScaler_OneHotEncoder_FitOnTrainOnly",
+      "training_date": "2026-09-19T09:47:11.336945+00:00",
+      "validation_strategy": "Chronological holdout (Train: 1997-2015, Val: 2016-2017, Test: 2018-2020)",
+      "metrics": {
+        "cv_r2_mean": 0.9615,
+        "cv_r2_std": 0.0157,
+        "val_r2": 0.9829,
+        "test_r2": 0.9644,
+        "test_mae": 12.3106,
+        "test_rmse": 167.2841
+      },
+      "overfitting_check": {
+        "train_val_gap": 0.0125,
+        "train_test_gap": 0.0306,
+        "overfitting_status": "CONTROLLED"
+      },
+      "uncertainty_calibration": {
+        "method": "split_conformal_residual_quantile",
+        "validation_q95": 6.68,
+        "nominal_coverage_pct": 95.0,
+        "empirical_coverage_pct": 94.50,
+        "mean_interval_width": 13.36,
+        "is_validated": true
+      },
+      "robustness_check": {
+        "extreme_inputs_clamped": true,
+        "unseen_categories_handled": true
+      },
+      "production_status": "production_candidate",
+      "limitations": [
+        "Yield estimates assume baseline good agricultural practices",
+        "Requires seasonal rainfall and standard NPK fertilizer inputs"
+      ]
+    },
+    {
+      "model_id": "crop_suitability_classifier_v1.1.0",
+      "business": "agriculture",
+      "task": "multiclass_classification",
+      "target": "crop_class (22 categories)",
+      "model_type": "RandomForestClassifier(n_estimators=100, max_depth=10, min_samples_leaf=2)",
+      "features": [
+        "n",
+        "p",
+        "k",
+        "temperature",
+        "humidity",
+        "ph",
+        "rainfall"
+      ],
+      "dataset_version": "icar_crop_recommendation_v1",
+      "preprocessing_version": "StandardScaler_FitOnTrainOnly",
+      "training_date": "2026-09-19T09:47:11.336948+00:00",
+      "validation_strategy": "Stratified 70/15/15 Holdout with StratifiedKFold",
+      "metrics": {
+        "cv_macro_f1_mean": 0.9908,
+        "cv_macro_f1_std": 0.0048,
+        "val_macro_f1": 0.997,
+        "test_accuracy": 0.9939,
+        "test_macro_f1": 0.9939,
+        "test_macro_precision": 0.9943,
+        "test_macro_recall": 0.9939
+      },
+      "overfitting_check": {
+        "train_val_gap": 0.003,
+        "overfitting_status": "EXCELLENT"
+      },
+      "calibration": {
+        "brier_score_loss": 0.0773,
+        "is_calibrated": true
+      },
+      "production_status": "production_candidate",
+      "limitations": [
+        "Requires accurate soil N-P-K (kg/ha) and pH testing data"
+      ]
+    },
+    {
+      "model_id": "mandi_price_predictor_v1.1.0",
+      "business": "market_prices",
+      "task": "regression",
+      "target": "market_price_inr_per_qtl",
+      "model_type": "RandomForestRegressor(n_estimators=70, max_depth=12, min_samples_leaf=4)",
+      "features": [
+        "product",
+        "state",
+        "month",
+        "year",
+        "arrival_quantity"
+      ],
+      "dataset_version": "apmc_monthly_mandi_prices_v1",
+      "preprocessing_version": "StandardScaler_OneHotEncoder_FitOnTrainOnly",
+      "training_date": "2026-09-19T09:47:11.336951+00:00",
+      "validation_strategy": "Chronological TimeSeriesSplit (Train: < 2016-03, Val: 2016-03 to 2016-06, Test: > 2016-06)",
+      "metrics": {
+        "cv_r2_mean": 0.6963,
+        "cv_r2_std": 0.1332,
+        "val_r2": 0.8434,
+        "test_r2": 0.4843,
+        "test_mae_inr": 1110.77,
+        "test_rmse_inr": 1615.62,
+        "test_mape_pct": 51.37
+      },
+      "overfitting_check": {
+        "val_r2": 0.8434,
+        "test_r2": 0.4843,
+        "note": "Low generalization R² (0.4843) reflects massive temporal volatility and structural price regime shifts"
+      },
+      "production_status": "stale_data",
+      "decommission_reason": "Historical APMC Mandi dataset terminates on 2016-11-01. Chronological test evaluation yields R²=0.4843 and MAE=₹1,110.77. Predicting 2026 spot market prices with 10-year stale data exhibits unacceptable temporal drift without a live API. Downgraded to stale_data and disqualified from production execution.",
+      "recommended_production_alternative": "APMC historical median lookup labeled as historical_reference with explicit data freshness warning.",
+      "limitations": [
+        "Data terminates in 2016; cannot forecast 2026 nominal price inflation",
+        "Disqualified from production execution under strict model governance policy"
+      ]
+    }
+  ],
+  "models_not_trained_insufficient_data": [
+    {
+      "model_type": "Micro-Dairy Farm Profit Regressor",
+      "business": "dairy",
+      "status": "insufficient_data_for_tabular_ml",
+      "reason_ml_not_used": "Authoritative bank loan appraisal relies on official NABARD techno-economic model parameters (lactation cycles, feed conversion, cattle valuation) rather than tabular regression on synthetic data. Fabricating synthetic dairy farm rows would violate Phase 24 NO FAKE DATA policy.",
+      "alternative_used": "Deterministic NABARD Engineering Engine (NABARD-MBP-2024-V1) with live Mandi feed and milk price inputs."
+    },
+    {
+      "model_type": "Poultry Broiler Batch Mortality ML Regressor",
+      "business": "poultry",
+      "status": "insufficient_data_for_tabular_ml",
+      "reason_ml_not_used": "Standard poultry broiler batches operate under standardized commercial FCR curves (1.65) and established veterinary mortality ranges (3-4%) certified by NABARD/CPDO. Training a black-box model without 10,000+ real batch telemetry sensors is technically unsound.",
+      "alternative_used": "Deterministic NABARD Broiler Financial Engine with live Mandi poultry live-weight prices."
+    }
+  ]
+}

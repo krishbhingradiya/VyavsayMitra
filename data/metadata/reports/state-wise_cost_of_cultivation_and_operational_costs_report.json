@@ -1,0 +1,21 @@
+{
+  "dataset": "State-wise Cost of Cultivation and Operational Costs",
+  "source": "Directorate of Economics & Statistics (DES), MoAFW",
+  "rows": 17,
+  "columns": [
+    "product",
+    "cost",
+    "unit",
+    "currency"
+  ],
+  "missing_records": 0,
+  "duplicates": 0,
+  "invalid_filtered": 0,
+  "date_range": "Agricultural Statistics at a Glance",
+  "geographic_coverage": "National Principal Crops",
+  "units": "INR per Hectare",
+  "validation_status": "PASSED_STRICT_VALIDATION",
+  "ml_suitability": "LOW (Benchmark lookup table, not suitable for ML training)",
+  "calculation_suitability": "CRITICAL (Primary operational cost baseline per hectare)",
+  "known_limitations": "Average benchmark costs; labor rate variations apply by state"
+}

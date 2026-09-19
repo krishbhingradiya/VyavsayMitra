@@ -1,0 +1,110 @@
+{
+  "version": "1.0.0",
+  "description": "VYAVSAYMITRA Canonical Data Schema & Normalization Mapping",
+  "fields": {
+    "state": {
+      "type": "string",
+      "description": "Standardized Indian State/UT Name",
+      "source_mappings": [
+        "state",
+        "state_name",
+        "State",
+        "State_Name"
+      ]
+    },
+    "district": {
+      "type": "string",
+      "description": "Normalized District Name",
+      "source_mappings": [
+        "district",
+        "district_name",
+        "District",
+        "District_Name"
+      ]
+    },
+    "business_type": {
+      "type": "string",
+      "description": "Primary enterprise category",
+      "allowed_values": [
+        "dairy",
+        "poultry",
+        "agriculture",
+        "food-processing",
+        "retail",
+        "textile",
+        "manufacturing",
+        "services",
+        "other"
+      ]
+    },
+    "product": {
+      "type": "string",
+      "description": "Standardized product/crop/commodity name",
+      "source_mappings": [
+        "commodity",
+        "crop",
+        "label",
+        "product_name"
+      ]
+    },
+    "unit": {
+      "type": "string",
+      "description": "Standardized unit of measurement (kg, quintal, litre, tonne, hectare)",
+      "default": "standard"
+    },
+    "market_price": {
+      "type": "float",
+      "description": "Benchmark modal mandi price in INR per unit",
+      "source_mappings": [
+        "modal_price",
+        "price"
+      ]
+    },
+    "min_price": {
+      "type": "float",
+      "description": "Minimum wholesale price in INR",
+      "source_mappings": [
+        "min_price"
+      ]
+    },
+    "max_price": {
+      "type": "float",
+      "description": "Maximum wholesale price in INR",
+      "source_mappings": [
+        "max_price"
+      ]
+    },
+    "cost": {
+      "type": "float",
+      "description": "Cost of cultivation or operational expense in INR",
+      "source_mappings": [
+        "cost",
+        "operational_cost"
+      ]
+    },
+    "production": {
+      "type": "float",
+      "description": "Total physical output or yield",
+      "source_mappings": [
+        "production",
+        "yield"
+      ]
+    },
+    "area": {
+      "type": "float",
+      "description": "Farm land area in hectares",
+      "source_mappings": [
+        "area"
+      ]
+    },
+    "date": {
+      "type": "string",
+      "description": "ISO formatted date or Year-Month (YYYY-MM)",
+      "source_mappings": [
+        "date",
+        "arrival_date",
+        "year"
+      ]
+    }
+  }
+}

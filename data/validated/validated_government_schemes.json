@@ -1,0 +1,159 @@
+[
+  {
+    "id": "pmegp",
+    "name": "Prime Minister's Employment Generation Programme (PMEGP)",
+    "ministry": "Ministry of MSME / KVIC",
+    "beneficiary_type": [
+      "Micro Entrepreneur",
+      "Individual",
+      "Self Help Group"
+    ],
+    "max_project_cost": {
+      "manufacturing": 5000000,
+      "service_business": 2000000
+    },
+    "subsidy_rules": {
+      "rural_general": 25.0,
+      "rural_special": 35.0,
+      "urban_general": 15.0,
+      "urban_special": 25.0
+    },
+    "own_contribution_pct": {
+      "general": 10.0,
+      "special": 5.0
+    },
+    "interest_rate_range": [
+      7.5,
+      9.5
+    ],
+    "tenure_years": 7,
+    "moratorium_months": 6,
+    "eligible_sectors": [
+      "dairy",
+      "poultry",
+      "agriculture",
+      "food-processing",
+      "textile",
+      "manufacturing",
+      "services",
+      "retail"
+    ],
+    "lock_in_period_years": 3,
+    "source_url": "https://www.kviconline.gov.in/pmegpep/pmegphome/index.jsp"
+  },
+  {
+    "id": "mudra_shishu",
+    "name": "Pradhan Mantri MUDRA Yojana \u2014 Shishu",
+    "ministry": "Department of Financial Services, Ministry of Finance",
+    "beneficiary_type": [
+      "Rural Micro Entrepreneur",
+      "Small Shopkeeper",
+      "Artisan"
+    ],
+    "loan_cap": 50000,
+    "subsidy_rules": {
+      "capital_subsidy": 0.0
+    },
+    "own_contribution_pct": {
+      "general": 0.0
+    },
+    "interest_rate_range": [
+      8.0,
+      10.5
+    ],
+    "tenure_years": 3,
+    "moratorium_months": 3,
+    "collateral_required": false,
+    "eligible_sectors": [
+      "all"
+    ],
+    "source_url": "https://www.mudra.org.in/"
+  },
+  {
+    "id": "mudra_kishore",
+    "name": "Pradhan Mantri MUDRA Yojana \u2014 Kishore",
+    "ministry": "Department of Financial Services, Ministry of Finance",
+    "beneficiary_type": [
+      "Growing Micro Business",
+      "Service Unit",
+      "Agri-allied Unit"
+    ],
+    "loan_min": 50001,
+    "loan_cap": 500000,
+    "subsidy_rules": {
+      "capital_subsidy": 0.0
+    },
+    "own_contribution_pct": {
+      "general": 10.0
+    },
+    "interest_rate_range": [
+      8.5,
+      11.0
+    ],
+    "tenure_years": 5,
+    "moratorium_months": 6,
+    "collateral_required": false,
+    "eligible_sectors": [
+      "all"
+    ],
+    "source_url": "https://www.mudra.org.in/"
+  },
+  {
+    "id": "pmfme_micro_food",
+    "name": "PM Formalisation of Micro Food Processing Enterprises (PMFME)",
+    "ministry": "Ministry of Food Processing Industries (MoFPI)",
+    "beneficiary_type": [
+      "Food Processing Micro-Units",
+      "Farmer Producer Organizations",
+      "SHGs"
+    ],
+    "max_project_cost": 3000000,
+    "subsidy_rules": {
+      "credit_linked_subsidy_pct": 35.0,
+      "max_subsidy_amount": 1000000
+    },
+    "own_contribution_pct": {
+      "general": 10.0
+    },
+    "interest_rate_range": [
+      8.0,
+      9.5
+    ],
+    "tenure_years": 7,
+    "moratorium_months": 6,
+    "eligible_sectors": [
+      "food-processing",
+      "dairy"
+    ],
+    "odop_aligned": true,
+    "source_url": "https://pmfme.mofpi.gov.in/"
+  },
+  {
+    "id": "nabard_ahidf",
+    "name": "Animal Husbandry Infrastructure Development Fund (AHIDF)",
+    "ministry": "Department of Animal Husbandry & Dairying (DAHD) / NABARD",
+    "beneficiary_type": [
+      "Dairy Farmer",
+      "Poultry Farmer",
+      "Agri-Entrepreneur",
+      "FPO"
+    ],
+    "max_project_cost": 50000000,
+    "subsidy_rules": {
+      "interest_subvention_pct": 3.0,
+      "credit_guarantee_cover_pct": 25.0
+    },
+    "own_contribution_pct": {
+      "micro_small": 10.0,
+      "medium": 15.0
+    },
+    "effective_interest_rate_pct": 6.5,
+    "tenure_years": 8,
+    "moratorium_months": 12,
+    "eligible_sectors": [
+      "dairy",
+      "poultry"
+    ],
+    "source_url": "https://ahidf.udyamimitra.in/"
+  }
+]

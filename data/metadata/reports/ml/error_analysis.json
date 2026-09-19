@@ -1,0 +1,195 @@
+{
+  "generated_at": "2026-09-19T09:47:11.336516+00:00",
+  "crop_yield_regression": {
+    "residual_stats": {
+      "mean_residual": -0.9694,
+      "std_residual": 167.2813,
+      "median_residual": -0.08,
+      "skewness": 3.3364,
+      "kurtosis": 467.5377,
+      "min_residual": -3851.5035,
+      "max_residual": 4615.8386
+    },
+    "worst_10_predictions": [
+      {
+        "index": 1070,
+        "actual": 18382.0,
+        "predicted": 13766.16,
+        "abs_error": 4615.84,
+        "pct_error": 25.11
+      },
+      {
+        "index": 726,
+        "actual": 9548.75,
+        "predicted": 13400.25,
+        "abs_error": 3851.5,
+        "pct_error": 40.34
+      },
+      {
+        "index": 9,
+        "actual": 15636.63,
+        "predicted": 12967.48,
+        "abs_error": 2669.16,
+        "pct_error": 17.07
+      },
+      {
+        "index": 1798,
+        "actual": 10049.0,
+        "predicted": 12693.92,
+        "abs_error": 2644.92,
+        "pct_error": 26.32
+      },
+      {
+        "index": 407,
+        "actual": 7082.14,
+        "predicted": 9096.46,
+        "abs_error": 2014.32,
+        "pct_error": 28.44
+      },
+      {
+        "index": 1283,
+        "actual": 6359.69,
+        "predicted": 4986.75,
+        "abs_error": 1372.94,
+        "pct_error": 21.59
+      },
+      {
+        "index": 1872,
+        "actual": 11270.01,
+        "predicted": 12370.3,
+        "abs_error": 1100.29,
+        "pct_error": 9.76
+      },
+      {
+        "index": 1533,
+        "actual": 6327.75,
+        "predicted": 7219.19,
+        "abs_error": 891.44,
+        "pct_error": 14.09
+      },
+      {
+        "index": 96,
+        "actual": 7720.99,
+        "predicted": 6933.78,
+        "abs_error": 787.21,
+        "pct_error": 10.2
+      },
+      {
+        "index": 1468,
+        "actual": 8344.98,
+        "predicted": 9096.46,
+        "abs_error": 751.47,
+        "pct_error": 9.01
+      }
+    ]
+  },
+  "mandi_price_regression": {
+    "residual_stats": {
+      "mean_residual": -245.4751,
+      "std_residual": 1596.861,
+      "median_residual": -95.7225,
+      "skewness": 0.2773,
+      "kurtosis": 1.4846,
+      "min_residual": -6181.2051,
+      "max_residual": 6917.3287
+    },
+    "worst_10_predictions": [
+      {
+        "index": 288,
+        "actual": 8420.0,
+        "predicted": 1502.67,
+        "abs_error": 6917.33,
+        "pct_error": 82.0
+      },
+      {
+        "index": 5800,
+        "actual": 11281.0,
+        "predicted": 4525.67,
+        "abs_error": 6755.33,
+        "pct_error": 59.0
+      },
+      {
+        "index": 7734,
+        "actual": 10786.0,
+        "predicted": 4273.47,
+        "abs_error": 6512.53,
+        "pct_error": 60.0
+      },
+      {
+        "index": 5363,
+        "actual": 2800.0,
+        "predicted": 8981.21,
+        "abs_error": 6181.21,
+        "pct_error": 220.0
+      },
+      {
+        "index": 7192,
+        "actual": 2606.0,
+        "predicted": 8707.59,
+        "abs_error": 6101.59,
+        "pct_error": 234.0
+      },
+      {
+        "index": 260,
+        "actual": 7500.0,
+        "predicted": 1502.67,
+        "abs_error": 5997.33,
+        "pct_error": 79.0
+      },
+      {
+        "index": 5313,
+        "actual": 3300.0,
+        "predicted": 9295.83,
+        "abs_error": 5995.83,
+        "pct_error": 181.0
+      },
+      {
+        "index": 267,
+        "actual": 7490.0,
+        "predicted": 1502.67,
+        "abs_error": 5987.33,
+        "pct_error": 79.0
+      },
+      {
+        "index": 6374,
+        "actual": 3254.0,
+        "predicted": 9232.84,
+        "abs_error": 5978.84,
+        "pct_error": 183.0
+      },
+      {
+        "index": 7230,
+        "actual": 3494.0,
+        "predicted": 9418.72,
+        "abs_error": 5924.72,
+        "pct_error": 169.0
+      }
+    ]
+  },
+  "extreme_inputs_stress_test": [
+    {
+      "test_case": "Valid Typical Benchmark",
+      "status": "HANDLED_SAFELY",
+      "raw_prediction": 12.79,
+      "clamped_safe_prediction": 12.79
+    },
+    {
+      "test_case": "Extreme Low Input (Near Zero Area/Fertilizer)",
+      "status": "HANDLED_SAFELY",
+      "raw_prediction": 1.06,
+      "clamped_safe_prediction": 1.06
+    },
+    {
+      "test_case": "Extreme High Input (10x Normal Rainfall & Area)",
+      "status": "HANDLED_SAFELY",
+      "raw_prediction": 1.06,
+      "clamped_safe_prediction": 1.06
+    },
+    {
+      "test_case": "Unseen Rare State/Commodity Combination",
+      "status": "HANDLED_SAFELY",
+      "raw_prediction": 12.76,
+      "clamped_safe_prediction": 12.76
+    }
+  ]
+}

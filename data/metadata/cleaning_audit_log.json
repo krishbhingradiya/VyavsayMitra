@@ -1,0 +1,49 @@
+{
+  "timestamp": "2026-09-19T09:15:42.497865+00:00",
+  "cleaning_reports": [
+    {
+      "dataset": "apmc_monthly_mandi_prices",
+      "initial_rows": 62429,
+      "final_rows": 62225,
+      "actions": [
+        "Filtered 204 records with non-positive modal prices",
+        "Corrected inverted min/max price bounds for 269 rows",
+        "Identified 442 valid high-value market transactions (preserved, not deleted)"
+      ]
+    },
+    {
+      "dataset": "des_crop_yield_production",
+      "initial_rows": 19689,
+      "final_rows": 19689,
+      "actions": [
+        "Re-aligned yield calculation for 9915 records"
+      ]
+    },
+    {
+      "dataset": "icar_crop_recommendation",
+      "initial_rows": 2200,
+      "final_rows": 2200,
+      "actions": []
+    },
+    {
+      "dataset": "agmarknet_state_market_prices",
+      "initial_rows": 8648,
+      "final_rows": 6126,
+      "actions": [
+        "Removed 2522 duplicates"
+      ]
+    },
+    {
+      "dataset": "cmo_msp_mandi",
+      "initial_rows": 155,
+      "final_rows": 145,
+      "actions": []
+    },
+    {
+      "dataset": "des_cost_of_cultivation",
+      "initial_rows": 17,
+      "final_rows": 17,
+      "actions": []
+    }
+  ]
+}

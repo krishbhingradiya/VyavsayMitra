@@ -1,0 +1,77 @@
+{
+  "generated_at": "2026-09-19T09:47:11.336817+00:00",
+  "crop_yield_learning_curve": [
+    {
+      "fraction": 0.2,
+      "training_samples": 3063,
+      "train_score": 0.9651,
+      "val_score": 0.9506,
+      "gap": 0.0145
+    },
+    {
+      "fraction": 0.4,
+      "training_samples": 6127,
+      "train_score": 0.9824,
+      "val_score": 0.9559,
+      "gap": 0.0265
+    },
+    {
+      "fraction": 0.6,
+      "training_samples": 9190,
+      "train_score": 0.9872,
+      "val_score": 0.9667,
+      "gap": 0.0206
+    },
+    {
+      "fraction": 0.8,
+      "training_samples": 12254,
+      "train_score": 0.9866,
+      "val_score": 0.9849,
+      "gap": 0.0016
+    },
+    {
+      "fraction": 1.0,
+      "training_samples": 15318,
+      "train_score": 0.9869,
+      "val_score": 0.9829,
+      "gap": 0.0039
+    }
+  ],
+  "crop_suitability_learning_curve": [
+    {
+      "fraction": 0.2,
+      "training_samples": 308,
+      "train_score": 1.0,
+      "val_score": 0.9758,
+      "gap": 0.0242
+    },
+    {
+      "fraction": 0.4,
+      "training_samples": 616,
+      "train_score": 1.0,
+      "val_score": 0.997,
+      "gap": 0.003
+    },
+    {
+      "fraction": 0.6,
+      "training_samples": 924,
+      "train_score": 1.0,
+      "val_score": 0.997,
+      "gap": 0.003
+    },
+    {
+      "fraction": 0.8,
+      "training_samples": 1232,
+      "train_score": 0.9984,
+      "val_score": 0.997,
+      "gap": 0.0014
+    },
+    {
+      "fraction": 1.0,
+      "training_samples": 1540,
+      "train_score": 0.9968,
+      "val_score": 0.997,
+      "gap": -0.0002
+    }
+  ]
+}

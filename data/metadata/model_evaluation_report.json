@@ -1,0 +1,23 @@
+{
+  "evaluated_at": "2026-09-19T09:18:36.005903+00:00",
+  "overall_status": "ALL_MODELS_PASSED_THRESHOLDS",
+  "models": {
+    "crop_yield_predictor": {
+      "status": "PASSED",
+      "r2_score": 0.9716,
+      "mae": 10.6167,
+      "rmse": 152.1988
+    },
+    "crop_suitability_classifier": {
+      "status": "PASSED",
+      "accuracy": 0.9955,
+      "macro_f1": 0.9955
+    },
+    "mandi_price_predictor": {
+      "status": "PASSED",
+      "r2_score": 0.6924,
+      "mae_inr": 483.3,
+      "mape_pct": 48.38
+    }
+  }
+}

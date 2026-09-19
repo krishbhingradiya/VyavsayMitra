@@ -1,0 +1,31 @@
+{
+  "dataset": "District-wise Crop Production and Yield Statistics",
+  "source": "Directorate of Economics & Statistics, MoAFW",
+  "rows": 19577,
+  "columns": [
+    "product",
+    "crop_year",
+    "season",
+    "state",
+    "area",
+    "production",
+    "annual_rainfall",
+    "fertilizer",
+    "pesticide",
+    "yield",
+    "business_type",
+    "area_unit",
+    "production_unit",
+    "yield_unit"
+  ],
+  "missing_records": 0,
+  "duplicates": 0,
+  "invalid_filtered": 112,
+  "date_range": "1997 to 2020",
+  "geographic_coverage": "30 States, 55 Crops",
+  "units": "Area: Hectares, Production: Tonnes, Yield: Tonnes/Hectare",
+  "validation_status": "PASSED_STRICT_VALIDATION",
+  "ml_suitability": "EXCELLENT (Ideal for XGBoost/Random Forest regression on yield)",
+  "calculation_suitability": "HIGH (Enables expected harvest production calculation per acre/hectare)",
+  "known_limitations": "Aggregated annual agricultural district figures"
+}

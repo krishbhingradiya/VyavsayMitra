@@ -1,0 +1,22 @@
+{
+  "dataset": "State-Level Modal Market Prices for Cash Crops",
+  "source": "Directorate of Marketing & Inspection / AGMARKNET",
+  "rows": 5769,
+  "columns": [
+    "state",
+    "product",
+    "market_price",
+    "unit",
+    "currency"
+  ],
+  "missing_records": 0,
+  "duplicates": 0,
+  "invalid_filtered": 357,
+  "date_range": "Recent Wholesale Index",
+  "geographic_coverage": "20 States, 191 Commodities",
+  "units": "INR/Quintal",
+  "validation_status": "PASSED_STRICT_VALIDATION",
+  "ml_suitability": "MODERATE (Static price cross-section by state)",
+  "calculation_suitability": "EXCELLENT (Direct benchmark lookup for state-level pricing)",
+  "known_limitations": "Averages prices across all mandis within the state"
+}

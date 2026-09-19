@@ -5,7 +5,17 @@
  * Runs alongside the Vite frontend dev server.
  */
 
-require('dotenv').config();
+const path = require('path');
+require('dotenv').config({ path: path.resolve(__dirname, '../.env') });
+require('dotenv').config({ path: path.resolve(__dirname, '.env') });
+
+// Safe environment key aliasing
+if (!process.env.GEMINI_API_KEY && process.env.VITE_GEMINI_API_KEY) {
+  process.env.GEMINI_API_KEY = process.env.VITE_GEMINI_API_KEY;
+}
+if (!process.env.VITE_GEMINI_API_KEY && process.env.GEMINI_API_KEY) {
+  process.env.VITE_GEMINI_API_KEY = process.env.GEMINI_API_KEY;
+}
 
 const express = require('express');
 const cors = require('cors');
@@ -14,6 +24,7 @@ const rateLimit = require('express-rate-limit');
 
 const { initDb } = require('./db');
 const authRoutes = require('./routes/auth');
+const businessRoutes = require('./routes/business');
 
 const app = express();
 const PORT = parseInt(process.env.PORT || '5000', 10);
@@ -60,6 +71,8 @@ const authLimiter = rateLimit({
 // ─── Routes ───────────────────────────────────────────────────────
 
 app.use('/api/auth', authLimiter, authRoutes);
+app.use('/api/business', businessRoutes);
+app.use('/api', businessRoutes);
 
 // Health check
 app.get('/api/health', (_req, res) => {
@@ -81,15 +94,26 @@ app.use((err, _req, res, _next) => {
 
 // ─── Start Server (after DB initialization) ───────────────────────
 
-async function start() {
+async function start(port = PORT) {
   try {
     await initDb();
-    app.listen(PORT, () => {
+    const server = app.listen(port, () => {
       console.log(`\n┌─────────────────────────────────────────────┐`);
-      console.log(`│  VYAVSAYMITRA Server running on port ${PORT}    │`);
-      console.log(`│  Health: http://localhost:${PORT}/api/health    │`);
-      console.log(`│  Auth:   http://localhost:${PORT}/api/auth/...  │`);
+      console.log(`│  VYAVSAYMITRA Server running on port ${port}    │`);
+      console.log(`│  Health: http://localhost:${port}/api/health    │`);
+      console.log(`│  Auth:   http://localhost:${port}/api/auth/...  │`);
+      console.log(`│  Biz:    http://localhost:${port}/api/business  │`);
       console.log(`└─────────────────────────────────────────────┘\n`);
+    });
+
+    server.on('error', (err) => {
+      if (err.code === 'EADDRINUSE' && port === 5000) {
+        console.warn(`[SERVER] Port 5000 is in use (e.g. macOS AirPlay). Falling back to port 5001...`);
+        start(5001);
+      } else {
+        console.error('[SERVER] Server error:', err);
+        process.exit(1);
+      }
     });
   } catch (err) {
     console.error('[SERVER] Failed to start:', err);
