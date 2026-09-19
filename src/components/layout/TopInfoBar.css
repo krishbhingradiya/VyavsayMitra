@@ -1,0 +1,93 @@
+.info-bar {
+  background: #FFFFFF;
+  color: #334155;
+  font-size: 11px;
+  position: relative;
+  border-bottom: 1px solid rgba(0, 0, 0, 0.06);
+  z-index: var(--z-navbar);
+}
+
+[data-theme="dark"] .info-bar {
+  background: #0B1726;
+  color: #94A3B8;
+  border-bottom-color: rgba(255, 255, 255, 0.08);
+}
+
+.info-bar__tricolor {
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  display: flex;
+  height: 2.5px;
+}
+
+.info-bar__stripe {
+  flex: 1;
+}
+
+.info-bar__stripe--saffron { background: #FF9933; }
+.info-bar__stripe--white { background: #FFFFFF; }
+.info-bar__stripe--green { background: #128807; }
+
+.info-bar__content {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding-top: 6px;
+  padding-bottom: 6px;
+  min-height: 32px;
+}
+
+.info-bar__message {
+  font-weight: 500;
+  letter-spacing: 0.02em;
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  color: #1E293B;
+}
+
+[data-theme="dark"] .info-bar__message {
+  color: #F1F5F9;
+}
+
+.info-bar__flag-icon {
+  display: inline-flex;
+  width: 14px;
+  height: 10px;
+  border-radius: 1px;
+  overflow: hidden;
+  box-shadow: 0 0 1px rgba(0,0,0,0.3);
+  margin-left: 4px;
+}
+
+.info-bar__flag-icon span {
+  display: block;
+  height: 33.3%;
+}
+
+.info-bar__badges {
+  display: flex;
+  align-items: center;
+  gap: var(--space-3);
+  font-size: 11px;
+  color: #475467;
+}
+
+[data-theme="dark"] .info-bar__badges {
+  color: #94A3B8;
+}
+
+.info-bar__badge {
+  font-weight: 500;
+}
+
+.info-bar__sep {
+  opacity: 0.3;
+}
+
+@media (max-width: 768px) {
+  .info-bar__badges { display: none; }
+  .info-bar__message { font-size: 10.5px; }
+}

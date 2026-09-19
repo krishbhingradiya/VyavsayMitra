@@ -1,0 +1,52 @@
+# Dependencies
+node_modules/
+.pnp
+.pnp.js
+
+# Production & Build Outputs
+dist/
+dist-ssr/
+build/
+
+# Environment Variables & Secrets
+.env
+.env.*
+!.env.example
+*.local
+
+# Logs
+logs/
+*.log
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+pnpm-debug.log*
+lerna-debug.log*
+
+# Testing & Coverage
+coverage/
+*.lcov
+
+# Cache & Temporary Directories
+.cache/
+.vite/
+.temp/
+.tmp/
+
+# Python Virtual Environments (if applicable)
+venv/
+.venv/
+env/
+__pycache__/
+
+# OS & Editor Files
+.DS_Store
+Thumbs.db
+.vscode/*
+!.vscode/extensions.json
+.idea/
+*.suo
+*.ntvs*
+*.njsproj
+*.sln
+*.sw?
