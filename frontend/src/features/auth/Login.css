@@ -1,0 +1,843 @@
+/* ==============================================================
+   VyavsayMitra Split-Card Authentication Styles
+   Pixel-accurate matching reference layout & smooth sliding motion
+   ============================================================== */
+
+/* Fullscreen Page Shell */
+.login-fullscreen {
+  width: 100%;
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  background: #F1F5F9;
+  overflow-x: hidden;
+  box-sizing: border-box;
+  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;
+}
+
+/* Centered Main Area below Top Bar */
+.login-main {
+  flex: 1;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: clamp(10px, 1.8vh, 24px) clamp(16px, 2.5vw, 32px);
+  box-sizing: border-box;
+  min-height: calc(100vh - 35px);
+}
+
+/* Card Entrance Animation on Initial Page Load */
+@keyframes authCardEntrance {
+  0% {
+    opacity: 0;
+    transform: translate3d(0, 16px, 0) scale(0.985);
+  }
+  100% {
+    opacity: 1;
+    transform: translate3d(0, 0, 0) scale(1);
+  }
+}
+
+/* Master Split Card Container */
+.split-auth-card {
+  position: relative;
+  width: 100%;
+  max-width: 980px;
+  height: min(635px, calc(100vh - 60px));
+  min-height: 550px;
+  background: #FFFFFF;
+  border-radius: 28px;
+  box-shadow: 0 20px 50px rgba(11, 34, 83, 0.08), 0 4px 16px rgba(0, 0, 0, 0.03);
+  border: 1px solid rgba(226, 232, 240, 0.8);
+  overflow: hidden;
+  display: flex;
+  box-sizing: border-box;
+  padding: 14px;
+  animation: authCardEntrance 0.65s cubic-bezier(0.16, 1, 0.3, 1) backwards;
+}
+
+/* -------------------------------------------------------------
+   Sliding Rural Image Panel (Moves smoothly Left <-> Right)
+   ------------------------------------------------------------- */
+.split-auth-sliding-panel {
+  position: absolute;
+  top: 14px;
+  bottom: 14px;
+  left: 14px;
+  width: calc(50% - 14px);
+  border-radius: 22px;
+  overflow: hidden;
+  z-index: 10;
+  box-shadow: 0 14px 40px rgba(0, 0, 0, 0.15), 0 4px 12px rgba(11, 34, 83, 0.07);
+  transition: transform 0.72s cubic-bezier(0.65, 0, 0.35, 1);
+  will-change: transform;
+  pointer-events: none;
+  background: #E2E8F0;
+}
+
+/* Login State: Rural Image is on the RIGHT */
+.split-auth-card--login .split-auth-sliding-panel {
+  transform: translate3d(calc(100% + 14px), 0, 0);
+}
+
+/* Sign Up State: Rural Image is on the LEFT */
+.split-auth-card--signup .split-auth-sliding-panel {
+  transform: translate3d(0, 0, 0);
+}
+
+/* Pristine Image inside Panel */
+.split-auth-image {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  object-position: left center;
+  display: block;
+  user-select: none;
+  pointer-events: none;
+  transition: transform 0.28s cubic-bezier(0.25, 0.1, 0.25, 1);
+  will-change: transform;
+}
+
+/* -------------------------------------------------------------
+   Image Panel Overlay with Content & Action Button
+   ------------------------------------------------------------- */
+.split-auth-image-overlay {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: linear-gradient(180deg, rgba(11, 34, 83, 0.38) 0%, rgba(11, 34, 83, 0.46) 50%, rgba(11, 34, 83, 0.65) 100%);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  padding: 24px;
+  box-sizing: border-box;
+  z-index: 2;
+  pointer-events: auto;
+}
+
+.split-auth-overlay-content {
+  position: absolute;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  width: 88%;
+  max-width: 320px;
+  will-change: opacity, transform;
+}
+
+.split-auth-overlay-title {
+  font-size: clamp(1.85rem, 2.5vw, 2.2rem);
+  font-weight: 700;
+  color: #FFFFFF;
+  margin: 0 0 10px 0;
+  letter-spacing: -0.015em;
+  text-shadow: 0 2px 8px rgba(0, 0, 0, 0.5);
+}
+
+.split-auth-overlay-subtitle {
+  font-size: 0.92rem;
+  color: rgba(255, 255, 255, 0.95);
+  line-height: 1.45;
+  margin: 0 0 24px 0;
+  text-align: center;
+  text-shadow: 0 1px 6px rgba(0, 0, 0, 0.5);
+  font-weight: 400;
+}
+
+.split-auth-overlay-btn {
+  background: rgba(255, 255, 255, 0.16);
+  backdrop-filter: blur(10px);
+  -webkit-backdrop-filter: blur(10px);
+  color: #FFFFFF;
+  border: 2px solid rgba(255, 255, 255, 0.92);
+  border-radius: 9999px;
+  padding: 10px 36px;
+  font-size: 0.85rem;
+  font-weight: 700;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  cursor: pointer;
+  transition: background-color 0.22s ease, border-color 0.22s ease, transform 0.2s cubic-bezier(0.4, 0, 0.2, 1), box-shadow 0.22s cubic-bezier(0.4, 0, 0.2, 1);
+  box-shadow: 0 4px 16px rgba(0, 0, 0, 0.25);
+  font-family: inherit;
+}
+
+.split-auth-overlay-btn:hover {
+  background: #FFFFFF;
+  color: #0B2253;
+  border-color: #FFFFFF;
+  transform: translateY(-2px);
+  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.35);
+}
+
+.split-auth-overlay-btn:active {
+  transform: translateY(0) scale(0.98);
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.2);
+}
+
+/* Login State: Show 'Hello there' and [ SIGN UP ] */
+.split-auth-card--login .split-auth-overlay-content--login {
+  opacity: 1;
+  transform: translate3d(0, 0, 0);
+  pointer-events: auto;
+  /* Incoming transition with delay: enters smoothly in second half of panel glide */
+  transition: opacity 0.36s cubic-bezier(0.2, 0.8, 0.2, 1) 0.3s,
+              transform 0.44s cubic-bezier(0.2, 0.8, 0.2, 1) 0.3s;
+}
+
+.split-auth-card--login .split-auth-overlay-content--signup {
+  opacity: 0;
+  transform: translate3d(0, -16px, 0);
+  pointer-events: none;
+  /* Outgoing transition: exits promptly with zero delay */
+  transition: opacity 0.2s ease 0s,
+              transform 0.24s ease 0s;
+}
+
+/* Sign Up State: Show 'Welcome back' and [ LOGIN ] */
+.split-auth-card--signup .split-auth-overlay-content--signup {
+  opacity: 1;
+  transform: translate3d(0, 0, 0);
+  pointer-events: auto;
+  /* Incoming transition with delay: enters smoothly in second half of panel glide */
+  transition: opacity 0.36s cubic-bezier(0.2, 0.8, 0.2, 1) 0.3s,
+              transform 0.44s cubic-bezier(0.2, 0.8, 0.2, 1) 0.3s;
+}
+
+.split-auth-card--signup .split-auth-overlay-content--login {
+  opacity: 0;
+  transform: translate3d(0, 16px, 0);
+  pointer-events: none;
+  /* Outgoing transition: exits promptly with zero delay */
+  transition: opacity 0.2s ease 0s,
+              transform 0.24s ease 0s;
+}
+
+/* -------------------------------------------------------------
+   Form Panels (Left for Login, Right for Sign Up)
+   ------------------------------------------------------------- */
+.split-auth-form-panel {
+  position: absolute;
+  top: 14px;
+  bottom: 14px;
+  width: calc(50% - 14px);
+  display: flex;
+  flex-direction: column;
+  box-sizing: border-box;
+  overflow-y: auto;
+  overflow-x: hidden;
+  scrollbar-width: thin;
+  scrollbar-color: rgba(148, 163, 184, 0.4) transparent;
+  will-change: transform, opacity;
+}
+
+.split-auth-form-panel::-webkit-scrollbar {
+  width: 4px;
+}
+
+.split-auth-form-panel::-webkit-scrollbar-thumb {
+  background: rgba(148, 163, 184, 0.4);
+  border-radius: 4px;
+}
+
+/* Left Panel (Login Form) */
+.split-auth-form-panel--left {
+  left: 14px;
+  padding: 14px clamp(20px, 3vw, 40px);
+  justify-content: center;
+}
+
+.split-auth-card--login .split-auth-form-panel--left {
+  opacity: 1;
+  transform: translate3d(0, 0, 0);
+  pointer-events: auto;
+  z-index: 5;
+  transition: opacity 0.35s cubic-bezier(0.2, 0.8, 0.2, 1) 0.26s,
+              transform 0.45s cubic-bezier(0.2, 0.8, 0.2, 1) 0.26s;
+}
+
+.split-auth-card--signup .split-auth-form-panel--left {
+  opacity: 0;
+  transform: translate3d(-20px, 0, 0);
+  pointer-events: none;
+  z-index: 1;
+  transition: opacity 0.2s ease 0s,
+              transform 0.24s ease 0s;
+}
+
+/* Right Panel (Sign Up Form) */
+.split-auth-form-panel--right {
+  right: 14px;
+  padding: 10px clamp(18px, 2.5vw, 36px);
+  justify-content: center;
+}
+
+.split-auth-card--signup .split-auth-form-panel--right {
+  opacity: 1;
+  transform: translate3d(0, 0, 0);
+  pointer-events: auto;
+  z-index: 5;
+  transition: opacity 0.35s cubic-bezier(0.2, 0.8, 0.2, 1) 0.26s,
+              transform 0.45s cubic-bezier(0.2, 0.8, 0.2, 1) 0.26s;
+}
+
+.split-auth-card--login .split-auth-form-panel--right {
+  opacity: 0;
+  transform: translate3d(20px, 0, 0);
+  pointer-events: none;
+  z-index: 1;
+  transition: opacity 0.2s ease 0s,
+              transform 0.24s ease 0s;
+}
+
+/* -------------------------------------------------------------
+   Premium Back to Home Navigation Pill
+   Visual hierarchy: 🏠  ←  Back to Home
+   ------------------------------------------------------------- */
+.split-auth-back-wrapper {
+  position: absolute;
+  top: 14px;
+  left: clamp(16px, 2.5vw, 24px);
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  z-index: 20;
+}
+
+.split-auth-back-btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 7px;
+  background: #FFFFFF;
+  border: 1px solid rgba(18, 138, 78, 0.45);
+  border-radius: 9999px;
+  padding: 5px 14px;
+  color: #128A4E;
+  text-decoration: none;
+  font-size: 0.82rem;
+  font-weight: 600;
+  line-height: 1.2;
+  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.04), 0 1px 2px rgba(18, 138, 78, 0.05);
+  transition: background-color 0.22s cubic-bezier(0.4, 0, 0.2, 1),
+              border-color 0.22s cubic-bezier(0.4, 0, 0.2, 1),
+              transform 0.22s cubic-bezier(0.4, 0, 0.2, 1),
+              box-shadow 0.22s cubic-bezier(0.4, 0, 0.2, 1),
+              color 0.22s cubic-bezier(0.4, 0, 0.2, 1);
+  cursor: pointer;
+  user-select: none;
+  box-sizing: border-box;
+}
+
+.split-auth-back-btn:hover {
+  transform: translateY(-1px);
+  border-color: #128A4E;
+  background: #F8FDF9;
+  box-shadow: 0 4px 12px rgba(18, 138, 78, 0.14), 0 2px 4px rgba(0, 0, 0, 0.04);
+  color: #0E6D3E;
+}
+
+.split-auth-back-btn:active {
+  transform: translateY(0) scale(0.98);
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.06);
+}
+
+.split-auth-back-icon-home {
+  color: #128A4E;
+  flex-shrink: 0;
+  stroke-width: 2.2px;
+  transition: transform 0.22s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.split-auth-back-btn:hover .split-auth-back-icon-home {
+  transform: translateY(-0.5px);
+}
+
+.split-auth-back-icon-arrow {
+  color: #128A4E;
+  flex-shrink: 0;
+  stroke-width: 2.4px;
+  transition: transform 0.24s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.split-auth-back-btn:hover .split-auth-back-icon-arrow {
+  transform: translateX(-3px);
+}
+
+.split-auth-back-text {
+  font-weight: 600;
+  letter-spacing: 0.01em;
+  color: #128A4E;
+}
+
+.split-auth-back-leaf {
+  color: #2E7D32;
+  opacity: 0.85;
+  transform: rotate(-10deg);
+  pointer-events: none;
+  transition: transform 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.split-auth-back-wrapper:hover .split-auth-back-leaf {
+  transform: rotate(0deg) scale(1.08);
+}
+
+/* -------------------------------------------------------------
+   Typography & Headers
+   ------------------------------------------------------------- */
+.split-auth-title {
+  font-size: 1.7rem;
+  font-weight: 700;
+  color: #0B2253;
+  text-align: center;
+  margin: 0 0 5px 0;
+  letter-spacing: -0.015em;
+}
+
+.split-auth-subtitle {
+  font-size: 0.85rem;
+  color: #4B5563;
+  text-align: center;
+  line-height: 1.4;
+  margin: 0 0 16px 0;
+  font-weight: 400;
+}
+
+/* -------------------------------------------------------------
+   Common Form Fields & Inputs
+   ------------------------------------------------------------- */
+.split-auth-group {
+  margin-bottom: 12px;
+}
+
+.split-auth-label {
+  display: block;
+  font-size: 0.8rem;
+  font-weight: 600;
+  color: #0B2253;
+  margin-bottom: 5px;
+}
+
+.split-auth-input-wrapper {
+  position: relative;
+  display: flex;
+  align-items: center;
+}
+
+.split-auth-input-icon {
+  position: absolute;
+  left: 13px;
+  color: #64748B;
+  pointer-events: none;
+  transition: color 0.2s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.split-auth-input-wrapper:focus-within .split-auth-input-icon {
+  color: #128A4E;
+}
+
+.split-auth-input {
+  width: 100%;
+  height: 40px;
+  padding: 0 36px 0 38px;
+  background: #FFFFFF;
+  border: 1px solid #CBD5E1;
+  border-radius: 8px;
+  font-size: 0.85rem;
+  color: #0F172A;
+  transition: border-color 0.2s cubic-bezier(0.4, 0, 0.2, 1), box-shadow 0.2s cubic-bezier(0.4, 0, 0.2, 1);
+  box-sizing: border-box;
+}
+
+.split-auth-input::placeholder {
+  color: #94A3B8;
+  font-size: 0.83rem;
+}
+
+.split-auth-input:focus {
+  outline: none;
+  border-color: #128A4E;
+  box-shadow: 0 0 0 3px rgba(18, 138, 78, 0.12);
+}
+
+.split-auth-input--error {
+  border-color: #EF4444;
+}
+
+.split-auth-input--error:focus {
+  border-color: #EF4444;
+  box-shadow: 0 0 0 3px rgba(239, 68, 68, 0.12);
+}
+
+.split-auth-password-toggle {
+  position: absolute;
+  right: 11px;
+  background: none;
+  border: none;
+  padding: 4px;
+  color: #64748B;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 4px;
+  transition: color 0.15s ease;
+}
+
+.split-auth-password-toggle:hover {
+  color: #1E293B;
+}
+
+.split-auth-error-text {
+  display: block;
+  font-size: 0.72rem;
+  color: #EF4444;
+  margin-top: 3px;
+  font-weight: 500;
+}
+
+.split-auth-alert-error {
+  background: #FEF2F2;
+  border: 1px solid #F87171;
+  color: #B91C1C;
+  font-size: 0.78rem;
+  padding: 7px 10px;
+  border-radius: 6px;
+  margin-bottom: 10px;
+  text-align: center;
+}
+
+/* -------------------------------------------------------------
+   Remember Me & Forgot Password Row
+   ------------------------------------------------------------- */
+.split-auth-row {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin: 10px 0 14px 0;
+}
+
+.split-auth-checkbox-label {
+  display: flex;
+  align-items: center;
+  gap: 7px;
+  font-size: 0.8rem;
+  color: #1E293B;
+  font-weight: 500;
+  cursor: pointer;
+  user-select: none;
+}
+
+.split-auth-checkbox {
+  width: 16px;
+  height: 16px;
+  border-radius: 4px;
+  accent-color: #128A4E;
+  cursor: pointer;
+  margin: 0;
+}
+
+.split-auth-forgot-link {
+  font-size: 0.8rem;
+  font-weight: 500;
+  color: #2563EB;
+  text-decoration: none;
+  transition: color 0.15s ease;
+}
+
+.split-auth-forgot-link:hover {
+  color: #1D4ED8;
+  text-decoration: underline;
+}
+
+/* -------------------------------------------------------------
+   Buttons
+   ------------------------------------------------------------- */
+.split-auth-submit-btn {
+  width: 100%;
+  height: 42px;
+  background: #128A4E;
+  color: #FFFFFF;
+  border: none;
+  border-radius: 8px;
+  font-size: 0.92rem;
+  font-weight: 600;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 6px;
+  box-shadow: 0 2px 4px rgba(18, 138, 78, 0.2);
+  transition: background-color 0.2s ease, transform 0.18s cubic-bezier(0.4, 0, 0.2, 1), box-shadow 0.2s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.split-auth-submit-btn svg {
+  transition: transform 0.22s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.split-auth-submit-btn:hover:not(:disabled) {
+  background: #0E743C;
+  transform: translateY(-1px);
+  box-shadow: 0 4px 10px rgba(18, 138, 78, 0.28);
+}
+
+.split-auth-submit-btn:hover:not(:disabled) svg {
+  transform: translateX(3px);
+}
+
+.split-auth-submit-btn:active:not(:disabled) {
+  transform: translateY(1px) scale(0.99);
+  box-shadow: 0 1px 2px rgba(18, 138, 78, 0.2);
+}
+
+.split-auth-submit-btn:disabled {
+  opacity: 0.7;
+  cursor: not-allowed;
+}
+
+/* Divider */
+.split-auth-divider {
+  display: flex;
+  align-items: center;
+  margin: 11px 0;
+}
+
+.split-auth-divider__line {
+  flex: 1;
+  height: 1px;
+  background: #E2E8F0;
+}
+
+.split-auth-divider__text {
+  padding: 0 10px;
+  font-size: 0.72rem;
+  font-weight: 600;
+  color: #64748B;
+  text-transform: uppercase;
+  letter-spacing: 0.04em;
+}
+
+/* Google Button */
+.split-auth-google-btn {
+  width: 100%;
+  height: 39px;
+  background: #FFFFFF;
+  border: 1px solid #CBD5E1;
+  border-radius: 8px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 9px;
+  font-size: 0.84rem;
+  font-weight: 600;
+  color: #0B2253;
+  cursor: pointer;
+  box-shadow: 0 1px 2px rgba(0, 0, 0, 0.03);
+  transition: background-color 0.2s ease, border-color 0.2s ease, box-shadow 0.2s cubic-bezier(0.4, 0, 0.2, 1), transform 0.18s ease;
+}
+
+.split-auth-google-btn:hover {
+  background: #F8FAFC;
+  border-color: #94A3B8;
+  box-shadow: 0 3px 8px rgba(0, 0, 0, 0.07);
+  transform: translateY(-1px);
+}
+
+.split-auth-google-btn:active {
+  transform: translateY(0);
+  box-shadow: 0 1px 2px rgba(0, 0, 0, 0.04);
+}
+
+/* Switch Prompt (Sign Up / Login Link) */
+.split-auth-switch-prompt {
+  margin-top: 13px;
+  text-align: center;
+  font-size: 0.81rem;
+  color: #334155;
+}
+
+.split-auth-switch-btn {
+  background: none;
+  border: none;
+  color: #128A4E;
+  font-weight: 700;
+  font-size: 0.81rem;
+  cursor: pointer;
+  padding: 0 2px;
+  margin-left: 2px;
+  text-decoration: none;
+  font-family: inherit;
+  transition: color 0.15s ease;
+}
+
+.split-auth-switch-btn:hover {
+  color: #0E743C;
+  text-decoration: underline;
+}
+
+/* -------------------------------------------------------------
+   Sign Up Specific: Role Selector & Terms
+   ------------------------------------------------------------- */
+.split-auth-role-section {
+  margin-bottom: 10px;
+}
+
+.split-auth-role-label {
+  display: block;
+  font-size: 0.78rem;
+  font-weight: 600;
+  color: #0B2253;
+  margin-bottom: 6px;
+}
+
+.split-auth-role-grid {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 5px;
+}
+
+.split-auth-role-btn {
+  padding: 5px 3px;
+  font-size: 0.72rem;
+  font-weight: 500;
+  border: 1px solid #CBD5E1;
+  border-radius: 6px;
+  background: #FFFFFF;
+  color: #475569;
+  cursor: pointer;
+  text-align: center;
+  transition: all 0.15s ease;
+  white-space: nowrap;
+}
+
+.split-auth-role-btn:hover {
+  border-color: #128A4E;
+  color: #128A4E;
+}
+
+.split-auth-role-btn--active {
+  border-color: #128A4E;
+  background: #EBFBF3;
+  color: #128A4E;
+  font-weight: 600;
+}
+
+.split-auth-terms-row {
+  display: flex;
+  align-items: flex-start;
+  gap: 7px;
+  margin: 7px 0 10px 0;
+}
+
+.split-auth-terms-text {
+  font-size: 0.73rem;
+  color: #475569;
+  line-height: 1.35;
+}
+
+.split-auth-terms-text a {
+  color: #128A4E;
+  text-decoration: none;
+  font-weight: 600;
+}
+
+.split-auth-terms-text a:hover {
+  text-decoration: underline;
+}
+
+/* Compact group margins for signup */
+.split-auth-group--compact {
+  margin-bottom: 6px;
+}
+
+.split-auth-group--compact .split-auth-input {
+  height: 36px;
+  font-size: 0.81rem;
+}
+
+.split-auth-group--compact .split-auth-error-text {
+  font-size: 0.68rem;
+  margin-top: 1px;
+}
+
+/* -------------------------------------------------------------
+   Responsive Breakpoints for Tablets & Mobile
+   ------------------------------------------------------------- */
+@media (max-width: 860px) {
+  .login-fullscreen {
+    height: auto;
+    min-height: 100vh;
+  }
+
+  .login-main {
+    height: auto;
+    min-height: calc(100vh - 35px);
+    padding: 16px 12px;
+  }
+
+  .split-auth-card {
+    height: auto;
+    min-height: 520px;
+    max-width: 480px;
+    padding: 20px 16px;
+  }
+
+  .split-auth-sliding-panel {
+    display: none;
+  }
+
+  .split-auth-form-panel {
+    position: relative;
+    top: auto;
+    bottom: auto;
+    left: auto;
+    right: auto;
+    width: 100%;
+    padding: 0;
+    opacity: 1;
+    transform: none !important;
+  }
+
+  .split-auth-card--login .split-auth-form-panel--right {
+    display: none;
+  }
+
+  .split-auth-card--signup .split-auth-form-panel--left {
+    display: none;
+  }
+
+  .split-auth-back-wrapper {
+    position: relative;
+    top: auto;
+    left: auto;
+    margin-bottom: 14px;
+    align-self: flex-start;
+  }
+}
+
+/* -------------------------------------------------------------
+   Accessibility: Reduced Motion
+   ------------------------------------------------------------- */
+@media (prefers-reduced-motion: reduce) {
+  .split-auth-card,
+  .split-auth-sliding-panel,
+  .split-auth-form-panel,
+  .split-auth-overlay-content,
+  .split-auth-submit-btn,
+  .split-auth-back-btn,
+  .split-auth-google-btn,
+  .split-auth-input,
+  .split-auth-image,
+  .split-auth-input-icon,
+  .split-auth-back-icon-arrow,
+  .split-auth-back-icon-home,
+  .split-auth-back-leaf {
+    animation: none !important;
+    transition-duration: 0.01ms !important;
+    transform: none !important;
+  }
+}
+

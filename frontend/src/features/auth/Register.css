@@ -1,0 +1,428 @@
+/* ==============================================
+   Register Page — Strictly Matching IMAGE 2 (Target)
+   Pixel-accurate visual recreation
+   ============================================== */
+
+/* Page Shell — Ensures exact viewport fitting without unwanted scrolling */
+.register-fullscreen {
+  width: 100%;
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  background: #FFFFFF;
+  overflow-x: hidden;
+  box-sizing: border-box;
+  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;
+}
+
+/* Main Area below Top Bar */
+.register-main {
+  flex: 1;
+  position: relative;
+  width: 100%;
+  min-height: 647px;
+  height: calc(100vh - 28px);
+  display: flex;
+  align-items: center;
+  justify-content: flex-end;
+  box-sizing: border-box;
+  overflow: hidden;
+}
+
+/* Background Image — Sharp HD, un-zoomed, anchored at left top */
+.register-bg-image {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  object-position: left top;
+  z-index: 1;
+  pointer-events: none;
+}
+
+/* Clickable Logo Link over top-left logo */
+.register-logo-link {
+  position: absolute;
+  top: clamp(16px, 2.8vh, 28px);
+  left: clamp(24px, 3.8vw, 44px);
+  width: 290px;
+  height: 64px;
+  z-index: 10;
+  cursor: pointer;
+}
+
+/* Container holding the Card on the Right */
+.register-card-container {
+  position: relative;
+  z-index: 5;
+  display: flex;
+  align-items: center;
+  justify-content: flex-end;
+  width: 100%;
+  height: 100%;
+  padding-right: clamp(24px, 2.93vw, 36px);
+  padding-top: clamp(16px, 2.8vh, 28px);
+  padding-bottom: clamp(10px, 2vh, 24px);
+  padding-left: 20px;
+  box-sizing: border-box;
+}
+
+/* White Signup Card — Floating rounded card matching IMAGE 2 */
+.register-card {
+  width: 100%;
+  max-width: 379px;
+  background: #FFFFFF;
+  border-radius: 20px;
+  padding: 26px 26px 22px 26px;
+  box-shadow: 0 10px 32px rgba(11, 40, 80, 0.08), 0 2px 6px rgba(0, 0, 0, 0.02);
+  border: 1px solid rgba(226, 232, 240, 0.95);
+  box-sizing: border-box;
+  display: flex;
+  flex-direction: column;
+  max-height: calc(100vh - 36px - 20px);
+  overflow-y: auto;
+  scrollbar-width: none;
+}
+
+.register-card::-webkit-scrollbar {
+  display: none;
+}
+
+/* Card Header */
+.register-card__title {
+  font-size: 1.55rem;
+  font-weight: 700;
+  color: #0B2253;
+  text-align: center;
+  margin: 0 0 3px 0;
+  letter-spacing: -0.015em;
+}
+
+.register-card__subtitle {
+  font-size: 0.825rem;
+  color: #64748B;
+  text-align: center;
+  line-height: 1.4;
+  margin: 0 0 14px 0;
+  font-weight: 400;
+}
+
+/* Role Selector */
+.register-role__section {
+  margin-bottom: 12px;
+}
+
+.register-role__label {
+  display: block;
+  font-size: 0.8rem;
+  font-weight: 600;
+  color: #0B2253;
+  margin-bottom: 7px;
+}
+
+.register-role__grid {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 6px;
+}
+
+.register-role__btn {
+  height: 31px;
+  padding: 0 2px;
+  border: 1px solid #CBD5E1;
+  border-radius: 7px;
+  background: #FFFFFF;
+  font-size: 0.7125rem;
+  font-weight: 500;
+  color: #475569;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  transition: all 0.15s ease;
+  white-space: nowrap;
+}
+
+.register-role__btn:hover:not(.register-role__btn--active) {
+  border-color: #128A4E;
+  color: #128A4E;
+}
+
+.register-role__btn--active {
+  background: #FFFFFF;
+  border: 1.5px solid #128A4E;
+  color: #128A4E;
+  font-weight: 600;
+}
+
+/* Form Groups */
+.register-form__group {
+  margin-bottom: 9px;
+}
+
+/* Input Wrapper & Icons */
+.register-input__wrapper {
+  position: relative;
+  display: flex;
+  align-items: center;
+}
+
+.register-input__icon {
+  position: absolute;
+  left: 13px;
+  color: #64748B;
+  pointer-events: none;
+}
+
+.register-input {
+  width: 100%;
+  height: 40px;
+  padding: 0 12px 0 40px;
+  background: #FFFFFF;
+  border: 1px solid #CBD5E1;
+  border-radius: 8px;
+  font-size: 0.835rem;
+  color: #0F172A;
+  transition: border-color 0.15s ease, box-shadow 0.15s ease;
+  box-sizing: border-box;
+}
+
+.register-input--password {
+  padding-right: 38px;
+}
+
+.register-input::placeholder {
+  color: #94A3B8;
+  font-size: 0.835rem;
+}
+
+.register-input:focus {
+  outline: none;
+  border-color: #128A4E;
+  box-shadow: 0 0 0 2px rgba(18, 138, 78, 0.12);
+}
+
+.register-input--error {
+  border-color: #EF4444;
+}
+
+.register-input--error:focus {
+  border-color: #EF4444;
+  box-shadow: 0 0 0 2px rgba(239, 68, 68, 0.12);
+}
+
+/* Password Eye Toggle */
+.register-password__toggle {
+  position: absolute;
+  right: 11px;
+  background: none;
+  border: none;
+  padding: 4px;
+  color: #64748B;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 4px;
+  transition: color 0.15s ease;
+}
+
+.register-password__toggle:hover {
+  color: #1E293B;
+}
+
+/* Error Messages */
+.register-error-text {
+  display: block;
+  font-size: 0.72rem;
+  color: #EF4444;
+  margin-top: 2px;
+  font-weight: 500;
+}
+
+/* Terms & Conditions Row */
+.register-terms__row {
+  display: flex;
+  align-items: center;
+  gap: 7px;
+  margin: 7px 0 11px 0;
+}
+
+.register-checkbox {
+  width: 15px;
+  height: 15px;
+  border-radius: 3px;
+  accent-color: #128A4E;
+  cursor: pointer;
+  margin: 0;
+  flex-shrink: 0;
+}
+
+.register-terms__text {
+  font-size: 0.735rem;
+  color: #475569;
+  line-height: 1.35;
+  user-select: none;
+}
+
+.register-terms__text a {
+  color: #128A4E;
+  font-weight: 600;
+  text-decoration: none;
+  transition: color 0.15s ease;
+}
+
+.register-terms__text a:hover {
+  text-decoration: underline;
+  color: #0E743C;
+}
+
+/* Submit Button — Solid Green */
+.register-submit-btn {
+  width: 100%;
+  height: 42px;
+  background: #128A4E;
+  color: #FFFFFF;
+  border: none;
+  border-radius: 8px;
+  font-size: 0.925rem;
+  font-weight: 600;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: background 0.15s ease, transform 0.1s ease;
+  box-shadow: 0 2px 4px rgba(18, 138, 78, 0.2);
+}
+
+.register-submit-btn:hover:not(:disabled) {
+  background: #0E743C;
+}
+
+.register-submit-btn:active:not(:disabled) {
+  transform: translateY(1px);
+}
+
+.register-submit-btn:disabled {
+  opacity: 0.7;
+  cursor: not-allowed;
+}
+
+/* OR Divider */
+.register-divider {
+  display: flex;
+  align-items: center;
+  margin: 11px 0;
+}
+
+.register-divider__line {
+  flex: 1;
+  height: 1px;
+  background: #E2E8F0;
+}
+
+.register-divider__text {
+  padding: 0 9px;
+  font-size: 0.72rem;
+  font-weight: 600;
+  color: #94A3B8;
+  text-transform: uppercase;
+  letter-spacing: 0.04em;
+}
+
+/* Google Button */
+.register-google-btn {
+  width: 100%;
+  height: 40px;
+  background: #FFFFFF;
+  border: 1px solid #CBD5E1;
+  border-radius: 8px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 9px;
+  font-size: 0.835rem;
+  font-weight: 500;
+  color: #1E293B;
+  cursor: pointer;
+  transition: background 0.15s ease, border-color 0.15s ease;
+}
+
+.register-google-btn:hover {
+  background: #F8FAFC;
+  border-color: #94A3B8;
+}
+
+/* Login Navigation Link */
+.register-login__prompt {
+  margin-top: 13px;
+  text-align: center;
+  font-size: 0.8rem;
+  color: #475569;
+}
+
+.register-login__link {
+  color: #128A4E;
+  font-weight: 600;
+  text-decoration: none;
+  margin-left: 4px;
+  transition: color 0.15s ease;
+}
+
+.register-login__link:hover {
+  color: #0E743C;
+  text-decoration: underline;
+}
+
+/* Mobile Banner Header (Hidden on Desktop) */
+.register-mobile-hero {
+  display: none;
+}
+
+/* Responsive Breakpoints */
+@media (max-width: 960px) {
+  .register-fullscreen {
+    min-height: 100vh;
+    height: auto;
+    overflow-y: auto;
+  }
+
+  .register-main {
+    flex-direction: column;
+    height: auto;
+    min-height: calc(100vh - 28px);
+    overflow: visible;
+    background: #F8FAFC;
+  }
+
+  .register-bg-image {
+    display: none;
+  }
+
+  .register-mobile-hero {
+    display: block;
+    width: 100%;
+    height: 260px;
+    background: url('/signup-left-bg.png') center top / cover no-repeat;
+  }
+
+  .register-logo-link {
+    display: none;
+  }
+
+  .register-card-container {
+    width: 100%;
+    height: auto;
+    justify-content: center;
+    padding: 1.25rem 1rem 2.5rem;
+  }
+
+  .register-card {
+    max-width: 440px;
+    max-height: none;
+    padding: 26px 22px;
+  }
+}

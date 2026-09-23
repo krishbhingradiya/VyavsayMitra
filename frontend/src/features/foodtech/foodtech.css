@@ -1,0 +1,509 @@
+/* ==========================================================================
+   VYAVSAYMITRA — FoodTech Advisory & Processing Styles (Phase 3 Step 5)
+   ========================================================================== */
+
+.foodtech-page {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-6);
+  padding-bottom: var(--space-16);
+}
+
+/* Header & Intro */
+.foodtech-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  flex-wrap: wrap;
+  gap: var(--space-4);
+  padding: var(--space-6);
+  background: linear-gradient(135deg, rgba(19, 136, 8, 0.08) 0%, rgba(255, 153, 51, 0.08) 100%);
+  border: 1px solid var(--color-border-light);
+  border-radius: var(--radius-2xl);
+  box-shadow: var(--shadow-sm);
+}
+
+.foodtech-header__title {
+  font-size: var(--font-size-2xl);
+  font-weight: var(--font-weight-bold);
+  color: var(--color-primary);
+  display: flex;
+  align-items: center;
+  gap: var(--space-3);
+  margin-bottom: var(--space-1);
+}
+
+.foodtech-header__subtitle {
+  font-size: var(--font-size-sm);
+  color: var(--color-text-secondary);
+  max-width: 680px;
+}
+
+.foodtech-header__badge-row {
+  display: flex;
+  gap: var(--space-2);
+  align-items: center;
+  margin-top: var(--space-2);
+  flex-wrap: wrap;
+}
+
+/* Step Wizard Progress Bar */
+.foodtech-steps {
+  display: flex;
+  gap: var(--space-4);
+  align-items: center;
+  justify-content: center;
+  margin: var(--space-2) 0;
+}
+
+.foodtech-step-item {
+  display: flex;
+  align-items: center;
+  gap: var(--space-2);
+  font-size: var(--font-size-sm);
+  font-weight: var(--font-weight-medium);
+  color: var(--color-text-muted);
+}
+
+.foodtech-step-item.active {
+  color: var(--color-primary);
+  font-weight: var(--font-weight-bold);
+}
+
+.foodtech-step-item.completed {
+  color: var(--color-green);
+}
+
+.foodtech-step-num {
+  width: 28px;
+  height: 28px;
+  border-radius: 50%;
+  background: var(--color-surface-hover);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: var(--font-size-xs);
+  border: 1px solid var(--color-border);
+}
+
+.foodtech-step-item.active .foodtech-step-num {
+  background: var(--color-primary);
+  color: var(--color-white);
+  border-color: var(--color-primary);
+}
+
+.foodtech-step-item.completed .foodtech-step-num {
+  background: var(--color-green);
+  color: var(--color-white);
+  border-color: var(--color-green);
+}
+
+.foodtech-step-divider {
+  width: 32px;
+  height: 2px;
+  background: var(--color-border);
+}
+
+/* Model Selector Grid */
+.foodtech-model-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(320px, 1fr));
+  gap: var(--space-6);
+}
+
+.foodtech-model-card {
+  background: var(--color-surface);
+  border: 2px solid var(--color-border-light);
+  border-radius: var(--radius-xl);
+  padding: var(--space-6);
+  cursor: pointer;
+  transition: all var(--transition-base);
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  position: relative;
+  overflow: hidden;
+}
+
+.foodtech-model-card:hover {
+  border-color: var(--color-primary-light);
+  transform: translateY(-3px);
+  box-shadow: var(--shadow-lg);
+}
+
+.foodtech-model-card.selected {
+  border-color: var(--color-green);
+  background: rgba(19, 136, 8, 0.02);
+  box-shadow: 0 0 0 2px rgba(19, 136, 8, 0.2);
+}
+
+.foodtech-model-card__icon-wrap {
+  width: 48px;
+  height: 48px;
+  border-radius: var(--radius-lg);
+  background: rgba(11, 37, 69, 0.06);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: var(--color-primary);
+  margin-bottom: var(--space-4);
+}
+
+.foodtech-model-card.selected .foodtech-model-card__icon-wrap {
+  background: var(--color-green-lighter);
+  color: var(--color-green);
+}
+
+.foodtech-model-card__title {
+  font-size: var(--font-size-lg);
+  font-weight: var(--font-weight-bold);
+  color: var(--color-primary);
+  margin-bottom: var(--space-1);
+}
+
+.foodtech-model-card__sub {
+  font-size: var(--font-size-xs);
+  color: var(--color-text-muted);
+  margin-bottom: var(--space-3);
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+}
+
+.foodtech-model-card__desc {
+  font-size: var(--font-size-sm);
+  color: var(--color-text-secondary);
+  line-height: 1.5;
+  margin-bottom: var(--space-4);
+  flex-grow: 1;
+}
+
+.foodtech-model-card__meta {
+  padding-top: var(--space-3);
+  border-top: 1px solid var(--color-border-light);
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-2);
+  font-size: var(--font-size-xs);
+  color: var(--color-text-secondary);
+}
+
+.foodtech-model-card__tags {
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--space-1);
+}
+
+/* Dynamic Input Form */
+.foodtech-form-card {
+  background: var(--color-surface);
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius-2xl);
+  padding: var(--space-8);
+  box-shadow: var(--shadow-sm);
+}
+
+.foodtech-form-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: var(--space-4);
+  margin-bottom: var(--space-6);
+  padding-bottom: var(--space-4);
+  border-bottom: 1px solid var(--color-border-light);
+}
+
+.foodtech-form-section-title {
+  font-size: var(--font-size-md);
+  font-weight: var(--font-weight-bold);
+  color: var(--color-primary);
+  margin: var(--space-6) 0 var(--space-3) 0;
+  display: flex;
+  align-items: center;
+  gap: var(--space-2);
+}
+
+.foodtech-input-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(260px, 1fr));
+  gap: var(--space-5);
+}
+
+.foodtech-input-wrap {
+  position: relative;
+}
+
+.foodtech-input-suffix {
+  position: absolute;
+  right: var(--space-3);
+  top: 50%;
+  transform: translateY(-50%);
+  font-size: var(--font-size-xs);
+  font-weight: var(--font-weight-medium);
+  color: var(--color-text-muted);
+  pointer-events: none;
+}
+
+.foodtech-input-prefix {
+  position: absolute;
+  left: var(--space-3);
+  top: 50%;
+  transform: translateY(-50%);
+  font-size: var(--font-size-sm);
+  color: var(--color-text-muted);
+  pointer-events: none;
+}
+
+.foodtech-input--prefixed {
+  padding-left: var(--space-7);
+}
+
+.foodtech-benchmark-badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 4px;
+  font-size: 11px;
+  color: var(--color-green-dark);
+  background: var(--color-green-lighter);
+  padding: 2px 6px;
+  border-radius: 4px;
+  cursor: pointer;
+  transition: all var(--transition-fast);
+}
+
+.foodtech-benchmark-badge:hover {
+  filter: brightness(0.95);
+}
+
+/* Mass Balance Visual Diagram */
+.mass-balance-container {
+  background: var(--color-surface);
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius-xl);
+  padding: var(--space-6);
+  margin-bottom: var(--space-6);
+}
+
+.mass-balance-flow {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: var(--space-4);
+  flex-wrap: wrap;
+  padding: var(--space-4) 0;
+}
+
+.mass-balance-node {
+  flex: 1;
+  min-width: 180px;
+  background: var(--color-surface);
+  border: 1px solid var(--color-border-light);
+  border-radius: var(--radius-lg);
+  padding: var(--space-4);
+  text-align: center;
+  position: relative;
+  box-shadow: var(--shadow-xs);
+}
+
+.mass-balance-node--input {
+  border-left: 4px solid var(--color-primary);
+  background: rgba(11, 37, 69, 0.02);
+}
+
+.mass-balance-node--primary {
+  border-left: 4px solid var(--color-green);
+  background: rgba(19, 136, 8, 0.02);
+}
+
+.mass-balance-node--byproduct {
+  border-left: 4px solid var(--color-saffron);
+  background: rgba(255, 153, 51, 0.02);
+}
+
+.mass-balance-node--loss {
+  border-left: 4px solid #6c757d;
+  background: rgba(108, 117, 125, 0.02);
+}
+
+.mass-balance-node__val {
+  font-size: var(--font-size-xl);
+  font-weight: var(--font-weight-bold);
+  font-family: var(--font-data);
+  color: var(--color-primary);
+}
+
+.mass-balance-node__pct {
+  font-size: var(--font-size-xs);
+  color: var(--color-text-muted);
+  margin-top: 2px;
+}
+
+.mass-balance-arrow {
+  color: var(--color-text-muted);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+/* Key Metrics Grid */
+.foodtech-metrics-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+  gap: var(--space-4);
+  margin-bottom: var(--space-6);
+}
+
+.foodtech-metric-card {
+  background: var(--color-surface);
+  border: 1px solid var(--color-border-light);
+  border-radius: var(--radius-xl);
+  padding: var(--space-5);
+  box-shadow: var(--shadow-xs);
+  transition: transform var(--transition-base);
+}
+
+.foodtech-metric-card:hover {
+  transform: translateY(-2px);
+  box-shadow: var(--shadow-sm);
+}
+
+.foodtech-metric-card__label {
+  font-size: var(--font-size-xs);
+  color: var(--color-text-muted);
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+  margin-bottom: var(--space-1);
+}
+
+.foodtech-metric-card__value {
+  font-size: var(--font-size-2xl);
+  font-weight: var(--font-weight-bold);
+  font-family: var(--font-data);
+}
+
+.foodtech-metric-card__sub {
+  font-size: var(--font-size-xs);
+  margin-top: var(--space-1);
+}
+
+/* Viability & Status Badges */
+.viability-banner {
+  padding: var(--space-5);
+  border-radius: var(--radius-xl);
+  display: flex;
+  align-items: center;
+  gap: var(--space-4);
+  margin-bottom: var(--space-6);
+}
+
+.viability-banner--profitable {
+  background: var(--color-green-lighter);
+  border: 1px solid rgba(19, 136, 8, 0.3);
+  color: var(--color-green-dark);
+}
+
+.viability-banner--loss {
+  background: var(--color-error-light);
+  border: 1px solid rgba(240, 68, 56, 0.3);
+  color: var(--color-error);
+}
+
+.viability-banner--breakeven {
+  background: var(--color-warning-light);
+  border: 1px solid rgba(255, 153, 51, 0.3);
+  color: var(--color-saffron-dark);
+}
+
+.viability-banner--insufficient {
+  background: rgba(108, 117, 125, 0.1);
+  border: 1px solid #ced4da;
+  color: #495057;
+}
+
+/* Schemes Cards */
+.foodtech-scheme-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(320px, 1fr));
+  gap: var(--space-5);
+}
+
+.foodtech-scheme-card {
+  background: var(--color-surface);
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius-xl);
+  padding: var(--space-5);
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-3);
+  position: relative;
+  box-shadow: var(--shadow-xs);
+}
+
+.foodtech-scheme-card--matched {
+  border-top: 4px solid var(--color-green);
+}
+
+.foodtech-scheme-card--potential {
+  border-top: 4px solid var(--color-saffron);
+}
+
+.foodtech-scheme-card--insufficient {
+  border-top: 4px solid #6c757d;
+}
+
+/* Sensitivity Table */
+.foodtech-table {
+  width: 100%;
+  border-collapse: collapse;
+  font-size: var(--font-size-sm);
+}
+
+.foodtech-table th {
+  text-align: left;
+  padding: var(--space-3) var(--space-4);
+  background: rgba(11, 37, 69, 0.04);
+  color: var(--color-text-secondary);
+  font-weight: var(--font-weight-semibold);
+  border-bottom: 1px solid var(--color-border);
+}
+
+.foodtech-table td {
+  padding: var(--space-3) var(--space-4);
+  border-bottom: 1px solid var(--color-border-light);
+  color: var(--color-text-primary);
+}
+
+/* Provenance Accordion */
+.foodtech-provenance-box {
+  background: rgba(11, 37, 69, 0.02);
+  border: 1px solid var(--color-border-light);
+  border-radius: var(--radius-lg);
+  padding: var(--space-4);
+}
+
+/* Responsive Media Queries */
+@media (max-width: 768px) {
+  .foodtech-model-grid {
+    grid-template-columns: 1fr;
+  }
+  .foodtech-input-grid {
+    grid-template-columns: 1fr;
+  }
+  .mass-balance-flow {
+    flex-direction: column;
+  }
+  .mass-balance-arrow {
+    transform: rotate(90deg);
+    margin: var(--space-1) 0;
+  }
+  .foodtech-header {
+    flex-direction: column;
+  }
+  .foodtech-steps {
+    flex-direction: column;
+    align-items: flex-start;
+  }
+  .foodtech-step-divider {
+    display: none;
+  }
+}

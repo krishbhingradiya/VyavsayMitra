@@ -327,7 +327,12 @@ if __name__ == '__main__':
     if len(sys.argv) > 2:
         task = sys.argv[1]
         try:
-            input_data = json.loads(sys.argv[2])
+            raw_arg = sys.argv[2]
+            if raw_arg.startswith('b64:'):
+                import base64
+                input_data = json.loads(base64.b64decode(raw_arg[4:]).decode('utf-8'))
+            else:
+                input_data = json.loads(raw_arg)
             if task == 'crop_yield':
                 print(json.dumps(predict_crop_yield(input_data)))
             elif task == 'crop_suitability':

@@ -1,0 +1,97 @@
+/* ==============================================
+   Top Government-style Information Bar
+   Strictly matches IMAGE 1 Source of Truth
+   ============================================== */
+
+.info-bar {
+  background: #F9F3EA;
+  color: #0B2545;
+  font-size: 11.5px;
+  position: relative;
+  border-bottom: 1px solid rgba(0, 0, 0, 0.06);
+  z-index: 100;
+  width: 100%;
+  box-sizing: border-box;
+}
+
+.info-bar__content {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  height: 26px;
+  padding: 0 clamp(24px, 3.8vw, 48px);
+  width: 100%;
+  box-sizing: border-box;
+}
+
+.info-bar__message {
+  font-weight: 600;
+  font-size: 11.5px;
+  letter-spacing: 0.01em;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  color: #0B2545;
+}
+
+.info-bar__flag {
+  display: inline-block;
+  vertical-align: middle;
+  border-radius: 1px;
+  box-shadow: 0 0 1px rgba(0, 0, 0, 0.25);
+  flex-shrink: 0;
+  width: 18px;
+  height: 12px;
+}
+
+.info-bar__tricolor-bar {
+  display: inline-flex;
+  flex-direction: column;
+  justify-content: space-between;
+  width: 22px;
+  height: 6px;
+  margin-left: 6px;
+  opacity: 0.95;
+}
+
+.info-bar__stripe {
+  height: 2px;
+  width: 100%;
+  border-radius: 1px;
+}
+
+.info-bar__stripe--saffron {
+  background-color: #E67E22;
+}
+
+.info-bar__stripe--green {
+  background-color: #27AE60;
+}
+
+.info-bar__badges {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  font-size: 11px;
+  color: #0B2545;
+}
+
+.info-bar__badge {
+  font-weight: 500;
+  letter-spacing: 0.01em;
+  color: #0B2545;
+}
+
+.info-bar__sep {
+  color: #CBD5E1;
+  font-weight: 300;
+}
+
+@media (max-width: 768px) {
+  .info-bar__badges {
+    display: none;
+  }
+  .info-bar__message {
+    font-size: 11.5px;
+  }
+}

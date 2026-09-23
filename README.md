@@ -3,10 +3,12 @@
 ### *Market. Money. Mitra.*
 > *"Sapne Se Safal Vyavsay Tak"*
 
-[![Build & Lint Status](https://img.shields.io/badge/build-passing-brightgreen.svg)](https://github.com/krishbhingradiya/Vyavsay_Mitra)
+[![Build Status](https://img.shields.io/badge/build-passing-brightgreen.svg)](https://github.com/krishbhingradiya/Vyavsay_Mitra)
 [![React](https://img.shields.io/badge/React-19.2-61DAFB.svg?logo=react&logoColor=black)](https://react.dev/)
 [![TypeScript](https://img.shields.io/badge/TypeScript-6.0-3178C6.svg?logo=typescript&logoColor=white)](https://www.typescriptlang.org/)
-[![Vite](https://img.shields.io/badge/Vite-8.3-646CFF.svg?logo=vite&logoColor=white)](https://vitejs.dev/)
+[![Express](https://img.shields.io/badge/Express-5.1-black.svg?logo=express)](https://expressjs.com/)
+[![Python](https://img.shields.io/badge/Python-3.14-blue.svg?logo=python)](https://python.org/)
+[![Scikit-Learn](https://img.shields.io/badge/scikit--learn-1.3+-orange.svg?logo=scikit-learn)](https://scikit-learn.org/)
 [![License](https://img.shields.io/badge/License-MIT-blue.svg)](LICENSE)
 [![SIH](https://img.shields.io/badge/SIH-2026-orange.svg)](https://sih.gov.in/)
 
@@ -14,189 +16,161 @@
 
 ---
 
-## 🌾 Problem Statement (SIH 2026)
+## 🏗️ Architecture & Project Structure
 
-Rural and semi-urban micro-entrepreneurs across India face structural disadvantages when starting or expanding enterprises:
-1. **Lack of Local Market Intelligence**: Limited visibility into competitor density, village demand catchment, and raw material supply dynamics within 5–15 KM.
-2. **Opaque Financial Structuring**: Difficulty understanding margin money ratios, bank debt servicing capacities, moratorium tenures, and monthly EMIs.
-3. **Complex Government Welfare Schemes**: Inability to match enterprise capital outlay with appropriate central and state subsidy schemes (e.g., PMEGP, MUDRA, NABARD, Stand-Up India).
-4. **Lack of Bank-Ready Documentation**: Missing formal Detailed Project Reports (DPR), break-even analyses, and required statutory document checklists.
-5. **Linguistic & Technological Barriers**: Complex financial portals often lack accessible, multilingual vernacular guidance.
-
----
-
-## 💡 Solution
-
-VYAVSAYMITRA provides an all-in-one vernacular platform that democratizes enterprise intelligence:
-- **Instant Project Structuring**: Derives total project cost, debt requirement, and subsidy eligibility directly from the entrepreneur's available margin capital.
-- **Hyper-Local Feasibility Studies**: Interactive geographic mapping of competitor density, location advantages, risks, and SWOT parameters within village radii.
-- **Intelligent Scheme Matching**: Algorithmic scheme selection with automated interest, tenure, and moratorium scheduling.
-- **Bank-Ready DPR Generator**: Produces 3-year projected cash flows, profit & loss projections, and break-even calculations exportable for bank credit officers.
-- **AI Mitra Advisory**: Contextual AI companion providing conversational guidance on subsidies, licensing, operating cost reductions, and risk mitigation.
-- **Tri-Lingual Support**: Native interface in **English**, **हिन्दी (Hindi)**, and **ગુજરાતી (Gujarati)**.
-
----
-
-## 🚀 Core Features
-
-### 1. Business Feasibility & Market Intelligence
-- **Location Analysis**: Village, block, and district demographic profiling with geographic mapping.
-- **Competitor Mapping**: Visual clustering of existing local businesses, market saturation levels, and unmet demand gaps within 5–15 KM.
-- **SWOT & Risk Matrix**: Auto-generated Strengths, Weaknesses, Opportunities, and Threats along with actionable mitigation roadmaps.
-- **Product Value & Pricing Strategy**: Benchmark pricing guidelines balancing rural purchasing power with sustainable gross margins.
-
-### 2. Financial Calculator & Capital Structuring
-- **Available Margin Logic**:
-  $$\text{Total Project Cost} = \frac{\text{Available Margin}}{0.10} \quad (10\%\text{ Margin Capital})$$
-  $$\text{Bank Loan Amount} = \text{Project Cost} \times 0.90 \quad (90\%\text{ Term Loan})$$
-- **Micro vs. Term Loan Routing**:
-  - **Project Cost $\le$ ₹1.40 Lakh**: Micro Finance Scheme (6.5% interest, 3-year tenure, 3-month moratorium).
-  - **Project Cost $>$ ₹1.40 Lakh to $\le$ ₹50 Lakh**: Term Loan Scheme (8.0% interest, 7-year tenure, 6-month moratorium).
-- **EMI & Repayment Schedule**: Monthly principal and interest amortization tables accounting for capitalized moratorium periods.
-- **Working Capital & Operational Expense Planner**: Cost estimation covering raw materials, labor, electricity, logistics, maintenance, and emergency buffers.
-
-### 3. Scheme Advisor & Funding Support
-- **Auto-Matching Engine**: Filters 100+ national and state schemes by capital bracket, sector, social category, and location.
-- **Funding Directory**: Profiles of Scheduled Commercial Banks, Regional Rural Banks (RRBs), Cooperative Banks, KVIC, and NABARD channelizing agencies.
-- **Interactive Document Readiness Checklist**: Tracks Aadhaar, PAN, land/rental agreements, quotation bills, caste certificates, and bank statements.
-
-### 4. Detailed Business Plan (DPR)
-- Executive summary, 3-year revenue growth models, operational expense escalations, break-even unit sales, and month-by-month cash flow forecasts.
-- One-click print / PDF export formatted for bank submission.
-
-### 5. AI Mitra — Conversational Business Advisor
-- Domain-expert rural business guidance engine with built-in financial context awareness.
-- Optional integration with **Google Gemini AI** (`VITE_GEMINI_API_KEY`) for live generative assistance with automatic graceful fallback.
-
-### 6. Vernacular Accessibility & Modern UI
-- Instant language toggle between English, हिन्दी, and ગુજરાતી.
-- High-contrast, responsive design matching rural fintech aesthetics, accessible on mobile and desktop without viewport clipping.
-
----
-
-## 🛠 Technology Stack
-
-| Layer | Technologies |
-| :--- | :--- |
-| **Frontend Framework** | React 19.2, TypeScript 6.0 |
-| **Build Tool** | Vite 8.3 with HMR and code-splitting |
-| **State Management** | Zustand 5.0 with persistent `localStorage` middleware |
-| **Routing** | React Router DOM 7.18 (`PublicLayout`, `DashboardLayout`, `<ProtectedRoute>`) |
-| **Styling** | Modular Vanilla CSS, CSS Variables Design System, Responsive Flexbox/Grid |
-| **Internationalization** | i18next, react-i18next, LanguageDetector |
-| **Visuals & Charts** | Recharts 3.10, Leaflet 1.9, React-Leaflet 5.0, Lucide React Icons |
-| **AI Integration** | Google Gemini REST API (`gemini-1.5-flash`) + Offline Advisory Engine |
-| **Linter** | Oxlint (0 warnings, 0 errors) |
-
----
-
-## 📂 Project Structure
+The project follows a clean, modular, multi-tier architecture:
 
 ```
-VYAVSAYMITRA/
-├── public/                     # Static assets and icons
-│   ├── favicon.svg
-│   └── icons.svg
-├── src/
-│   ├── assets/                 # Brand assets & composed rural hero artwork
-│   │   ├── rural-hero.jpg
-│   │   └── hero.png
-│   ├── components/             # Reusable UI & layout components
-│   │   └── layout/             # Public Navbar, TopInfoBar, DashboardLayout, Footer
-│   ├── config/                 # Scheme routing rules, constants, languages
-│   ├── data/                   # Realistic demo business & demographic data
-│   ├── features/               # Domain feature modules
-│   │   ├── ai/                 # AI Mitra companion with Gemini integration
-│   │   ├── auth/               # Login, Register, Forgot Password
-│   │   ├── business/           # Location, Market, Competitors, SWOT, Risk
-│   │   ├── business-plan/      # Detailed Project Report (DPR) generator
-│   │   ├── dashboard/          # Dashboard Home, Profile, Settings
-│   │   ├── finance/            # Margin, Project Cost, EMI, Moratorium, Repayment
-│   │   ├── funding/            # Institutional funding & document checklist
-│   │   ├── onboarding/         # 6-step entrepreneur onboarding wizard
-│   │   ├── reports/            # Exportable summary dossiers
-│   │   └── schemes/            # Scheme Advisor & eligibility filtering
-│   ├── hooks/                  # Custom React hooks (forms, scroll, count-up)
-│   ├── i18n/                   # Translation keys (English, Hindi, Gujarati)
-│   ├── pages/                  # LandingPage (Hero, Journey, Stats, CTA)
-│   ├── store/                  # Zustand stores with localStorage persistence
-│   ├── styles/                 # Design tokens, variables, reset, animations
-│   ├── types/                  # TypeScript interface contracts
-│   ├── utils/                  # Verified financial calculation algorithms
-│   ├── App.tsx                 # Route declarations and guards
-│   ├── index.css               # Base typography and imports
-│   └── main.tsx                # Application root entry point
-├── .env.example                # Documented configuration template
-├── .gitignore                  # Security-first ignore rules
-├── package.json
-├── tsconfig.json
-└── vite.config.ts
+VyavsayMitra/
+├── frontend/                     # React 19 + TypeScript 6 + Vite 8 SPA
+│   ├── src/
+│   │   ├── api/                  # Centralized, typed API Client (apiClient.ts)
+│   │   ├── components/           # Reusable UI components (layout, brand, common)
+│   │   ├── features/             # Feature slices (auth, dashboard, business, finance, etc.)
+│   │   ├── hooks/                # Custom React hooks
+│   │   ├── i18n/                 # Vernacular translations (English, Hindi, Gujarati)
+│   │   ├── store/                # Zustand client state stores (auth, business, finance, UI)
+│   │   └── types/                # Shared TypeScript definitions
+│   ├── public/                   # Static assets, branding, and imagery
+│   ├── package.json              # Frontend dependencies and scripts
+│   └── vite.config.ts            # Vite build configuration
+│
+├── backend/                      # Express 5 REST API & Computation Engine
+│   ├── src/
+│   │   ├── config/               # Database (sql.js) & freshness policy
+│   │   ├── controllers/          # Business & Auth request controllers
+│   │   ├── middleware/           # Rate limiting & error handlers
+│   │   ├── models/               # Data access models (User, OTP)
+│   │   ├── routes/               # Express API route declarations
+│   │   └── services/             # Core business intelligence & advisory engines:
+│   │       ├── ai/               # AI synthesis & qualitative advisory
+│   │       ├── business/         # Domain engines (Crop, Dairy, Poultry, Food-Processing, MSME)
+│   │       ├── calculations/     # Deterministic financial calculation engines
+│   │       ├── data/             # Historical & APMC mandi market fusion service
+│   │       ├── email/            # Nodemailer OTP email service
+│   │       ├── ml/               # Subprocess Python ML model bridge & governance
+│   │       └── validation/       # Strict payload & schema validators
+│   ├── data/                     # SQLite database storage (vyavsaymitra.db)
+│   ├── tests/                    # Backend automated test suites (46 tests)
+│   ├── package.json              # Backend dependencies and scripts
+│   └── index.js                  # Backend entry point
+│
+├── ml/                           # Python Machine Learning Subsystem
+│   ├── inference/                # Production model inference scripts (predict.py)
+│   ├── training/                 # Model training pipelines (Yield, Suitability, Mandi)
+│   ├── pipelines/                # Feature engineering & preprocessing pipelines
+│   ├── evaluation/               # Model audit & metrics evaluation
+│   └── requirements.txt          # Python ML dependencies
+│
+├── data/                         # Curated & Validated Datasets
+│   ├── validated/                # Cleaned NABARD benchmarks, Mandi prices, Schemes
+│   ├── metadata/                 # Dataset registries & data dictionaries
+│   ├── features/                 # Generated ML feature stores
+│   └── raw/                      # Raw government source datasets
+│
+├── models/                       # Serialized production ML model artifacts (.joblib)
+├── tests/                        # Python unit tests for ML & data pipeline (12 tests)
+├── package.json                  # Root orchestrator scripts
+└── README.md
 ```
 
 ---
 
-## ⚡ Local Setup & Running Guide
+## 🌾 Core Capabilities
+
+### 1. Hyper-Local Business Feasibility & Sector Archetypes
+- **Agri-Crops**: Yield prediction, crop suitability recommendations, cost-of-cultivation benchmarks.
+- **Dairy Units**: NABARD unit economics for 2-cow micro to 10-cow commercial units.
+- **Poultry Broilers**: 500-bird cyclical batch production models with feed-conversion benchmarks.
+- **Food Processing**: Mini flour mills (Atta Chakki), oil extraction, and agro-processing units.
+- **General MSME**: Extensible natural language idea classifier with instant capital sizing.
+
+### 2. Market Data Fusion (AGMARKNET + Verified Benchmarks)
+- Real-time mandi price tracking from official government sources (`data.gov.in` / `agmarknet.gov.in`).
+- Safe fallback to verified regional APMC historical benchmarks.
+- Unit normalization (INR/quintal vs. INR/kg) and provenance tracking.
+
+### 3. Machine Learning Governance
+- Subprocess execution with base64 safety serialization.
+- Production status gate (`production_candidate` / `active_production`).
+- Conformal prediction intervals with uncertainty bounds.
+- Rejection of stale or unverified models with automatic fallback.
+
+### 4. Financial Calculators & DPR Generator
+- Margin capital formula: Total Project Cost = Available Margin / 10%.
+- Automatic loan routing (Micro Finance vs. Term Loan).
+- Moratorium handling, amortization schedules, and working capital estimations.
+
+---
+
+## ⚡ Quick Start
 
 ### Prerequisites
 - **Node.js**: v18.0.0 or higher (v20+ recommended)
 - **npm**: v9.0.0 or higher
+- **Python**: v3.10+ (with virtual environment in `.venv`)
 
-### 1. Clone the Repository
+### 1. Installation
+Install all dependencies (root, frontend, and backend) in one step:
 ```bash
-git clone https://github.com/krishbhingradiya/Vyavsay_Mitra.git
-cd Vyavsay_Mitra
+npm run install:all
 ```
 
-### 2. Install Dependencies
+For Python ML environment:
 ```bash
-npm install
+pip install -r ml/requirements.txt
 ```
 
-### 3. Environment Configuration (Optional)
-Copy `.env.example` to create your local `.env`:
-```bash
-cp .env.example .env
-```
-Configure environment variables if needed:
-```env
-# Optional: backend API URL (defaults to client-side mode)
-VITE_API_URL=http://localhost:5000
+### 2. Running Locally
 
-# Optional: Google Gemini API key for live AI completions
-VITE_GEMINI_API_KEY=your_gemini_api_key_here
-```
-> **Note**: VYAVSAYMITRA runs 100% offline out-of-the-box using its built-in rule and advisory engine. An API key is purely optional.
-
-### 4. Run Frontend Development Server
+#### Run Both Frontend and Backend Concurrently:
 ```bash
 npm run dev
 ```
-Open [http://localhost:5173](http://localhost:5173) in your browser.
+- **Frontend**: [http://localhost:5173](http://localhost:5173)
+- **Backend API**: [http://localhost:5000/api](http://localhost:5000/api)
+- **Health Check**: [http://localhost:5000/api/health](http://localhost:5000/api/health)
 
-### 5. Running Backend (If Applicable)
-VYAVSAYMITRA is currently architected as a standalone, offline-first client application using Zustand state persistence (`localStorage`). If connecting to an external REST service, ensure `VITE_API_URL` points to your backend server.
-
-### 6. Lint & Quality Check
+#### Run Services Individually:
 ```bash
-npm run lint
-```
+# Frontend only
+npm run dev:frontend
 
-### 7. Production Build & Preview
-```bash
-# Typecheck and create production bundle
-npm run build
-
-# Preview production build locally
-npm run preview
+# Backend only
+npm run dev:backend
 ```
 
 ---
 
-## 🛡️ Security & Secret Protection
+## 🧪 Testing
 
-- **Zero Hardcoded Secrets**: All credentials, keys, and endpoints are loaded exclusively through `import.meta.env`.
-- **Git Protection**: `.env`, `.env.*`, and temporary directories are strictly excluded via `.gitignore`.
-- **Offline Reliability**: Graceful fallbacks ensure no crashes occur even if external APIs or network connectivity fail.
+The platform includes a total of **58 automated tests**:
+
+```bash
+# Run all tests (Backend + ML)
+npm run test:all
+
+# Run backend test suites (46 tests)
+npm run test:backend
+
+# Run ML and data pipeline tests (12 tests)
+npm run test:ml
+```
+
+### Test Suite Breakdown:
+1. **Production Backend Governance Test Suite** (14 tests) — input validation, edge cases, model fallbacks.
+2. **Business & Calculations Test Suite** (18 tests) — domain engines, idea classifier, ML regressor.
+3. **Historical + Current Market Data Fusion Suite** (14 tests) — price normalization, location fallback, freshness guards.
+4. **ML Production & Pipeline Unit Tests** (12 tests) — inference safety, schema validation, data pipeline tests.
+
+---
+
+## 📦 Building for Production
+
+```bash
+npm run build
+```
+Creates an optimized production bundle in `frontend/dist`.
 
 ---
 

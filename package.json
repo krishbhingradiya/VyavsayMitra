@@ -1,37 +1,21 @@
 {
   "name": "vyavsaymitra",
   "private": true,
-  "version": "0.0.0",
-  "type": "module",
+  "version": "1.0.0",
+  "description": "Rural Business Feasibility & Advisory Intelligence Platform",
   "scripts": {
-    "dev": "vite",
-    "build": "tsc -b && vite build",
-    "lint": "oxlint",
-    "preview": "vite preview",
-    "test": "npm --prefix server test",
-    "test:server": "npm --prefix server test"
-  },
-  "dependencies": {
-    "@types/leaflet": "^1.9.22",
-    "i18next": "^26.4.2",
-    "i18next-browser-languagedetector": "^8.2.1",
-    "leaflet": "^1.9.4",
-    "lucide-react": "^1.46.0",
-    "react": "^19.2.8",
-    "react-dom": "^19.2.8",
-    "react-i18next": "^17.0.14",
-    "react-leaflet": "^5.0.0",
-    "react-router-dom": "^7.18.4",
-    "recharts": "^3.10.1",
-    "zustand": "^5.0.15"
+    "dev": "concurrently -n \"BACKEND,FRONTEND\" -c \"blue,green\" \"npm --prefix backend run dev\" \"npm --prefix frontend run dev\"",
+    "dev:frontend": "npm --prefix frontend run dev",
+    "dev:backend": "npm --prefix backend run dev",
+    "build": "npm --prefix frontend run build",
+    "test": "npm --prefix backend test",
+    "test:backend": "npm --prefix backend test",
+    "test:ml": ".venv\\Scripts\\python.exe -m unittest discover -s tests -p \"*_test.py\"",
+    "test:all": "npm run test:backend && npm run test:ml",
+    "lint": "npm --prefix frontend run lint",
+    "install:all": "npm install && npm --prefix frontend install && npm --prefix backend install"
   },
   "devDependencies": {
-    "@types/node": "^24.13.3",
-    "@types/react": "^19.2.18",
-    "@types/react-dom": "^19.2.7",
-    "@vitejs/plugin-react": "^6.1.1",
-    "oxlint": "^1.81.0",
-    "typescript": "~6.0.2",
-    "vite": "^8.3.0"
+    "concurrently": "^10.0.5"
   }
 }

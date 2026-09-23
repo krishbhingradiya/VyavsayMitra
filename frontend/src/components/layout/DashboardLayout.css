@@ -1,0 +1,497 @@
+/* ==============================================
+   Dashboard Layout — Matches Target Government UI
+   ============================================== */
+
+.dash-layout {
+  display: flex;
+  flex-direction: column;
+  min-height: 100vh;
+  background: #F8FAFC;
+}
+
+/* ─── Unified Government Top Header ──────────── */
+.dash-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  height: 48px;
+  background: #FAF7F0;
+  border-bottom: 1px solid #EAE6DC;
+  padding: 0 24px;
+  position: sticky;
+  top: var(--tricolor-bar-height, 5px);
+  z-index: 100;
+}
+
+.dash-header__left {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+
+.dash-header__menu-btn {
+  background: none;
+  border: none;
+  cursor: pointer;
+  padding: 4px;
+  color: #475569;
+  display: flex;
+  align-items: center;
+}
+
+.dash-header__gov {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.dash-header__flag {
+  flex-shrink: 0;
+  border-radius: 2px;
+  box-shadow: 0 1px 2px rgba(0, 0, 0, 0.1);
+}
+
+.dash-header__gov-title {
+  font-size: 0.8rem;
+  font-weight: 600;
+  color: #1E3A5F;
+  letter-spacing: 0.01em;
+}
+
+.dash-header__right {
+  display: flex;
+  align-items: center;
+  gap: 20px;
+}
+
+.dash-header__missions {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  font-size: 0.74rem;
+  color: #64748B;
+  font-weight: 500;
+}
+
+.dash-header__sep {
+  color: #CBD5E1;
+}
+
+.dash-header__actions {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+}
+
+/* Notification Bell */
+.dash-header__bell {
+  position: relative;
+  background: none;
+  border: none;
+  cursor: pointer;
+  color: #475569;
+  padding: 6px;
+  border-radius: 6px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: all 0.15s ease;
+}
+
+.dash-header__bell:hover {
+  background: rgba(0, 0, 0, 0.05);
+  color: #0F172A;
+}
+
+.dash-header__bell-badge {
+  position: absolute;
+  top: 1px;
+  right: 1px;
+  min-width: 14px;
+  height: 14px;
+  padding: 0 3px;
+  background: #DC2626;
+  color: #FFFFFF;
+  border-radius: 9999px;
+  font-size: 9px;
+  font-weight: 700;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  line-height: 1;
+}
+
+/* User Section */
+.dash-header__user-wrap {
+  position: relative;
+}
+
+.dash-header__user {
+  display: flex;
+  align-items: center;
+  gap: 9px;
+  cursor: pointer;
+  padding: 3px 8px;
+  border-radius: 8px;
+  transition: background 0.15s ease;
+  user-select: none;
+}
+
+.dash-header__user:hover {
+  background: rgba(0, 0, 0, 0.04);
+}
+
+.dash-header__avatar {
+  width: 30px;
+  height: 30px;
+  border-radius: 50%;
+  object-fit: cover;
+  border: 1.5px solid #E2E8F0;
+}
+
+.dash-header__user-text {
+  display: flex;
+  flex-direction: column;
+  line-height: 1.15;
+  text-align: left;
+}
+
+.dash-header__user-name {
+  font-size: 0.78rem;
+  font-weight: 600;
+  color: #0F172A;
+}
+
+.dash-header__user-role {
+  font-size: 10.5px;
+  color: #64748B;
+  font-weight: 400;
+}
+
+.dash-header__chevron {
+  color: #94A3B8;
+}
+
+/* Dropdown */
+.dash-header__dropdown {
+  position: absolute;
+  top: calc(100% + 6px);
+  right: 0;
+  background: #FFFFFF;
+  border: 1px solid #E2E8F0;
+  border-radius: 10px;
+  box-shadow: 0 10px 25px rgba(0, 0, 0, 0.1);
+  min-width: 160px;
+  padding: 6px;
+  z-index: 150;
+  animation: fadeIn 0.15s ease;
+}
+
+.dash-header__dropdown-item {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  padding: 8px 12px;
+  font-size: 0.8rem;
+  color: #334155;
+  border-radius: 6px;
+  cursor: pointer;
+  text-decoration: none;
+  border: none;
+  background: none;
+  width: 100%;
+  text-align: left;
+  transition: all 0.15s ease;
+}
+
+.dash-header__dropdown-item:hover {
+  background: #F1F5F9;
+  color: #0F172A;
+}
+
+.dash-header__dropdown-item--logout {
+  color: #DC2626;
+}
+
+.dash-header__dropdown-item--logout:hover {
+  background: #FEF2F2;
+  color: #DC2626;
+}
+/* ─── Body (Sidebar + Main) ────────────────────────────── */
+.dash-body {
+  display: flex;
+  flex: 1;
+}
+
+/* ─── Sidebar ──────────────────────────────────────────── */
+.dash-sidebar {
+  width: 240px;
+  background: #FFFFFF;
+  border-right: 1px solid #E2E8F0;
+  display: flex;
+  flex-direction: column;
+  position: sticky;
+  top: calc(48px + var(--tricolor-bar-height, 5px));
+  height: calc(100vh - 48px - var(--tricolor-bar-height, 5px));
+  overflow-y: auto;
+  z-index: 50;
+  transition: transform 0.25s ease;
+  flex-shrink: 0;
+}
+
+.dash-sidebar__brand {
+  padding: 16px 18px 12px;
+  display: flex;
+  align-items: center;
+}
+
+.dash-sidebar__logo-link {
+  text-decoration: none;
+  display: flex;
+  align-items: center;
+}
+
+.dash-sidebar__nav {
+  flex: 1;
+  padding: 6px 12px;
+  display: flex;
+  flex-direction: column;
+  gap: 3px;
+}
+
+.dash-sidebar__item {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  padding: 9px 14px;
+  font-size: 0.84rem;
+  font-weight: 500;
+  color: #475569;
+  cursor: pointer;
+  border: none;
+  background: none;
+  width: 100%;
+  text-align: left;
+  transition: all 0.15s ease;
+  text-decoration: none;
+  border-radius: 9999px;
+  box-sizing: border-box;
+}
+
+.dash-sidebar__item:hover {
+  background: #F1F5F9;
+  color: #0F172A;
+}
+
+.dash-sidebar__item--active {
+  background: #E8F5EC !important;
+  color: #128A4E !important;
+  font-weight: 600;
+}
+
+.dash-sidebar__item--active .dash-sidebar__item-icon {
+  color: #128A4E !important;
+}
+
+.dash-sidebar__item-icon {
+  display: flex;
+  align-items: center;
+  flex-shrink: 0;
+  color: #64748B;
+}
+
+.dash-sidebar__item-label {
+  white-space: nowrap;
+}
+
+.dash-sidebar__item--logout {
+  color: #DC2626;
+  margin-top: 4px;
+}
+
+.dash-sidebar__item--logout:hover {
+  background: #FEF2F2;
+  color: #DC2626;
+}
+
+.dash-sidebar__item--logout .dash-sidebar__item-icon {
+  color: #DC2626;
+}
+
+/* Rural Branding Widget at Sidebar Bottom */
+.dash-sidebar__rural-widget {
+  margin: 8px 12px 14px;
+  padding: 8px 8px 10px;
+  background: #F8FDF9;
+  border: 1px solid rgba(22, 131, 74, 0.16);
+  border-radius: 12px;
+  text-align: center;
+}
+
+.dash-sidebar__rural-slogan {
+  font-family: var(--font-handwriting);
+  font-size: 13px;
+  color: #128A4E;
+  margin-bottom: 5px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 4px;
+}
+
+.dash-sidebar__rural-slogan-bold {
+  font-weight: 700;
+}
+
+.dash-sidebar__rural-leaf {
+  flex-shrink: 0;
+}
+
+.dash-sidebar__rural-banner {
+  width: 100%;
+  height: 72px;
+  border-radius: 8px;
+  overflow: hidden;
+  margin-bottom: 5px;
+}
+
+.dash-sidebar__rural-img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  object-position: 85% center;
+  display: block;
+}
+
+.dash-sidebar__rural-caption {
+  font-size: 9.5px;
+  color: #64748B;
+  line-height: 1.3;
+  margin: 0;
+  font-weight: 500;
+}
+
+/* Sidebar Overlay */
+.dash-sidebar-overlay {
+  position: fixed;
+  inset: 0;
+  background: rgba(0, 0, 0, 0.4);
+  z-index: 45;
+  animation: fadeIn 0.2s ease;
+}
+
+/* ─── Main Content ──────────────────────────────────────── */
+.dash-main {
+  flex: 1;
+  min-width: 0;
+  background: #F8FAFC;
+}
+
+.dash-content {
+  padding: 24px 36px 48px;
+  max-width: 1320px;
+  margin: 0 auto;
+  box-sizing: border-box;
+}
+
+
+/* ─── Mobile Bottom Nav ────────────────────────────────── */
+.dash-mobile-nav {
+  position: fixed;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  height: var(--mobile-nav-height);
+  background: var(--color-surface);
+  border-top: 1px solid var(--color-border-light);
+  display: flex;
+  z-index: var(--z-navbar);
+}
+
+.dash-mobile-nav__item {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 2px;
+  font-size: 10px;
+  color: var(--color-text-muted);
+  text-decoration: none;
+  transition: color var(--transition-fast);
+}
+
+.dash-mobile-nav__item--active {
+  color: var(--color-green);
+}
+
+/* ─── Responsive ────────────────────────────────────────── */
+@media (max-width: 768px) {
+  .dash-header {
+    padding: 0 12px;
+  }
+
+  .dash-header__missions {
+    display: none;
+  }
+
+  .dash-header__user-text {
+    display: none;
+  }
+
+  .dash-header__chevron {
+    display: none;
+  }
+
+  .dash-header__gov-title {
+    font-size: 0.72rem;
+  }
+
+  .dash-sidebar {
+    position: fixed;
+    top: 48px;
+    left: 0;
+    height: calc(100vh - 48px);
+    z-index: 120;
+  }
+
+  .dash-sidebar--closed {
+    transform: translateX(-100%);
+  }
+
+  .dash-sidebar--open {
+    transform: translateX(0);
+  }
+
+  .dash-body {
+    padding-bottom: 64px;
+  }
+
+  .dash-content {
+    padding: 16px 14px 40px;
+  }
+}
+
+/* ─── Page Loader ────────────────────────────────────────── */
+.page-loader {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  height: 100vh;
+  gap: var(--space-4);
+}
+
+.page-loader__spinner {
+  width: 40px;
+  height: 40px;
+  border: 3px solid var(--color-border-light);
+  border-top-color: var(--color-green);
+  border-radius: 50%;
+  animation: spin 0.8s linear infinite;
+}
+
+.page-loader__text {
+  color: var(--color-text-muted);
+  font-size: var(--font-size-sm);
+}

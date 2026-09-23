@@ -50,3 +50,12 @@ Thumbs.db
 *.njsproj
 *.sln
 *.sw?
+
+# Root test captures and temporary inspection artifacts
+/*.png
+/*.jpg
+/*.jpeg
+/take_screenshot.mjs
+/take_profile_shot.mjs
+/inspect_dom.mjs
+/run_all_captures.mjs
