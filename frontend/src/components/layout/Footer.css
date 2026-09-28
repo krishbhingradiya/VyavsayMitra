@@ -19,50 +19,6 @@
   margin-bottom: var(--space-4);
 }
 
-.footer__logo-badge {
-  width: 36px;
-  height: 36px;
-  background: linear-gradient(135deg, #16834A 0%, #0B2545 100%);
-  border-radius: var(--radius-md);
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  color: white;
-  position: relative;
-  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.2);
-}
-
-.footer__logo-sprout {
-  color: #F28C28;
-  position: absolute;
-  top: 3px;
-  right: 3px;
-  width: 12px;
-  height: 12px;
-}
-
-.footer__logo-v {
-  font-family: var(--font-brand);
-  font-weight: var(--font-weight-extrabold);
-  font-size: 1.1rem;
-  line-height: 1;
-}
-
-.footer__name {
-  display: block;
-  font-size: var(--font-size-lg);
-  font-weight: var(--font-weight-bold);
-  color: white;
-  letter-spacing: 0.02em;
-}
-
-.footer__tagline {
-  display: block;
-  font-size: var(--font-size-xs);
-  color: var(--color-saffron-light);
-  font-weight: var(--font-weight-medium);
-}
-
 .footer__desc {
   font-size: var(--font-size-sm);
   line-height: var(--line-height-relaxed);

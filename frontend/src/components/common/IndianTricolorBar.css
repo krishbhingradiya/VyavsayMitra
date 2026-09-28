@@ -4,14 +4,13 @@
    ============================================================== */
 
 :root {
-  --tricolor-bar-height: 5px;
+  --tricolor-bar-height: 0px;
 }
 
 .indian-tricolor-bar {
-  display: flex;
-  flex-direction: row;
+  display: none;
   width: 100%;
-  height: var(--tricolor-bar-height, 5px);
+  height: 0;
   position: sticky;
   top: 0;
   left: 0;

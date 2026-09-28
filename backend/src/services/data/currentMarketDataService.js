@@ -416,7 +416,7 @@ async function fetchFromGovernmentApi(commodity, state, district) {
 async function fetchFromGeminiSearch(_commodity, _state, _district) {
   // If Gemini API is available, calls Gemini model with Google Search grounding
   // Then validates against authoritative whitelist
-  const geminiKey = process.env.GEMINI_API_KEY || process.env.VITE_GEMINI_API_KEY;
+  const geminiKey = process.env.GEMINI_API_KEY;
   if (!geminiKey) return null;
 
   // Placeholder for direct live call with strict domain filtering

@@ -1,118 +1,131 @@
 /* ==========================================================================
    VYAVSAYMITRA Brand Logo Styles
-   Faithfully matching the exact brandmark from the reference image:
-   - Orange bulb arch + Green organic leaves emblem
-   - VYAVSAY in deep Navy (#0B2545) + MITRA in Forest Green (#16834A)
-   - Tagline: "Market. Money. Mitra." in slate grey (#5A6E7C)
+   Single centralized official brand logo asset.
+   - Clean transparent background
+   - Zero CSS filters, blurs, shadows, or transform scaling
+   - Natural, crisp pixel rendering across all screen densities
    ========================================================================== */
 
 .brand-logo {
   display: inline-flex;
   align-items: center;
-  gap: 12px;
   user-select: none;
 }
 
 .brand-logo-link {
   display: inline-flex;
+  align-items: center;
   text-decoration: none;
   color: inherit;
+  line-height: 0;
 }
 
 .brand-logo-link:hover .brand-emblem,
 .brand-logo-link:hover .brand-logo-img {
-  transform: scale(1.02);
-  transition: transform 0.2s ease;
+  opacity: 0.92;
+  transition: opacity 0.15s ease;
 }
 
 .brand-emblem,
 .brand-logo-img {
   display: block;
   flex-shrink: 0;
-  transition: transform 0.2s ease;
   user-select: none;
+  object-fit: contain;
+  max-width: 100%;
+  width: auto;
+  image-rendering: auto;
+  image-rendering: -webkit-optimize-contrast;
+  filter: none !important;
+  box-shadow: none !important;
+  transform: none;
 }
 
-.brand-logo__text {
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
+/* Explicit size height helpers */
+.brand-logo-img--sm {
+  height: 42px;
 }
 
-.brand-logo__title {
-  font-family: 'Plus Jakarta Sans', 'Inter', -apple-system, sans-serif;
-  font-weight: 800;
-  line-height: 1.05;
-  letter-spacing: -0.02em;
-  display: flex;
-  align-items: baseline;
+.brand-logo-img--md {
+  height: 56px;
 }
 
-.brand-logo__vyavsay {
-  color: #0B2545;
+.brand-logo-img--navbar {
+  height: 68px;
 }
 
-.brand-logo__mitra {
-  color: #16834A;
+.brand-logo-img--sidebar {
+  height: 68px;
 }
 
-.brand-logo__tagline {
-  font-family: 'Inter', -apple-system, sans-serif;
-  font-weight: 600;
-  color: #5A6E7C;
-  letter-spacing: 0.015em;
-  line-height: 1.2;
-  margin-top: 2px;
+.brand-logo-img--lg {
+  height: 74px;
 }
 
-/* Size Variants */
-.brand-logo--sm .brand-logo__title {
-  font-size: 1.05rem;
-}
-.brand-logo--sm .brand-logo__tagline {
-  font-size: 0.65rem;
-}
-.brand-logo--sm {
-  gap: 8px;
+.brand-logo-img--xl {
+  height: 88px;
 }
 
-.brand-logo--md .brand-logo__title {
-  font-size: 1.32rem;
-}
-.brand-logo--md .brand-logo__tagline {
-  font-size: 0.74rem;
-}
-.brand-logo--md {
-  gap: 11px;
+/* Icon variant */
+.brand-logo-img--icon {
+  width: auto;
+  aspect-ratio: 1 / 1;
 }
 
-.brand-logo--lg .brand-logo__title {
-  font-size: 1.65rem;
-}
-.brand-logo--lg .brand-logo__tagline {
-  font-size: 0.85rem;
-}
-.brand-logo--lg {
-  gap: 14px;
+/* Full variant */
+.brand-logo-img--full {
+  width: auto;
+  aspect-ratio: 947 / 317;
 }
 
-.brand-logo--xl .brand-logo__title {
-  font-size: 2.15rem;
-}
-.brand-logo--xl .brand-logo__tagline {
-  font-size: 1.02rem;
-}
-.brand-logo--xl {
-  gap: 16px;
+/* ─── Wrapper for Auto-adaptive Logo ──────────────────────────────────────── */
+.brand-logo-wrap {
+  display: inline-flex;
+  align-items: center;
+  line-height: 0;
+  vertical-align: middle;
 }
 
-/* Dark Theme Support */
-[data-theme="dark"] .brand-logo--theme-auto .brand-logo__vyavsay,
-.brand-logo--theme-dark .brand-logo__vyavsay {
-  color: #FFFFFF;
+/* Default / Light Background */
+.brand-logo-img--light-bg {
+  display: block;
 }
 
-[data-theme="dark"] .brand-logo--theme-auto .brand-logo__tagline,
-.brand-logo--theme-dark .brand-logo__tagline {
-  color: #94A3B8;
+.brand-logo-img--dark-bg {
+  display: none !important;
+}
+
+/* ─── Automatic Dark Background Adaptability ──────────────────────────────── */
+/* Triggers in Dark Mode, Footer, Dark Navigation, Onboarding Sidebar, or any Dark/Navy Container */
+[data-theme="dark"] .brand-logo-img--light-bg,
+.footer .brand-logo-img--light-bg,
+.onboarding__sidebar .brand-logo-img--light-bg,
+.bg-dark .brand-logo-img--light-bg,
+.dark-bg .brand-logo-img--light-bg,
+.brand-logo--dark .brand-logo-img--light-bg,
+.brand-logo-wrap--dark .brand-logo-img--light-bg {
+  display: none !important;
+}
+
+[data-theme="dark"] .brand-logo-img--dark-bg,
+.footer .brand-logo-img--dark-bg,
+.onboarding__sidebar .brand-logo-img--dark-bg,
+.bg-dark .brand-logo-img--dark-bg,
+.dark-bg .brand-logo-img--dark-bg,
+.brand-logo--dark .brand-logo-img--dark-bg,
+.brand-logo-wrap--dark .brand-logo-img--dark-bg {
+  display: block !important;
+}
+
+/* Explicit variants */
+.brand-logo-img--dark {
+  display: block;
+}
+
+.brand-logo-img--white {
+  display: block;
+}
+
+.brand-logo-img--light {
+  display: block;
 }

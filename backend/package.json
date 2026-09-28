@@ -1,20 +1,23 @@
 {
   "name": "vyavsaymitra-server",
-  "version": "1.0.0",
+  "version": "2.0.0",
   "private": true,
   "description": "VYAVSAYMITRA backend server for OTP authentication",
   "main": "index.js",
   "scripts": {
     "start": "node index.js",
     "dev": "node --watch index.js",
-    "test": "node tests/productionBackend.test.js && node tests/businessApi.test.js && node tests/marketDataFusion.test.js && node tests/formulaEngine.test.js && node tests/cropFarmingModel.test.js && node tests/foodtechModelFoundation.test.js && node tests/foodtechExecutionEngine.test.js && node tests/foodtechApi.test.js && node tests/foodtechAdvisory.test.js"
+    "test": "node tests/productionBackend.test.js && node tests/businessApi.test.js && node tests/marketDataFusion.test.js && node tests/formulaEngine.test.js && node tests/cropFarmingModel.test.js && node tests/foodtechModelFoundation.test.js && node tests/foodtechExecutionEngine.test.js && node tests/foodtechApi.test.js && node tests/foodtechAdvisory.test.js && node tests/businessManagement.test.js && node tests/multiBusinessPhase1.test.js && node tests/supabaseIntegration.test.js && node tests/phase4Workspace.test.js && node tests/phase5FinalE2E.test.js && node tests/phase6ProductionHardening.test.js && node tests/phase7Productization.test.js && node tests/phase8ProductionOperations.test.js && node tests/phase9ProductionIntelligence.test.js && node tests/phase10ProductionLaunch.test.js && node tests/phase11PilotAnalytics.test.js && node tests/phase12FieldOperationsScale.test.js && node tests/phase13FinalRelease.test.js && node tests/businessWorkspaceResolution.test.js && node tests/geminiConfig.test.js"
   },
   "dependencies": {
+    "@google/genai": "^2.24.0",
+    "@supabase/supabase-js": "^2.117.1",
     "cors": "^2.8.5",
     "dotenv": "^16.5.0",
     "express": "^5.1.0",
     "express-rate-limit": "^7.5.0",
     "helmet": "^8.1.0",
+    "jsonwebtoken": "^9.0.3",
     "nodemailer": "^7.0.3",
     "sql.js": "^1.12.0"
   }

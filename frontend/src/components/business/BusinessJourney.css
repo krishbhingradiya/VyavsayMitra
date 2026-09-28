@@ -1,0 +1,219 @@
+/* VYAVSAYMITRA — Entrepreneur Business Journey Styles */
+
+.journey-container {
+  background: var(--surface-primary, #ffffff);
+  border-radius: 12px;
+  border: 1px solid var(--border-color, #e2e8f0);
+  padding: 24px;
+  margin-bottom: 24px;
+}
+
+.journey-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 20px;
+  border-bottom: 1px solid var(--border-color, #edf2f7);
+  padding-bottom: 16px;
+}
+
+.journey-title-wrap h2 {
+  font-size: 1.25rem;
+  font-weight: 700;
+  color: #1a202c;
+  margin: 0 0 4px 0;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.journey-subtitle {
+  font-size: 0.875rem;
+  color: #718096;
+  margin: 0;
+}
+
+.journey-overall-progress {
+  text-align: right;
+}
+
+.progress-pill {
+  font-weight: 700;
+  font-size: 0.95rem;
+  color: #2b6cb0;
+  background: #ebf8ff;
+  padding: 6px 14px;
+  border-radius: 20px;
+  border: 1px solid #bee3f8;
+}
+
+.journey-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(320px, 1fr));
+  gap: 16px;
+}
+
+.journey-stage-card {
+  border: 1px solid #e2e8f0;
+  border-radius: 10px;
+  padding: 16px;
+  background: #fafafa;
+  transition: all 0.2s ease-in-out;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+}
+
+.journey-stage-card:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.05);
+}
+
+.journey-stage-card.status-completed {
+  background: #f0fff4;
+  border-color: #c6f6d5;
+}
+
+.journey-stage-card.status-in-progress {
+  background: #ebf8ff;
+  border-color: #bee3f8;
+}
+
+.journey-stage-card.status-action-required {
+  background: #fffaf0;
+  border-color: #feebc8;
+}
+
+.stage-top {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  margin-bottom: 10px;
+}
+
+.stage-number {
+  font-size: 0.75rem;
+  font-weight: 700;
+  color: #4a5568;
+  background: #edf2f7;
+  padding: 2px 8px;
+  border-radius: 6px;
+}
+
+.stage-name {
+  font-size: 1rem;
+  font-weight: 600;
+  color: #2d3748;
+  margin: 6px 0 0 0;
+}
+
+.stage-status-badge {
+  font-size: 0.75rem;
+  font-weight: 600;
+  padding: 3px 8px;
+  border-radius: 12px;
+  text-transform: uppercase;
+  letter-spacing: 0.03em;
+}
+
+.badge-completed {
+  background: #c6f6d5;
+  color: #22543d;
+}
+
+.badge-in_progress {
+  background: #bee3f8;
+  color: #2a4365;
+}
+
+.badge-action_required {
+  background: #feebc8;
+  color: #744210;
+}
+
+.badge-pending, .badge-not_started {
+  background: #edf2f7;
+  color: #718096;
+}
+
+.stage-progress-bar {
+  height: 6px;
+  background: #e2e8f0;
+  border-radius: 4px;
+  overflow: hidden;
+  margin: 8px 0 12px 0;
+}
+
+.stage-progress-fill {
+  height: 100%;
+  background: #3182ce;
+  border-radius: 4px;
+  transition: width 0.3s ease;
+}
+
+.stage-progress-fill.fill-completed {
+  background: #38a169;
+}
+
+.stage-progress-fill.fill-action-required {
+  background: #dd6b20;
+}
+
+.stage-details {
+  font-size: 0.8125rem;
+  color: #4a5568;
+  line-height: 1.4;
+  margin-bottom: 12px;
+}
+
+.detail-row {
+  margin-bottom: 6px;
+}
+
+.detail-label {
+  font-weight: 600;
+  color: #2d3748;
+  display: inline-block;
+  margin-right: 4px;
+}
+
+.blocking-alert {
+  background: #fed7d7;
+  color: #9b2c2c;
+  padding: 6px 10px;
+  border-radius: 6px;
+  font-size: 0.8125rem;
+  font-weight: 500;
+  margin-bottom: 8px;
+  display: flex;
+  align-items: center;
+  gap: 6px;
+}
+
+.evidence-tag {
+  display: inline-flex;
+  align-items: center;
+  gap: 4px;
+  background: #f7fafc;
+  border: 1px solid #e2e8f0;
+  padding: 2px 8px;
+  border-radius: 4px;
+  font-size: 0.75rem;
+  color: #4a5568;
+  margin-top: 4px;
+}
+
+.stage-footer {
+  border-top: 1px solid rgba(0, 0, 0, 0.06);
+  padding-top: 8px;
+  font-size: 0.75rem;
+  color: #a0aec0;
+  display: flex;
+  justify-content: space-between;
+}
+
+.journey-loading {
+  padding: 40px;
+  text-align: center;
+  color: #718096;
+}

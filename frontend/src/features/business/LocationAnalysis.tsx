@@ -67,7 +67,7 @@ export default function LocationAnalysis() {
             <table className="data-table">
               <thead><tr><th>Village</th><th>Distance</th><th>Population</th></tr></thead>
               <tbody>
-                {marketAnalysis.nearbyVillages.map((v) => (
+                {marketAnalysis.nearbyVillages.map((v: any) => (
                   <tr key={v.name}><td>{v.name}</td><td>{v.distance} KM</td><td>{v.population.toLocaleString('en-IN')}</td></tr>
                 ))}
               </tbody>

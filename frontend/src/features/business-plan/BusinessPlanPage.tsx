@@ -1,5 +1,6 @@
 import { useState, useMemo } from 'react';
 import { useAuthStore } from '../../store/useAuthStore';
+import { useBusinessStore } from '../../store/useBusinessStore';
 import { useFinanceStore } from '../../store/useFinanceStore';
 import { formatINR } from '../../utils/financial';
 import {
@@ -20,24 +21,38 @@ import { Link } from 'react-router-dom';
 
 export default function BusinessPlanPage() {
   const user = useAuthStore((s) => s.user);
+  const activeBusiness = useBusinessStore((s) => s.activeBusiness);
+  const businesses = useBusinessStore((s) => s.businesses);
+  const biz = activeBusiness || (businesses && businesses.length > 0 ? businesses[0] : null);
+  const analysis = biz?.latestAnalysis;
+
   const { projectCost, selectedScheme, emiResult, operatingCosts } = useFinanceStore();
   const activeScheme = selectedScheme?.scheme;
 
   // Financial model assumptions (customizable)
-  const [dailyUnits, setDailyUnits] = useState(350); // e.g., 350 litres of milk / day
-  const [unitPrice, setUnitPrice] = useState(58); // ₹58 / litre
+  const isAgri = biz?.domain === 'agriculture';
+  const [dailyUnits, setDailyUnits] = useState(isAgri ? 200 : 350);
+  const [unitPrice, setUnitPrice] = useState(isAgri ? 45 : 58);
   const [growthRateYear2, setGrowthRateYear2] = useState(15);
   const [growthRateYear3, setGrowthRateYear3] = useState(20);
 
-  // Stable document references
-  const [dprRefId] = useState('VM-784219');
-  const [reportDate] = useState('17 Sep 2026');
+  // Dynamic document references
+  const dprRefId = biz ? `VM-DPR-${biz.id.slice(0, 8).toUpperCase()}` : 'VM-784219';
+  const reportDate = new Date().toLocaleDateString('en-IN', { day: 'numeric', month: 'short', year: 'numeric' });
 
-  // Total monthly operating costs calculated from store array
+  // Total project outlay from verified analysis or finance store
+  const verifiedProjectCost = analysis?.total_project_cost || projectCost?.totalProjectCost || 500000;
+  const verifiedPromoterMargin = analysis?.promoter_equity || projectCost?.marginCapital || Math.round(verifiedProjectCost * 0.1);
+  const verifiedBankLoan = analysis?.bank_loan_requirement || projectCost?.loanAmount || (verifiedProjectCost - verifiedPromoterMargin);
+
+  // Total monthly operating costs calculated from store array or analysis
   const monthlyOperatingTotal = useMemo(() => {
+    if (analysis?.annual_operating_cost) {
+      return Math.round(analysis.annual_operating_cost / 12);
+    }
     if (!operatingCosts || operatingCosts.length === 0) return 45000;
     return operatingCosts.reduce((acc, item) => acc + item.amount, 0);
-  }, [operatingCosts]);
+  }, [analysis, operatingCosts]);
 
   // Computed projections
   const projections = useMemo(() => {
@@ -195,10 +210,10 @@ export default function BusinessPlanPage() {
               VYAVSAYMITRA PROJECT APPRAISAL DOSSIER
             </div>
             <h2 style={{ fontSize: 'var(--font-size-2xl)', fontWeight: 'var(--font-weight-bold)', color: 'var(--color-primary)' }}>
-              Project Profile: {user?.businessInterest ? user.businessInterest.toUpperCase() : 'DAIRY ENTERPRISE'}
+              Project Profile: {biz?.name ? biz.name.toUpperCase() : (user?.businessInterest ? user.businessInterest.toUpperCase() : 'MICRO ENTERPRISE')}
             </h2>
             <p className="text-sm text-muted">
-              Location: {user?.location.village || 'Changa'}, Block: {user?.location.block || 'Petlad'}, Dist: {user?.location.district || 'Anand'}, {user?.location.state || 'Gujarat'}
+              Location: {biz?.location?.village || user?.location.village || 'Changa'}, Dist: {biz?.location?.district || user?.location.district || 'Anand'}, {biz?.location?.state || user?.location.state || 'Gujarat'}
             </p>
           </div>
 
@@ -240,7 +255,7 @@ export default function BusinessPlanPage() {
           <div
             style={{
               display: 'grid',
-              gridTemplateColumns: 'repeat(auto-fit, minmax(220px, 1fr))',
+              gridTemplateColumns: 'repeat(auto-fit, minmax(min(100%, 220px), 1fr))',
               gap: 'var(--space-4)',
               background: 'var(--color-bg)',
               padding: 'var(--space-4)',
@@ -259,24 +274,24 @@ export default function BusinessPlanPage() {
             <div>
               <span className="text-xs text-muted block">Enterprise Category</span>
               <strong className="text-sm" style={{ textTransform: 'capitalize' }}>
-                {user?.businessInterest || 'Dairy & Animal Husbandry'}
+                {biz ? `${biz.domain === 'agriculture' ? 'Agriculture' : 'Food Processing'} (${biz.business_type || 'Micro-Enterprise'})` : (user?.businessInterest || 'Rural Enterprise')}
               </strong>
             </div>
             <div>
               <span className="text-xs text-muted block">Promoter Experience</span>
               <strong className="text-sm" style={{ textTransform: 'capitalize' }}>
-                {user?.experience || 'Some Experience'}
+                {user?.experience || 'Operational Field Experience'}
               </strong>
             </div>
           </div>
 
           <p className="text-sm text-muted" style={{ lineHeight: 1.6 }}>
-            The proposed enterprise is aimed at establishing a modernized micro/small enterprise in{' '}
-            <strong>{user?.location.village || 'Changa'}</strong>, catering to direct consumers and local commercial buyers.
+            The proposed enterprise <strong>"{biz?.name || 'Proposed Enterprise'}"</strong> is aimed at establishing a modernized micro/small enterprise in{' '}
+            <strong>{biz?.location?.village || user?.location.village || 'Changa'}</strong>, catering to direct consumers and institutional buyers.
             With an initial self-equity margin contribution of{' '}
-            <strong>{formatINR(projectCost?.marginCapital || 100000)}</strong> (10%), the unit seeks term credit assistance
-            of <strong>{formatINR(projectCost?.loanAmount || 900000)}</strong> (90%) under the{' '}
-            <strong>{activeScheme?.name || 'Term Loan Scheme'}</strong>.
+            <strong>{formatINR(verifiedPromoterMargin)}</strong> (10%), the unit seeks term credit assistance
+            of <strong>{formatINR(verifiedBankLoan)}</strong> (90%) under the{' '}
+            <strong>{biz?.domain === 'foodtech' ? 'PMFME / PMEGP Scheme' : (activeScheme?.name || 'Priority Sector Lending Scheme')}</strong>.
           </p>
         </div>
 
@@ -295,7 +310,7 @@ export default function BusinessPlanPage() {
             2. Capital Outlay & Means of Finance
           </h3>
 
-          <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: 'var(--space-6)', marginBottom: 'var(--space-4)' }}>
+          <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(min(100%, 280px), 1fr))', gap: 'var(--space-6)', marginBottom: 'var(--space-4)' }}>
             <div>
               <h4 style={{ fontSize: 'var(--font-size-sm)', fontWeight: 'var(--font-weight-bold)', marginBottom: 'var(--space-2)' }}>
                 Capital Cost Breakdown
@@ -304,24 +319,24 @@ export default function BusinessPlanPage() {
                 <tbody>
                   <tr>
                     <td>Plant / Shed / Civil Work</td>
-                    <td className="font-data font-semibold text-right">{formatINR((projectCost?.totalProjectCost || 1000000) * 0.45)}</td>
+                    <td className="font-data font-semibold text-right">{formatINR(verifiedProjectCost * 0.45)}</td>
                   </tr>
                   <tr>
                     <td>Machinery / Livestock / Equipment</td>
-                    <td className="font-data font-semibold text-right">{formatINR((projectCost?.totalProjectCost || 1000000) * 0.35)}</td>
+                    <td className="font-data font-semibold text-right">{formatINR(verifiedProjectCost * 0.35)}</td>
                   </tr>
                   <tr>
                     <td>Initial Working Capital / Buffer</td>
-                    <td className="font-data font-semibold text-right">{formatINR((projectCost?.totalProjectCost || 1000000) * 0.15)}</td>
+                    <td className="font-data font-semibold text-right">{formatINR(verifiedProjectCost * 0.15)}</td>
                   </tr>
                   <tr>
                     <td>Contingency / Prelim Expenses</td>
-                    <td className="font-data font-semibold text-right">{formatINR((projectCost?.totalProjectCost || 1000000) * 0.05)}</td>
+                    <td className="font-data font-semibold text-right">{formatINR(verifiedProjectCost * 0.05)}</td>
                   </tr>
                   <tr style={{ background: 'var(--color-bg)', fontWeight: 'bold' }}>
                     <td>Total Project Outlay</td>
                     <td className="font-data text-right" style={{ color: 'var(--color-primary)' }}>
-                      {formatINR(projectCost?.totalProjectCost || 1000000)}
+                      {formatINR(verifiedProjectCost)}
                     </td>
                   </tr>
                 </tbody>
@@ -337,27 +352,27 @@ export default function BusinessPlanPage() {
                   <tr>
                     <td>Promoter Contribution (Margin Money - 10%)</td>
                     <td className="font-data font-semibold text-right" style={{ color: 'var(--color-saffron)' }}>
-                      {formatINR(projectCost?.marginCapital || 100000)}
+                      {formatINR(verifiedPromoterMargin)}
                     </td>
                   </tr>
                   <tr>
                     <td>Bank Loan Requested (90%)</td>
                     <td className="font-data font-semibold text-right" style={{ color: 'var(--color-green)' }}>
-                      {formatINR(projectCost?.loanAmount || 900000)}
+                      {formatINR(verifiedBankLoan)}
                     </td>
                   </tr>
                   <tr>
                     <td>Applicable Scheme Channel</td>
-                    <td className="font-semibold text-right">{activeScheme?.name || 'Term Loan Scheme'}</td>
+                    <td className="font-semibold text-right">{biz?.domain === 'foodtech' ? 'PMFME / PMEGP Scheme' : (activeScheme?.name || 'KCC / PMEGP Scheme')}</td>
                   </tr>
                   <tr>
                     <td>Estimated Annual Interest Rate</td>
-                    <td className="font-data text-right">{activeScheme?.interestRate || 8}% p.a.</td>
+                    <td className="font-data text-right">{activeScheme?.interestRate || 8.5}% p.a.</td>
                   </tr>
                   <tr style={{ background: 'var(--color-bg)', fontWeight: 'bold' }}>
                     <td>Monthly Debt Service (EMI)</td>
                     <td className="font-data text-right" style={{ color: 'var(--color-primary)' }}>
-                      {formatINR(emiResult?.monthlyEMI || 14032)} / mo
+                      {formatINR(emiResult?.monthlyEMI || Math.round(verifiedBankLoan * 0.021))} / mo
                     </td>
                   </tr>
                 </tbody>

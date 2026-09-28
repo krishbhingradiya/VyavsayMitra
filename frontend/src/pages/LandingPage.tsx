@@ -136,159 +136,214 @@ interface HeroSectionProps {
 
 function HeroSection({ onStartAction }: HeroSectionProps) {
   return (
-    <section className="hero" aria-label="Hero section">
-      {/* Full-width background — rural-hero.jpg contains the composed scene */}
-      <div className="hero__backdrop">
-        <img
-          src={ruralHeroImg}
-          alt="Rural Indian entrepreneurs in village farmland with signboards and milestone"
-          className="hero__bg-image"
-          width="1024"
-          height="503"
-          loading="eager"
-        />
-      </div>
+    <section className="hero" aria-label="VyavsayMitra — Empowering Rural Entrepreneurs">
+      {/* 1. Full-bleed panoramic rural India artwork matching reference */}
+      <div className="hero__artwork-wrap">
+        <picture>
+          <source srcSet="/rural-hero-exact-2x.jpg 2x, /rural-hero.jpg 1x" type="image/jpeg" />
+          <img
+            src={ruralHeroImg}
+            alt="Big Dreams, Stronger Villages — VyavsayMitra rural business advisory platform"
+            className="hero__bg-image"
+            width="2048"
+            height="1094"
+            loading="eager"
+            fetchPriority="high"
+          />
+        </picture>
 
-      {/* TOP-LEFT: Badge, Main Heading, Subtitle, CTAs, Taglines */}
-      <div className="hero__content">
-        <div className="hero__text">
-          {/* Badge matching Image 3 */}
-          <div className="hero__badge">
-            <Sprout size={14} className="hero__badge-icon" />
-            <span>Empowering Rural Entrepreneurs</span>
-          </div>
+        {/* 2. Interactive Hotspots Overlay */}
+        <div className="hero__interactive-overlay" aria-hidden="false">
+          {/* Top-left Brand Logo Link */}
+          <Link
+            to="/"
+            className="hero__hotspot-logo"
+            aria-label="VyavsayMitra Home"
+            title="VyavsayMitra"
+          />
 
-          {/* Main Heading */}
-          <h1 className="hero__heading">
-            <span>Big Dreams,</span>
-            <span className="hero__heading-highlight">Stronger Villages</span>
-          </h1>
+          {/* Primary CTA: Start Your Business Analysis */}
+          <button
+            type="button"
+            className="hero__hotspot-btn hero__hotspot-btn--primary"
+            onClick={() =>
+              onStartAction(
+                '/business-feasibility',
+                "Let's Start Your Business Journey",
+                'Create your free profile to begin your personalized hyper-local business feasibility study.'
+              )
+            }
+            aria-label="Start Your Business Analysis"
+            title="Start Your Business Analysis"
+          >
+            <span className="sr-only">Start Your Business Analysis</span>
+          </button>
 
-          {/* Subtitle */}
-          <p className="hero__subtext">
-            Make informed business decisions with local market intelligence,
-            financial planning and AI guidance — all in one place.
-          </p>
+          {/* Secondary CTA: Explore Schemes */}
+          <button
+            type="button"
+            className="hero__hotspot-btn hero__hotspot-btn--secondary"
+            onClick={() =>
+              onStartAction(
+                '/scheme-advisor',
+                'Explore Financial Support & Schemes',
+                'Sign in to personalize government scheme information and subsidies based on your location and project cost.'
+              )
+            }
+            aria-label="Explore Government Schemes"
+            title="Explore Schemes"
+          >
+            <span className="sr-only">Explore Schemes</span>
+          </button>
 
-          {/* CTAs */}
-          <div className="hero__ctas">
-            <button
-              type="button"
-              className="btn hero__btn-primary"
-              onClick={() =>
-                onStartAction(
-                  '/business-feasibility',
-                  "Let's Start Your Business Journey",
-                  'Create your free profile to begin your personalized hyper-local business feasibility study.'
-                )
-              }
-            >
-              <span>Start Your Business Analysis</span>
-              <ArrowRight size={18} />
-            </button>
+          {/* Stat 1: 500+ Business Ideas */}
+          <Link
+            to="/business-feasibility"
+            className="hero__hotspot-stat hero__hotspot-stat--1"
+            aria-label="500+ Business Ideas"
+            title="500+ Business Ideas"
+          >
+            <span className="sr-only">500+ Business Ideas</span>
+          </Link>
 
-            <button
-              type="button"
-              className="btn hero__btn-secondary"
-              onClick={() =>
-                onStartAction(
-                  '/scheme-advisor',
-                  'Explore Financial Support & Schemes',
-                  'Sign in to personalize government scheme information and subsidies based on your location and project cost.'
-                )
-              }
-            >
-              Explore Schemes
-            </button>
-          </div>
+          {/* Stat 2: 100+ Government Schemes */}
+          <Link
+            to="/scheme-advisor"
+            className="hero__hotspot-stat hero__hotspot-stat--2"
+            aria-label="100+ Government Schemes"
+            title="100+ Government Schemes"
+          >
+            <span className="sr-only">100+ Government Schemes</span>
+          </Link>
 
-          {/* Brand Taglines with hand-drawn underline */}
-          <div className="hero__taglines">
-            <div className="hero__tagline-main-wrapper">
-              <p className="hero__tagline-main">"Sapne Se Safal Vyavsay Tak"</p>
-              <svg className="hero__tagline-swoosh" viewBox="0 0 280 14" fill="none" aria-hidden="true">
-                <path
-                  d="M2 6C45 3 110 3 170 6"
-                  stroke="#F28C28"
-                  strokeWidth="2.5"
-                  strokeLinecap="round"
-                />
-                <path
-                  d="M32 9C75 7 125 7 165 9"
-                  stroke="#16834A"
-                  strokeWidth="1.8"
-                  strokeLinecap="round"
-                />
-                <path
-                  d="M226 9C238 8 250 8 260 9"
-                  stroke="#16834A"
-                  strokeWidth="2.2"
-                  strokeLinecap="round"
-                />
-              </svg>
-            </div>
-            <p className="hero__tagline-sub">Vyavsay Ka Sahi Saathi</p>
-          </div>
+          {/* Stat 3: 1M+ Rural Entrepreneurs */}
+          <button
+            type="button"
+            className="hero__hotspot-stat hero__hotspot-stat--3"
+            onClick={() =>
+              onStartAction(
+                '/community',
+                'Join 1M+ Rural Entrepreneurs',
+                'Connect with fellow rural business owners and mentors across India.'
+              )
+            }
+            aria-label="1M+ Rural Entrepreneurs"
+            title="1M+ Rural Entrepreneurs"
+          >
+            <span className="sr-only">1M+ Rural Entrepreneurs</span>
+          </button>
+
+          {/* Stat 4: 28+ States & UTs */}
+          <Link
+            to="/market-intelligence"
+            className="hero__hotspot-stat hero__hotspot-stat--4"
+            aria-label="28+ States & UTs Market Intelligence"
+            title="28+ States & UTs"
+          >
+            <span className="sr-only">28+ States & UTs</span>
+          </Link>
         </div>
       </div>
 
-      {/* BOTTOM-LEFT: Statistics bar cleanly seated on the white curve matching Image 3 */}
-      <div className="hero__stats-bar">
-        <div className="hero__stats-bar-inner">
-          <div className="hero__stats-row">
-            <HeroStatCol
-              icon={<Lightbulb size={24} strokeWidth={2} />}
-              iconTheme="amber"
-              target={500}
-              suffix="+"
-              label="Business Ideas"
-            />
-
-            <div className="hero__stat-divider" />
-
-            <HeroStatCol
-              icon={<Landmark size={24} strokeWidth={2} />}
-              iconTheme="green"
-              target={100}
-              suffix="+"
-              label="Government Schemes"
-              isGreenValue
-            />
-
-            <div className="hero__stat-divider" />
-
-            <HeroStatCol
-              icon={<Users size={24} strokeWidth={2} />}
-              iconTheme="blue"
-              target={1000000}
-              suffix="+"
-              label="Rural Entrepreneurs"
-              displayValue="1M"
-            />
-
-            <div className="hero__stat-divider" />
-
-            <HeroStatCol
-              icon={<MapPin size={24} strokeWidth={2} />}
-              iconTheme="orange"
-              target={28}
-              suffix="+"
-              label="States & UTs"
-            />
-          </div>
-
-          {/* Substrip: Local Insights | Financial Clarity | Sustainable Growth */}
-          <div className="hero__substrip">
-            <span className="hero__substrip-icon-badge">
-              <Sprout size={15} className="hero__substrip-icon" />
-            </span>
-            <span>Local Insights</span>
-            <span className="hero__substrip-sep">|</span>
-            <span>Financial Clarity</span>
-            <span className="hero__substrip-sep">|</span>
-            <span>Sustainable Growth</span>
-          </div>
+      {/* 3. Mobile fallback content (visible only on mobile screens < 768px) */}
+      <div className="hero__mobile-content">
+        <div className="hero__badge">
+          <Sprout size={14} className="hero__badge-icon" />
+          <span>Empowering Rural Entrepreneurs</span>
         </div>
+
+        <h1 className="hero__heading">
+          <span>Big Dreams,</span>
+          <span className="hero__heading-highlight">Stronger Villages</span>
+        </h1>
+
+        <p className="hero__subtext">
+          Make informed business decisions with local market intelligence,
+          financial planning and AI guidance — all in one place.
+        </p>
+
+        <div className="hero__ctas">
+          <button
+            type="button"
+            className="btn hero__btn-primary"
+            onClick={() =>
+              onStartAction(
+                '/business-feasibility',
+                "Let's Start Your Business Journey",
+                'Create your free profile to begin your personalized hyper-local business feasibility study.'
+              )
+            }
+          >
+            <span>Start Your Business Analysis</span>
+            <ArrowRight size={18} />
+          </button>
+
+          <button
+            type="button"
+            className="btn hero__btn-secondary"
+            onClick={() =>
+              onStartAction(
+                '/scheme-advisor',
+                'Explore Financial Support & Schemes',
+                'Sign in to personalize government scheme information and subsidies based on your location and project cost.'
+              )
+            }
+          >
+            Explore Schemes
+          </button>
+        </div>
+
+        <div className="hero__mobile-stats">
+          <HeroStatCol
+            icon={<Lightbulb size={20} strokeWidth={2} />}
+            iconTheme="amber"
+            target={500}
+            suffix="+"
+            label="Business Ideas"
+          />
+          <HeroStatCol
+            icon={<Landmark size={20} strokeWidth={2} />}
+            iconTheme="green"
+            target={100}
+            suffix="+"
+            label="Government Schemes"
+            isGreenValue
+          />
+          <HeroStatCol
+            icon={<Users size={20} strokeWidth={2} />}
+            iconTheme="blue"
+            target={1000000}
+            suffix="+"
+            label="Rural Entrepreneurs"
+            displayValue="1M"
+          />
+          <HeroStatCol
+            icon={<MapPin size={20} strokeWidth={2} />}
+            iconTheme="orange"
+            target={28}
+            suffix="+"
+            label="States & UTs"
+          />
+        </div>
+      </div>
+
+      {/* 4. Complete Accessible Semantic Content for SEO & Screen Readers */}
+      <div className="sr-only">
+        <span className="hero__badge">Empowering Rural Entrepreneurs</span>
+        <h2>Big Dreams, Stronger Villages</h2>
+        <p>
+          Make informed business decisions with local market intelligence,
+          financial planning and AI guidance — all in one place.
+        </p>
+        <p>"Sapne Se Safal Vyavsay Tak" — Vyavsay Ka Sahi Saathi</p>
+        <ul>
+          <li>500+ Business Ideas</li>
+          <li>100+ Government Schemes</li>
+          <li>1M+ Rural Entrepreneurs</li>
+          <li>28+ States & UTs</li>
+        </ul>
+        <p>Local Insights | Financial Clarity | Sustainable Growth</p>
+        <p>Rural Entrepreneurs Stronger India</p>
       </div>
     </section>
   );
@@ -311,7 +366,7 @@ function HeroStatCol({
   displayValue?: string;
   isGreenValue?: boolean;
 }) {
-  const { count, ref } = useCountUp(target, 800);
+  const { count, ref } = useCountUp(target, 200, false);
   const display = displayValue
     ? count >= target
       ? displayValue

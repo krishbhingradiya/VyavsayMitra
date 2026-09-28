@@ -52,9 +52,9 @@ export default function Navbar() {
       }`}
       role="banner"
     >
-      <div className="navbar__inner container">
-        {/* LEFT: Brand Logo matching Reference */}
-        <BrandLogo asLink to="/" size="md" />
+      <div className="navbar__inner">
+        {/* LEFT: Brand Logo */}
+        <BrandLogo asLink to="/" size="navbar" />
 
         {/* CENTER: Intentionally empty to keep pre-login navigation clean */}
         <div className="navbar__spacer" />

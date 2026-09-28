@@ -532,7 +532,7 @@ export const FoodTechInputForm: React.FC<Props> = ({
           }}
         >
           <div className="text-xs text-muted">
-            <span style={{ color: 'var(--color-error)' }}>*</span> Required inputs must be supplied. Calculations are AST-verified.
+            <span style={{ color: 'var(--color-error)' }}>*</span> Required inputs must be supplied. Calculations are independently verified.
           </div>
 
           <button

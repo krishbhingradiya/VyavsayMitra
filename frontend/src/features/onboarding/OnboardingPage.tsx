@@ -93,7 +93,7 @@ export default function OnboardingPage() {
     <div className="onboarding">
       <div className="onboarding__sidebar">
         <div className="onboarding__brand">
-          <BrandLogo asLink to="/" size="md" theme="dark" showTagline={false} />
+          <BrandLogo asLink to="/" size="md" theme="dark" />
         </div>
         <h2 className="onboarding__sidebar-title">{t('onboarding.title')}</h2>
         <div className="onboarding__steps-list">

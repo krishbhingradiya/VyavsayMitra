@@ -78,10 +78,13 @@ async function initDb() {
   cleanupExpiredOtps();
 
   // Run cleanup every 30 minutes
-  setInterval(() => {
+  const cleanupTimer = setInterval(() => {
     cleanupExpiredOtps();
     saveDb();
   }, 30 * 60 * 1000);
+  if (cleanupTimer && typeof cleanupTimer.unref === 'function') {
+    cleanupTimer.unref();
+  }
 
   console.log('[DB] SQLite database initialized at', DB_PATH);
   return db;

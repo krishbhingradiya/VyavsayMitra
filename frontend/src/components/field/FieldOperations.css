@@ -1,0 +1,324 @@
+/* VYAVSAYMITRA — Field Operations & Evidence Vault Styles */
+
+.field-ops-page {
+  padding: 24px;
+  max-width: 1200px;
+  margin: 0 auto;
+}
+
+.field-ops-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 16px;
+  margin-bottom: 24px;
+  background: #ffffff;
+  padding: 20px 24px;
+  border-radius: 12px;
+  border: 1px solid #e2e8f0;
+}
+
+.field-ops-title h1 {
+  font-size: 1.5rem;
+  font-weight: 700;
+  color: #1a202c;
+  margin: 0 0 4px 0;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.field-ops-title p {
+  color: #718096;
+  margin: 0;
+  font-size: 0.875rem;
+}
+
+.btn-primary-field {
+  background: #2b6cb0;
+  color: #ffffff;
+  border: none;
+  padding: 10px 18px;
+  border-radius: 8px;
+  font-weight: 600;
+  font-size: 0.875rem;
+  cursor: pointer;
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  transition: background 0.2s;
+}
+
+.btn-primary-field:hover {
+  background: #2c5282;
+}
+
+.btn-secondary-field {
+  background: #edf2f7;
+  color: #2d3748;
+  border: 1px solid #cbd5e0;
+  padding: 8px 14px;
+  border-radius: 6px;
+  font-weight: 600;
+  font-size: 0.8125rem;
+  cursor: pointer;
+  transition: all 0.2s;
+}
+
+.btn-secondary-field:hover {
+  background: #e2e8f0;
+}
+
+.field-ops-filters {
+  display: flex;
+  gap: 12px;
+  margin-bottom: 20px;
+  flex-wrap: wrap;
+}
+
+.filter-select {
+  padding: 8px 14px;
+  border-radius: 6px;
+  border: 1px solid #cbd5e0;
+  background: #ffffff;
+  font-size: 0.875rem;
+  color: #2d3748;
+}
+
+.field-visits-list {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+}
+
+/* Field Visit Card */
+.visit-card {
+  background: #ffffff;
+  border-radius: 12px;
+  border: 1px solid #e2e8f0;
+  padding: 20px;
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.05);
+  transition: box-shadow 0.2s;
+}
+
+.visit-card:hover {
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
+}
+
+.visit-card-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  border-bottom: 1px solid #edf2f7;
+  padding-bottom: 12px;
+  margin-bottom: 14px;
+}
+
+.visit-card-title {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+
+.visit-type-badge {
+  font-size: 0.75rem;
+  font-weight: 700;
+  background: #edf2f7;
+  color: #4a5568;
+  padding: 3px 8px;
+  border-radius: 4px;
+  text-transform: uppercase;
+}
+
+.visit-status-badge {
+  font-size: 0.75rem;
+  font-weight: 700;
+  padding: 4px 10px;
+  border-radius: 12px;
+  text-transform: uppercase;
+}
+
+.status-scheduled { background: #edf2f7; color: #4a5568; }
+.status-in_progress { background: #ebf8ff; color: #2b6cb0; }
+.status-verification_pending { background: #feebc8; color: #c05621; }
+.status-verified { background: #c6f6d5; color: #22543d; }
+.status-action_required { background: #fed7d7; color: #9b2c2c; }
+.status-completed { background: #d6bcfa; color: #44337a; }
+.status-cancelled { background: #e2e8f0; color: #718096; }
+
+.visit-body {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+  gap: 16px;
+  margin-bottom: 16px;
+  font-size: 0.875rem;
+}
+
+.visit-info-group {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+}
+
+.visit-info-label {
+  font-weight: 600;
+  color: #718096;
+  font-size: 0.75rem;
+  text-transform: uppercase;
+}
+
+.visit-info-value {
+  color: #2d3748;
+}
+
+.visit-actions-bar {
+  display: flex;
+  gap: 10px;
+  align-items: center;
+  flex-wrap: wrap;
+  border-top: 1px solid #edf2f7;
+  padding-top: 14px;
+}
+
+/* Verification Checklist */
+.checklist-container {
+  margin-top: 16px;
+  background: #f7fafc;
+  border-radius: 8px;
+  padding: 16px;
+  border: 1px solid #e2e8f0;
+}
+
+.checklist-title {
+  font-size: 0.95rem;
+  font-weight: 700;
+  color: #2d3748;
+  margin-bottom: 12px;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.checklist-item {
+  display: flex;
+  align-items: flex-start;
+  gap: 12px;
+  padding: 10px 0;
+  border-bottom: 1px solid #edf2f7;
+}
+
+.checklist-item:last-child {
+  border-bottom: none;
+}
+
+.checklist-checkbox {
+  margin-top: 3px;
+  cursor: pointer;
+  width: 18px;
+  height: 18px;
+}
+
+.checklist-label {
+  font-size: 0.875rem;
+  color: #2d3748;
+  flex: 1;
+}
+
+.checklist-label.completed {
+  text-decoration: line-through;
+  color: #718096;
+}
+
+/* Evidence Upload Form */
+.evidence-upload-card {
+  background: #ffffff;
+  border: 1px dashed #cbd5e0;
+  border-radius: 10px;
+  padding: 20px;
+  margin-top: 16px;
+}
+
+.evidence-form-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 12px;
+  margin-bottom: 12px;
+}
+
+.evidence-input-group {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+}
+
+.evidence-input-group label {
+  font-size: 0.8125rem;
+  font-weight: 600;
+  color: #4a5568;
+}
+
+.evidence-input, .evidence-select {
+  padding: 8px 12px;
+  border-radius: 6px;
+  border: 1px solid #cbd5e0;
+  font-size: 0.875rem;
+}
+
+.evidence-checksum-badge {
+  font-family: monospace;
+  font-size: 0.75rem;
+  background: #edf2f7;
+  padding: 4px 8px;
+  border-radius: 4px;
+  color: #4a5568;
+  word-break: break-all;
+}
+
+/* Modal styling */
+.modal-overlay {
+  position: fixed;
+  inset: 0;
+  background: rgba(15, 23, 42, 0.25);
+  backdrop-filter: blur(6px);
+  -webkit-backdrop-filter: blur(6px);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 1100;
+  padding: 20px;
+  overflow: hidden;
+  box-sizing: border-box;
+}
+
+.modal-card {
+  background: #ffffff;
+  border-radius: 12px;
+  padding: 24px;
+  width: min(540px, calc(100vw - 32px));
+  max-width: 100%;
+  max-height: calc(100vh - 40px);
+  max-height: calc(100dvh - 40px);
+  display: flex;
+  flex-direction: column;
+  box-shadow: 0 10px 25px rgba(0, 0, 0, 0.2);
+  border: 1px solid #e2e8f0;
+  overflow: hidden;
+  box-sizing: border-box;
+}
+
+.modal-card form {
+  display: flex;
+  flex-direction: column;
+  flex: 1;
+  min-height: 0;
+  overflow: hidden;
+}
+
+.modal-title {
+  font-size: 1.25rem;
+  font-weight: 700;
+  margin-bottom: 16px;
+  color: #1a202c;
+  flex-shrink: 0;
+}

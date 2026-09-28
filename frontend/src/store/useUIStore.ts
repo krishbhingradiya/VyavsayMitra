@@ -14,7 +14,11 @@ interface UIState {
   toggleSidebar: () => void;
   setSidebarOpen: (open: boolean) => void;
   setSidebarCollapsed: (collapsed: boolean) => void;
-  addToast: (toast: Omit<Toast, 'id'>) => void;
+  addToast: (
+    toastOrMsg: Omit<Toast, 'id'> | string,
+    type?: 'success' | 'error' | 'info' | 'warning',
+    duration?: number
+  ) => void;
   removeToast: (id: string) => void;
   openModal: (modalId: string) => void;
   closeModal: () => void;
@@ -48,9 +52,13 @@ export const useUIStore = create<UIState>((set) => ({
   setSidebarOpen: (open) => set({ sidebarOpen: open }),
   setSidebarCollapsed: (collapsed) => set({ sidebarCollapsed: collapsed }),
 
-  addToast: (toast) => {
+  addToast: (toastOrMsg, type = 'info', duration) => {
+    const toastObj: Omit<Toast, 'id'> =
+      typeof toastOrMsg === 'string'
+        ? { message: toastOrMsg, type, duration }
+        : toastOrMsg;
     const id = `toast-${Date.now()}-${Math.random().toString(36).slice(2, 7)}`;
-    const newToast = { ...toast, id };
+    const newToast = { ...toastObj, id };
     set((state) => ({ toasts: [...state.toasts, newToast] }));
 
     // Auto-remove after duration
@@ -58,7 +66,7 @@ export const useUIStore = create<UIState>((set) => ({
       set((state) => ({
         toasts: state.toasts.filter((t) => t.id !== id),
       }));
-    }, toast.duration || 4000);
+    }, newToast.duration || 4000);
   },
 
   removeToast: (id) => {

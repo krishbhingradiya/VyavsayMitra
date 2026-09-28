@@ -18,19 +18,14 @@ function IndiaFlag({ className }: { className?: string }) {
   );
 }
 
-export default function TopInfoBar({ showTricolor = true }: { showTricolor?: boolean }) {
+export default function TopInfoBar({ showTricolor: _showTricolor = true }: { showTricolor?: boolean } = {}) {
   return (
     <div className="info-bar" role="banner" aria-label="National mission bar">
       <div className="info-bar__content">
         <div className="info-bar__message">
           <IndiaFlag className="info-bar__flag" />
           <span>Towards a Prosperous Rural India</span>
-          {showTricolor && (
-            <span className="info-bar__tricolor-bar" aria-hidden="true">
-              <span className="info-bar__stripe info-bar__stripe--saffron" />
-              <span className="info-bar__stripe info-bar__stripe--green" />
-            </span>
-          )}
+          <IndiaFlag className="info-bar__flag" />
         </div>
         <div className="info-bar__badges">
           <span className="info-bar__badge">Digital India</span>

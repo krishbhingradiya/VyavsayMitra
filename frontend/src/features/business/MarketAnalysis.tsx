@@ -52,7 +52,7 @@ export default function MarketAnalysis() {
           <ResponsiveContainer width="100%" height={250}>
             <PieChart>
               <Pie data={marketAnalysis.potentialCustomerSegments} dataKey="percentage" nameKey="name" cx="50%" cy="50%" outerRadius={80} label={(entry: any) => `${entry.name} ${entry.percentage}%`}>
-                {marketAnalysis.potentialCustomerSegments.map((_, i) => (
+                {marketAnalysis.potentialCustomerSegments.map((_: any, i: number) => (
                   <Cell key={i} fill={COLORS[i % COLORS.length]} />
                 ))}
               </Pie>

@@ -45,7 +45,7 @@ export const FoodTechMassBalanceFlow: React.FC<Props> = ({
         <div className="flex items-center gap-2">
           <Scale size={20} color="var(--color-primary)" />
           <h3 style={{ fontSize: 'var(--font-size-base)', fontWeight: 'var(--font-weight-bold)' }}>
-            Physical Mass Balance & Output Conservation
+            Material Transformation & Output Flow
           </h3>
         </div>
 
@@ -53,19 +53,19 @@ export const FoodTechMassBalanceFlow: React.FC<Props> = ({
           {isConservationValid ? (
             <span className="badge badge--green flex items-center gap-1">
               <CheckCircle2 size={13} />
-              Mass Conservation Verified (MoFPI/CFTRI Standards)
+              Production Balance Verified (Industry Norms)
             </span>
           ) : (
             <span className="badge badge--saffron flex items-center gap-1">
               <AlertTriangle size={13} />
-              Balance: {totalAccounted.toLocaleString()} / {rawMaterialQuantity.toLocaleString()} {rawMaterialUnit}
+              Accounted: {totalAccounted.toLocaleString()} / {rawMaterialQuantity.toLocaleString()} {rawMaterialUnit}
             </span>
           )}
         </div>
       </div>
 
       <p className="text-xs text-muted" style={{ marginBottom: 'var(--space-4)' }}>
-        Under the first law of thermodynamics and national food technology norms, total primary product, byproducts, and handling losses must deterministically equal raw intake.
+        Shows how raw material input is transformed into finished commercial goods, valuable byproducts, and minimal handling loss.
       </p>
 
       {/* Visual Node Flow */}

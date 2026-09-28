@@ -196,7 +196,7 @@ export const FoodTechDashboard: React.FC<Props> = ({ advisory, onModifyInputs })
             status: 'VALIDATED',
             source: 'MoFPI / CSIR-CFTRI / ICMAI',
             sourceUrl: 'https://mofpi.gov.in',
-            methodology: 'Statutory AST Accounting Standard',
+            methodology: 'Verified Financial Feasibility Standard',
             executedAt: new Date().toISOString(),
           };
         }
@@ -221,7 +221,7 @@ export const FoodTechDashboard: React.FC<Props> = ({ advisory, onModifyInputs })
             <span>{bName}</span>
           </div>
           <div className="foodtech-header__subtitle">
-            Institutional Bankable Project Feasibility, Mass Balance & Financing Assessment
+            Institutional Bankable Project Feasibility, Production Flow & Financing Assessment
           </div>
           <div className="foodtech-header__badge-row">
             <span className="badge badge--primary">ID: {bId}</span>
@@ -538,7 +538,7 @@ export const FoodTechDashboard: React.FC<Props> = ({ advisory, onModifyInputs })
               Deterministic Sensitivity Scenarios
             </h3>
             <p className="text-xs text-muted" style={{ marginBottom: 'var(--space-4)' }}>
-              Computed directly via AST formula execution without client-side assumptions.
+              Computed directly via verified feasibility modeling.
             </p>
 
             <table className="foodtech-table">

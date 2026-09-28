@@ -1,5 +1,6 @@
 import { useState } from 'react';
 import { useAuthStore } from '../../store/useAuthStore';
+import { useBusinessStore } from '../../store/useBusinessStore';
 import { useFinanceStore } from '../../store/useFinanceStore';
 import { formatINR } from '../../utils/financial';
 import {
@@ -26,8 +27,22 @@ interface ReportCardItem {
 
 export default function ReportsPage() {
   const user = useAuthStore((s) => s.user);
+  const activeBusiness = useBusinessStore((s) => s.activeBusiness);
+  const businesses = useBusinessStore((s) => s.businesses);
+  const biz = activeBusiness || (businesses && businesses.length > 0 ? businesses[0] : null);
+  const analysis = biz?.latestAnalysis;
+
   const { projectCost, selectedScheme } = useFinanceStore();
   const [downloadingId, setDownloadingId] = useState<string | null>(null);
+
+  const targetName = biz ? biz.name : (user?.businessInterest ? `${user.businessInterest} Enterprise` : 'Rural Enterprise');
+  const targetCost = analysis?.total_project_cost || projectCost?.totalProjectCost || 500000;
+  const targetLocation = biz?.location?.village
+    ? `${biz.location.village}, ${biz.location.district || 'Anand'}`
+    : `${user?.location.village || 'Changa'}, ${user?.location.district || 'Anand'}`;
+  const matchedSchemeName = biz?.domain === 'foodtech'
+    ? 'PMFME / PMEGP Credit-Linked Subsidy'
+    : (biz?.domain === 'agriculture' ? 'KCC / PMEGP Priority Credit' : (selectedScheme?.scheme?.name || 'PMEGP / MUDRA Scheme'));
 
   const reports: ReportCardItem[] = [
     {
@@ -36,10 +51,10 @@ export default function ReportsPage() {
       category: 'Banking & Credit',
       description:
         'Standard bank-ready 3-year financial appraisal, means of finance, promoter contribution, and debt service coverage ratio.',
-      updatedAt: 'Today, Just now',
+      updatedAt: 'Verified & Current',
       pages: 4,
       status: 'ready',
-      route: '/business-plan',
+      route: biz ? `/businesses/${biz.id}/reports` : '/business-plan',
     },
     {
       id: 'feasibility',
@@ -47,10 +62,10 @@ export default function ReportsPage() {
       category: 'Market Research',
       description:
         'Catchment demographic breakdown, consumer segments, competitor location mapping, and local demand indicators within 10 KM.',
-      updatedAt: 'Today, 10 minutes ago',
+      updatedAt: 'Verified Observation',
       pages: 3,
       status: 'ready',
-      route: '/business-feasibility',
+      route: biz ? `/businesses/${biz.id}/market` : '/business-feasibility',
     },
     {
       id: 'financial',
@@ -58,10 +73,10 @@ export default function ReportsPage() {
       category: 'Financial Analysis',
       description:
         'Margin money requirement, term loan computation, EMI repayment schedule, moratorium grace details, and operating cost breakup.',
-      updatedAt: 'Today, 15 minutes ago',
+      updatedAt: 'Calculated from Inputs',
       pages: 3,
       status: 'ready',
-      route: '/financial-calculator',
+      route: biz ? `/businesses/${biz.id}/analysis` : '/financial-calculator',
     },
     {
       id: 'scheme',
@@ -69,10 +84,10 @@ export default function ReportsPage() {
       category: 'Government Subsidies',
       description:
         'Evaluation of PMEGP, MUDRA, and state credit schemes with required document checklist for branch submission.',
-      updatedAt: 'Today, 20 minutes ago',
+      updatedAt: 'Scheme Benchmarks',
       pages: 2,
       status: 'ready',
-      route: '/scheme-advisor',
+      route: biz ? `/businesses/${biz.id}/schemes` : '/scheme-advisor',
     },
   ];
 
@@ -85,7 +100,7 @@ export default function ReportsPage() {
   };
 
   return (
-    <div className="page-enter">
+    <div className="page-enter" style={{ maxWidth: '1200px', margin: '0 auto', width: '100%', boxSizing: 'border-box' }}>
       {/* Header */}
       <div
         className="flex items-center justify-between"
@@ -102,6 +117,7 @@ export default function ReportsPage() {
               display: 'flex',
               alignItems: 'center',
               justifyContent: 'center',
+              flexShrink: 0,
             }}
           >
             <FileText size={24} />
@@ -112,6 +128,7 @@ export default function ReportsPage() {
                 fontSize: 'var(--font-size-2xl)',
                 fontWeight: 'var(--font-weight-bold)',
                 lineHeight: 1.2,
+                color: 'var(--color-primary)',
               }}
             >
               Business Reports & Appraisal Dossiers
@@ -123,7 +140,7 @@ export default function ReportsPage() {
         </div>
 
         <div className="flex gap-3">
-          <Link to="/business-plan" className="btn btn--primary btn--sm">
+          <Link to={biz ? `/businesses/${biz.id}/reports` : '/business-plan'} className="btn btn--primary btn--sm">
             <Printer size={16} />
             Print Master DPR Dossier
           </Link>
@@ -142,39 +159,47 @@ export default function ReportsPage() {
         <div
           style={{
             display: 'grid',
-            gridTemplateColumns: 'repeat(auto-fit, minmax(200px, 1fr))',
+            gridTemplateColumns: 'repeat(auto-fit, minmax(min(100%, 200px), 1fr))',
             gap: 'var(--space-4)',
           }}
         >
           <div>
             <span className="text-xs text-muted block">Enterprise Target</span>
             <strong className="text-sm" style={{ textTransform: 'capitalize' }}>
-              {user?.businessInterest || 'Dairy'} Unit
+              {targetName}
             </strong>
           </div>
           <div>
             <span className="text-xs text-muted block">Catchment Area</span>
             <strong className="text-sm">
-              {user?.location.village || 'Changa'}, {user?.location.district || 'Anand'}
+              {targetLocation}
             </strong>
           </div>
           <div>
             <span className="text-xs text-muted block">Total Project Outlay</span>
             <strong className="text-sm font-data" style={{ color: 'var(--color-primary)' }}>
-              {formatINR(projectCost?.totalProjectCost || 1000000)}
+              {formatINR(targetCost)}
             </strong>
           </div>
           <div>
             <span className="text-xs text-muted block">Matched Credit Scheme</span>
             <strong className="text-sm" style={{ color: 'var(--color-green)' }}>
-              {selectedScheme?.scheme?.name || 'Term Loan Scheme'}
+              {matchedSchemeName}
             </strong>
           </div>
         </div>
       </div>
 
-      {/* Reports Grid */}
-      <div className="grid grid-2" style={{ gap: 'var(--space-6)', marginBottom: 'var(--space-8)' }}>
+      {/* Reports Grid (Responsive auto-fit) */}
+      <div
+        style={{
+          display: 'grid',
+          gridTemplateColumns: 'repeat(auto-fit, minmax(min(100%, 340px), 1fr))',
+          gap: 'var(--space-6)',
+          marginBottom: 'var(--space-8)',
+          width: '100%',
+        }}
+      >
         {reports.map((report) => (
           <div
             key={report.id}

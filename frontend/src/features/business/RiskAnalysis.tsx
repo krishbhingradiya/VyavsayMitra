@@ -7,7 +7,7 @@ export default function RiskAnalysis() {
   const risks = useBusinessStore((s) => s.risks);
   if (!risks.length) return (<div className="page-enter empty-state"><AlertTriangle size={48} className="empty-state__icon" /><h3 className="empty-state__title">No risk analysis yet.</h3><p className="empty-state__description">Complete business analysis to identify risks.</p></div>);
 
-  const impactColors = { low: 'var(--color-risk-low)', medium: 'var(--color-risk-medium)', high: 'var(--color-risk-high)' };
+  const impactColors: Record<string, string> = { low: 'var(--color-risk-low)', medium: 'var(--color-risk-medium)', high: 'var(--color-risk-high)' };
 
   return (
     <div className="page-enter">

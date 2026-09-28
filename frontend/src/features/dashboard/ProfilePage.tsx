@@ -1,4 +1,4 @@
-import React, { useState, useMemo, useRef } from 'react';
+import React, { useState, useMemo, useRef, useEffect } from 'react';
 import { useAuthStore } from '../../store/useAuthStore';
 import { useUIStore } from '../../store/useUIStore';
 import { INDIAN_STATES } from '../../types/user';
@@ -40,12 +40,30 @@ const GUJARAT_LOCATIONS: Record<string, { talukas: string[]; villages: string[] 
 export default function ProfilePage() {
   const user = useAuthStore((s) => s.user);
   const updateUser = useAuthStore((s) => s.updateUser);
+  const fetchProfile = useAuthStore((s) => s.fetchProfile);
   const addToast = useUIStore((s) => s.addToast);
 
   const [isEditing, setIsEditing] = useState(false);
   const [isUpdating, setIsUpdating] = useState(false);
   const [showCompletionModal, setShowCompletionModal] = useState(false);
   const formRef = useRef<HTMLFormElement | null>(null);
+
+  useEffect(() => {
+    fetchProfile().then((data) => {
+      if (data) {
+        setPersonalForm((prev) => ({
+          ...prev,
+          name: data.name || prev.name,
+          email: data.email || prev.email,
+          phone: data.phone || prev.phone,
+          state: data.location?.state || prev.state,
+          district: data.location?.district || prev.district,
+          taluka: data.location?.block || prev.taluka,
+          village: data.location?.village || prev.village,
+        }));
+      }
+    });
+  }, [fetchProfile]);
 
   // -------------------------------------------------------------
   // Form State: Personal Information

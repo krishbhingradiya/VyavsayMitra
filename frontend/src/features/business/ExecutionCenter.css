@@ -1,0 +1,126 @@
+/* VYAVSAYMITRA — Execution Center Styles */
+
+.exec-center-container {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+}
+
+.exec-provenance-banner {
+  background: #f7fafc;
+  border-left: 4px solid #3182ce;
+  padding: 12px 16px;
+  border-radius: 0 8px 8px 0;
+  font-size: 0.8125rem;
+  color: #4a5568;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.provenance-tag {
+  font-weight: 600;
+  color: #2b6cb0;
+  background: #ebf8ff;
+  padding: 2px 8px;
+  border-radius: 4px;
+  border: 1px solid #bee3f8;
+}
+
+.exec-kpi-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+  gap: 16px;
+}
+
+.exec-kpi-card {
+  background: #ffffff;
+  border-radius: 12px;
+  border: 1px solid #e2e8f0;
+  padding: 20px;
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.04);
+}
+
+.exec-kpi-header {
+  font-size: 0.75rem;
+  font-weight: 700;
+  color: #718096;
+  text-transform: uppercase;
+  letter-spacing: 0.04em;
+  margin-bottom: 8px;
+}
+
+.exec-kpi-value {
+  font-size: 1.75rem;
+  font-weight: 800;
+  color: #1a202c;
+  line-height: 1.2;
+}
+
+.exec-kpi-subtext {
+  font-size: 0.8125rem;
+  color: #4a5568;
+  margin-top: 6px;
+}
+
+.exec-sections-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 20px;
+}
+
+@media (max-width: 900px) {
+  .exec-sections-grid {
+    grid-template-columns: 1fr;
+  }
+}
+
+.exec-panel {
+  background: #ffffff;
+  border-radius: 12px;
+  border: 1px solid #e2e8f0;
+  padding: 20px;
+}
+
+.exec-panel-title {
+  font-size: 1.1rem;
+  font-weight: 700;
+  color: #2d3748;
+  margin: 0 0 16px 0;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.action-item-card {
+  border: 1px solid #e2e8f0;
+  border-radius: 8px;
+  padding: 12px 14px;
+  margin-bottom: 10px;
+  background: #fafafa;
+}
+
+.action-item-card.is-overdue {
+  border-color: #feb2b2;
+  background: #fff5f5;
+}
+
+.action-item-title {
+  font-weight: 600;
+  font-size: 0.9375rem;
+  color: #2d3748;
+}
+
+.action-item-meta {
+  font-size: 0.75rem;
+  color: #718096;
+  margin-top: 4px;
+  display: flex;
+  gap: 12px;
+}
+
+.provenance-label {
+  font-size: 0.75rem;
+  color: #718096;
+  font-style: italic;
+}

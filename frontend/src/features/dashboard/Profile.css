@@ -736,13 +736,15 @@
 .prof-modal-overlay {
   position: fixed;
   inset: 0;
-  background: rgba(15, 23, 42, 0.5);
-  backdrop-filter: blur(2px);
-  z-index: 1000;
+  background: rgba(15, 23, 42, 0.25);
+  backdrop-filter: blur(6px);
+  -webkit-backdrop-filter: blur(6px);
+  z-index: 1100;
   display: flex;
   align-items: center;
   justify-content: center;
   padding: 20px;
+  overflow: hidden;
   box-sizing: border-box;
 }
 
@@ -750,11 +752,25 @@
   background: #FFFFFF;
   border-radius: 16px;
   box-shadow: 0 16px 36px rgba(0, 0, 0, 0.16);
-  width: 100%;
-  max-width: 480px;
+  border: 1px solid #E2E8F0;
+  width: min(480px, calc(100vw - 32px));
+  max-width: 100%;
+  max-height: calc(100vh - 40px);
+  max-height: calc(100dvh - 40px);
+  display: flex;
+  flex-direction: column;
   padding: 22px;
   box-sizing: border-box;
+  overflow: hidden;
   animation: modalEnter 0.2s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.prof-modal-card form {
+  display: flex;
+  flex-direction: column;
+  flex: 1;
+  min-height: 0;
+  overflow: hidden;
 }
 
 @keyframes modalEnter {

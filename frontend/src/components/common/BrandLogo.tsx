@@ -3,17 +3,23 @@ import { Link } from 'react-router-dom';
 import './BrandLogo.css';
 
 export interface BrandLogoProps {
-  size?: 'sm' | 'md' | 'lg' | 'xl';
+  size?: 'sm' | 'md' | 'lg' | 'xl' | 'navbar' | 'sidebar';
   showTagline?: boolean;
   iconOnly?: boolean;
   asLink?: boolean;
   to?: string;
   className?: string;
-  theme?: 'light' | 'dark' | 'auto';
+  theme?: 'light' | 'dark' | 'white' | 'auto';
+  variant?: 'light' | 'dark' | 'white' | 'auto';
+  height?: number;
 }
 
-export const BrandEmblem: React.FC<{ size?: number; className?: string }> = ({
-  size = 38,
+export const BrandEmblem: React.FC<{
+  size?: number;
+  className?: string;
+  theme?: 'light' | 'dark' | 'white' | 'auto';
+}> = ({
+  size = 42,
   className = '',
 }) => {
   return (
@@ -35,33 +41,133 @@ export const BrandLogo: React.FC<BrandLogoProps> = ({
   asLink = false,
   to = '/',
   className = '',
+  theme,
+  variant,
+  height: customHeight,
 }) => {
-  const heights = {
-    sm: 32,
-    md: 42,
-    lg: 52,
-    xl: 66,
+  const ASPECT_RATIO = 947 / 317; // exact ~2.9874 ratio of the trimmed official logo
+
+  const dimensions: Record<string, { height: number; width: number }> = {
+    sm: { height: 42, width: Math.round(42 * ASPECT_RATIO) },
+    md: { height: 56, width: Math.round(56 * ASPECT_RATIO) },
+    navbar: { height: 68, width: Math.round(68 * ASPECT_RATIO) },
+    sidebar: { height: 68, width: Math.round(68 * ASPECT_RATIO) },
+    lg: { height: 74, width: Math.round(74 * ASPECT_RATIO) },
+    xl: { height: 88, width: Math.round(88 * ASPECT_RATIO) },
   };
 
-  const currentHeight = heights[size];
+  const dim = customHeight
+    ? { height: customHeight, width: Math.round(customHeight * ASPECT_RATIO) }
+    : dimensions[size] || dimensions.md;
 
-  const content = iconOnly ? (
-    <img
-      src="/logo-icon.png"
-      alt="VYAVSAYMITRA"
-      height={currentHeight}
-      className={`brand-logo-img brand-logo-img--icon ${className}`}
-      style={{ height: `${currentHeight}px`, width: 'auto', display: 'block', objectFit: 'contain' }}
-    />
-  ) : (
-    <img
-      src="/logo.png"
-      alt="VYAVSAYMITRA — Market. Money. Mitra."
-      height={currentHeight}
-      className={`brand-logo-img brand-logo-img--full ${className}`}
-      style={{ height: `${currentHeight}px`, width: 'auto', display: 'block', objectFit: 'contain' }}
-    />
-  );
+  const resolvedTheme = variant || theme || 'auto';
+
+  let content: React.ReactNode;
+
+  if (iconOnly) {
+    content = (
+      <img
+        src="/logo-icon.png"
+        alt="VYAVSAYMITRA"
+        width={dim.height}
+        height={dim.height}
+        className={`brand-logo-img brand-logo-img--icon brand-logo-img--${size} ${className}`}
+        style={{
+          height: `${dim.height}px`,
+          width: `${dim.height}px`,
+          display: 'block',
+          objectFit: 'contain',
+          maxWidth: '100%',
+        }}
+      />
+    );
+  } else if (resolvedTheme === 'dark') {
+    // Explicit dark-background logo (crisp pure white VYAVSAY + vibrant emerald MITRA + clean white tagline)
+    content = (
+      <img
+        src="/logo-white.png"
+        alt="VYAVSAYMITRA — Market. Money. Mitra."
+        width={dim.width}
+        height={dim.height}
+        className={`brand-logo-img brand-logo-img--full brand-logo-img--dark brand-logo-img--${size} ${className}`}
+        style={{
+          height: `${dim.height}px`,
+          width: 'auto',
+          display: 'block',
+          objectFit: 'contain',
+          maxWidth: '100%',
+        }}
+      />
+    );
+  } else if (resolvedTheme === 'white') {
+    // Monochrome all-white logo for solid brand green or saffron backgrounds
+    content = (
+      <img
+        src="/logo-monochrome.png"
+        alt="VYAVSAYMITRA — Market. Money. Mitra."
+        width={dim.width}
+        height={dim.height}
+        className={`brand-logo-img brand-logo-img--full brand-logo-img--white brand-logo-img--${size} ${className}`}
+        style={{
+          height: `${dim.height}px`,
+          width: 'auto',
+          display: 'block',
+          objectFit: 'contain',
+          maxWidth: '100%',
+        }}
+      />
+    );
+  } else if (resolvedTheme === 'light') {
+    // Explicit light-background logo
+    content = (
+      <img
+        src="/logo.png"
+        alt="VYAVSAYMITRA — Market. Money. Mitra."
+        width={dim.width}
+        height={dim.height}
+        className={`brand-logo-img brand-logo-img--full brand-logo-img--light brand-logo-img--${size} ${className}`}
+        style={{
+          height: `${dim.height}px`,
+          width: 'auto',
+          display: 'block',
+          objectFit: 'contain',
+          maxWidth: '100%',
+        }}
+      />
+    );
+  } else {
+    // 'auto': dual rendering responsive to dark/light containers and dark mode via CSS
+    content = (
+      <span className={`brand-logo-wrap brand-logo-wrap--auto brand-logo-wrap--${size} ${className}`}>
+        <img
+          src="/logo.png"
+          alt="VYAVSAYMITRA — Market. Money. Mitra."
+          width={dim.width}
+          height={dim.height}
+          className={`brand-logo-img brand-logo-img--full brand-logo-img--light-bg brand-logo-img--${size}`}
+          style={{
+            height: `${dim.height}px`,
+            width: 'auto',
+            objectFit: 'contain',
+            maxWidth: '100%',
+          }}
+        />
+        <img
+          src="/logo-white.png"
+          alt="VYAVSAYMITRA — Market. Money. Mitra."
+          width={dim.width}
+          height={dim.height}
+          className={`brand-logo-img brand-logo-img--full brand-logo-img--dark-bg brand-logo-img--${size}`}
+          style={{
+            height: `${dim.height}px`,
+            width: 'auto',
+            objectFit: 'contain',
+            maxWidth: '100%',
+          }}
+        />
+      </span>
+    );
+  }
 
   if (asLink) {
     return (
@@ -71,7 +177,7 @@ export const BrandLogo: React.FC<BrandLogoProps> = ({
     );
   }
 
-  return content;
+  return <>{content}</>;
 };
 
 export default BrandLogo;

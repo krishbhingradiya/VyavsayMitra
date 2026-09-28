@@ -15,12 +15,18 @@
 
 .navbar--home {
   position: absolute;
-  top: calc(28px + var(--tricolor-bar-height, 5px));
+  top: 26px;
   left: 0;
   right: 0;
   background: transparent !important;
   border-bottom: none !important;
   box-shadow: none !important;
+  z-index: 20;
+}
+
+.navbar--home:not(.navbar--scrolled) .brand-logo-link {
+  opacity: 0;
+  pointer-events: auto;
 }
 
 .navbar--transparent {
@@ -31,14 +37,15 @@
 
 .navbar--scrolled {
   position: fixed;
-  top: var(--tricolor-bar-height, 5px);
+  top: 0;
   left: 0;
   right: 0;
-  background: rgba(255, 255, 255, 0.95) !important;
+  background: rgba(255, 255, 255, 0.96) !important;
   backdrop-filter: blur(12px);
   -webkit-backdrop-filter: blur(12px);
-  border-bottom: 1px solid rgba(0, 0, 0, 0.06) !important;
-  box-shadow: 0 4px 20px rgba(11, 37, 69, 0.06) !important;
+  border-bottom: 1px solid rgba(0, 0, 0, 0.08) !important;
+  box-shadow: 0 4px 20px rgba(11, 37, 69, 0.08) !important;
+  z-index: 50;
 }
 
 [data-theme="dark"] .navbar {
@@ -53,73 +60,28 @@
 }
 
 [data-theme="dark"] .navbar--scrolled {
-  background: rgba(11, 23, 38, 0.95);
+  background: rgba(11, 23, 38, 0.96);
 }
 
 .navbar__inner {
   display: flex;
   align-items: center;
   justify-content: space-between;
-  height: 60px;
-  padding: 0 clamp(24px, 3.5vw, 48px);
+  height: 58px;
+  padding: 0 clamp(20px, 4.88vw, 55px);
+  width: 100%;
   max-width: 100%;
+  box-sizing: border-box;
   gap: var(--space-4);
   transition: height var(--transition-base);
 }
 
 .navbar--scrolled .navbar__inner {
+  height: 58px;
+}
+
+.navbar--scrolled .brand-logo-img--navbar {
   height: 52px;
-}
-
-/* --------------------------------------------------------------------------
-   Brand Logo (Image 2 exact split: VYAVSAY in Navy + MITRA in Green)
-   -------------------------------------------------------------------------- */
-.navbar__logo {
-  display: flex;
-  align-items: center;
-  gap: 10px;
-  text-decoration: none;
-  flex-shrink: 0;
-}
-
-.navbar__logo-leaf-badge {
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  flex-shrink: 0;
-}
-
-.navbar__logo-info {
-  display: flex;
-  flex-direction: column;
-}
-
-.navbar__brand-split {
-  font-family: var(--font-brand);
-  font-size: 1.25rem;
-  font-weight: 800;
-  letter-spacing: -0.01em;
-  line-height: 1.1;
-}
-
-.navbar__brand-navy {
-  color: #0B2545;
-}
-
-[data-theme="dark"] .navbar__brand-navy {
-  color: #FFFFFF;
-}
-
-.navbar__brand-green {
-  color: #16834A;
-}
-
-.navbar__tagline {
-  font-size: 0.72rem;
-  font-weight: 500;
-  color: #64748B;
-  letter-spacing: 0.02em;
-  margin-top: 1px;
 }
 
 /* Spacer */
@@ -146,14 +108,15 @@
   display: inline-flex;
   align-items: center;
   gap: 6px;
-  padding: 7px 14px;
+  padding: 6px 14px;
   font-size: 0.85rem;
   font-weight: 600;
-  color: #334155;
-  background: #FFFFFF;
-  border: 1px solid #CBD5E1;
-  border-radius: 8px;
+  color: #24292F;
+  background: rgba(255, 255, 255, 0.95);
+  border: 1px solid rgba(0, 0, 0, 0.14);
+  border-radius: 9999px;
   cursor: pointer;
+  box-shadow: 0 1px 4px rgba(0, 0, 0, 0.06);
   transition: all var(--transition-fast);
 }
 
@@ -266,13 +229,13 @@
   background: #0B2545;
   color: #FFFFFF;
   border: 1px solid #0B2545;
-  border-radius: 8px;
-  padding: 8px 18px;
+  border-radius: 9999px;
+  padding: 7px 18px;
   font-size: 0.85rem;
   font-weight: 600;
   text-decoration: none;
   transition: all var(--transition-fast);
-  box-shadow: 0 2px 6px rgba(11, 37, 69, 0.2);
+  box-shadow: 0 2px 8px rgba(11, 37, 69, 0.25);
 }
 
 .navbar__user-pill-btn:hover {
@@ -347,6 +310,15 @@
 }
 
 @media (max-width: 768px) {
+  .navbar__inner {
+    height: 68px;
+    padding: 0 16px;
+  }
+
+  .brand-logo-img--navbar {
+    height: 48px;
+  }
+
   .navbar__user-pill-btn {
     display: none;
   }

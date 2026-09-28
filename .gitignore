@@ -59,3 +59,9 @@ Thumbs.db
 /take_profile_shot.mjs
 /inspect_dom.mjs
 /run_all_captures.mjs
+
+# Local uploads, test evidence & scratch storage
+scratch/
+backend/uploads/
+backend/data/storage/
+

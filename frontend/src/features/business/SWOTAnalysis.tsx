@@ -25,7 +25,7 @@ export default function SWOTAnalysis() {
               <h3 style={{ color: q.color }}>{q.title}</h3>
             </div>
             <ul style={{ display: 'flex', flexDirection: 'column', gap: 'var(--space-2)' }}>
-              {q.items.map((item, i) => (
+              {q.items.map((item: any, i: number) => (
                 <li key={i} className="text-sm" style={{ padding: 'var(--space-2) 0', borderBottom: '1px solid var(--color-border-light)', display: 'flex', gap: 'var(--space-2)' }}>
                   <span style={{ color: q.color }}>•</span> {item}
                 </li>

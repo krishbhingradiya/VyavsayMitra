@@ -3,6 +3,7 @@ import { BrowserRouter, Routes, Route, Navigate } from 'react-router-dom';
 import { useAuthStore } from './store/useAuthStore';
 import { useUIStore } from './store/useUIStore';
 import IndianTricolorBar from './components/common/IndianTricolorBar';
+import { ErrorBoundary } from './components/common/ErrorBoundary';
 import './i18n';
 
 /* Layouts */
@@ -22,6 +23,10 @@ const OnboardingPage = React.lazy(() => import('./features/onboarding/Onboarding
 const DashboardHome = React.lazy(() => import('./features/dashboard/DashboardHome'));
 const ProfilePage = React.lazy(() => import('./features/dashboard/ProfilePage'));
 const SettingsPage = React.lazy(() => import('./features/dashboard/SettingsPage'));
+
+/* Multi-Business Core: Wizard & Workspace */
+const StartNewBusinessWizard = React.lazy(() => import('./features/business/StartNewBusinessWizard'));
+const BusinessWorkspace = React.lazy(() => import('./features/business/BusinessWorkspace'));
 
 /* Business Feasibility */
 const BusinessFeasibility = React.lazy(() => import('./features/business/BusinessFeasibility'));
@@ -56,6 +61,12 @@ const AIMitra = React.lazy(() => import('./features/ai/AIMitra'));
 /* Reports */
 const ReportsPage = React.lazy(() => import('./features/reports/ReportsPage'));
 
+/* Admin / Operator Dashboard (Phase 11) */
+const AdminDashboard = React.lazy(() => import('./features/admin/AdminDashboard'));
+
+/* Field Operations & Verification (Phase 12) */
+const FieldOperations = React.lazy(() => import('./pages/FieldOperations'));
+
 /** Route guard for authenticated routes */
 function ProtectedRoute({ children }: { children: React.ReactNode }) {
   const isAuthenticated = useAuthStore((s) => s.isAuthenticated);
@@ -84,7 +95,8 @@ export default function App() {
     <BrowserRouter>
       {/* Global Indian Tricolour National Identity Strip */}
       <IndianTricolorBar />
-      <Suspense fallback={<PageLoader />}>
+      <ErrorBoundary>
+        <Suspense fallback={<PageLoader />}>
         <Routes>
           {/* Public routes */}
           <Route element={<PublicLayout />}>
@@ -105,6 +117,12 @@ export default function App() {
             <ProtectedRoute><DashboardLayout /></ProtectedRoute>
           }>
             <Route path="/dashboard" element={<DashboardHome />} />
+            <Route path="/businesses/new" element={<StartNewBusinessWizard />} />
+            <Route path="/business/new" element={<StartNewBusinessWizard />} />
+            <Route path="/businesses/:id" element={<BusinessWorkspace />} />
+            <Route path="/businesses/:id/:tab" element={<BusinessWorkspace />} />
+            <Route path="/business/:id" element={<BusinessWorkspace />} />
+            <Route path="/business/:id/:tab" element={<BusinessWorkspace />} />
             <Route path="/profile" element={<ProfilePage />} />
             <Route path="/settings" element={<SettingsPage />} />
 
@@ -118,6 +136,7 @@ export default function App() {
             <Route path="/business-feasibility/risks" element={<RiskAnalysis />} />
             <Route path="/business-feasibility/pricing" element={<ProductPricing />} />
             <Route path="/business-feasibility/foodtech" element={<Navigate to="/foodtech-advisory" replace />} />
+            <Route path="/crop-farming" element={<Navigate to="/business-feasibility" replace />} />
 
             {/* FoodTech Advisory & Processing */}
             <Route path="/foodtech-advisory" element={<FoodTechAdvisoryPage />} />
@@ -145,12 +164,19 @@ export default function App() {
 
             {/* Reports */}
             <Route path="/reports" element={<ReportsPage />} />
+
+            {/* Operator Admin Dashboard (Phase 11) */}
+            <Route path="/admin" element={<AdminDashboard />} />
+
+            {/* Field Operations & Verification (Phase 12) */}
+            <Route path="/field-operations" element={<FieldOperations />} />
           </Route>
 
           {/* Catch-all */}
           <Route path="*" element={<Navigate to="/" replace />} />
         </Routes>
       </Suspense>
+    </ErrorBoundary>
 
       {/* Global Toast Container */}
       <ToastContainer />

@@ -340,27 +340,80 @@
 }
 .toast__close:hover { color: var(--color-text-primary); }
 
-/* — Modal Overlay — */
-.modal-overlay {
+/* — Unified Modal Overlay System (Requirement 7) — */
+.modal-overlay,
+.modal-backdrop,
+.workspace-edit-modal-overlay,
+.workspace-edit-modal-backdrop,
+.app-modal-backdrop,
+.vault-modal-backdrop,
+.feedback-modal-backdrop,
+.dpr-modal-backdrop {
   position: fixed;
   inset: 0;
-  background: rgba(16, 24, 40, 0.5);
+  background: rgba(10, 25, 45, 0.28);
+  backdrop-filter: blur(8px);
+  -webkit-backdrop-filter: blur(8px);
   display: flex;
   align-items: center;
   justify-content: center;
-  z-index: var(--z-modal);
-  animation: fadeIn 0.2s ease;
-  padding: var(--space-4);
+  z-index: 1100;
+  padding: 20px;
+  overflow-y: auto;
+  box-sizing: border-box;
+  animation: modalOverlayFadeIn 200ms ease-out forwards;
 }
 
-.modal-content {
-  background: var(--color-surface);
-  border-radius: var(--radius-2xl);
-  padding: var(--space-8);
-  max-width: 480px;
-  width: 100%;
-  animation: scaleIn 0.3s ease;
-  box-shadow: var(--shadow-xl);
+@keyframes modalOverlayFadeIn {
+  from {
+    opacity: 0;
+    background: rgba(10, 25, 45, 0);
+  }
+  to {
+    opacity: 1;
+    background: rgba(10, 25, 45, 0.28);
+  }
+}
+
+.modal-content,
+.modal-dialog,
+.app-modal,
+.vault-modal,
+.workspace-edit-modal,
+.feedback-modal {
+  background: var(--color-surface, #ffffff);
+  border-radius: var(--radius-2xl, 14px);
+  padding: var(--space-8, 1.5rem);
+  max-width: 540px;
+  width: min(540px, calc(100vw - 32px));
+  max-height: calc(100vh - 40px);
+  max-height: calc(100dvh - 40px);
+  display: flex;
+  flex-direction: column;
+  animation: modalSpringPopIn 220ms cubic-bezier(0.16, 1, 0.3, 1) forwards;
+  box-shadow: 0 20px 40px -10px rgba(11, 37, 69, 0.18), 0 10px 20px -5px rgba(0, 0, 0, 0.06);
+  border: 1px solid var(--color-border-light, #e2e8f0);
+  overflow: hidden;
+  box-sizing: border-box;
+}
+
+@keyframes modalSpringPopIn {
+  from {
+    opacity: 0;
+    transform: translateY(8px) scale(0.98);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0) scale(1);
+  }
+}
+
+.modal-content form {
+  display: flex;
+  flex-direction: column;
+  flex: 1;
+  min-height: 0;
+  overflow: hidden;
 }
 
 .modal-header {
@@ -368,6 +421,7 @@
   align-items: center;
   justify-content: space-between;
   margin-bottom: var(--space-4);
+  flex-shrink: 0;
 }
 
 .modal-title {
@@ -380,12 +434,16 @@
   font-size: var(--font-size-sm);
   line-height: var(--line-height-relaxed);
   margin-bottom: var(--space-6);
+  flex: 1;
+  min-height: 0;
+  overflow-y: auto;
 }
 
 .modal-footer {
   display: flex;
   gap: var(--space-3);
   justify-content: flex-end;
+  flex-shrink: 0;
 }
 
 /* — Tabs — */
@@ -560,3 +618,71 @@
 .font-data { font-family: var(--font-data); }
 .font-semibold { font-weight: var(--font-weight-semibold); }
 .font-bold { font-weight: var(--font-weight-bold); }
+
+/* ============================================
+   Universal Print Stylesheet — DPR Dossier
+   ============================================ */
+@media print {
+  header,
+  nav,
+  footer,
+  aside,
+  .dash-header,
+  .dash-sidebar,
+  .dash-mobile-nav,
+  .dash-ai-mitra-container,
+  .dash-ai-mitra-fab,
+  .indian-tricolor-bar,
+  .workspace-header,
+  .workspace-tabs,
+  .workspace-quick-prompts,
+  .workspace-chat-input-bar,
+  .btn,
+  button,
+  .no-print,
+  .dpr-no-print {
+    display: none !important;
+  }
+
+  body, html, #root, .dash-layout, .dash-content, .workspace-page, .workspace-tab-content {
+    background: #ffffff !important;
+    color: #0b2545 !important;
+    padding: 0 !important;
+    margin: 0 !important;
+    max-width: 100% !important;
+    width: 100% !important;
+    overflow: visible !important;
+    box-shadow: none !important;
+  }
+
+  .card, .dpr-dossier-card {
+    box-shadow: none !important;
+    border: 1px solid #cbd5e1 !important;
+    break-inside: avoid;
+    page-break-inside: avoid;
+    margin-bottom: 1.5rem !important;
+    background: #ffffff !important;
+  }
+
+  .data-table, .dpr-table {
+    width: 100% !important;
+    border-collapse: collapse !important;
+  }
+
+  .data-table th, .dpr-table th {
+    background: #f1f5f9 !important;
+    color: #0f172a !important;
+    -webkit-print-color-adjust: exact;
+    print-color-adjust: exact;
+  }
+
+  .dpr-page-break {
+    page-break-before: always;
+  }
+
+  @page {
+    margin: 1.2cm;
+    size: A4 portrait;
+  }
+}
+

@@ -34,6 +34,8 @@ export interface FoodTechModelSummary {
   outputMetrics: string[];
   benchmarkDefaults: Record<string, FoodTechBenchmarkValue>;
   dataSources: FoodTechDataSource[];
+  institutionalSource?: string;
+  institutional_source?: string;
 }
 
 export interface FoodTechModelResponse {

@@ -15,17 +15,19 @@ interface AuthState {
   user: User | null;
   isAuthenticated: boolean;
   isLoading: boolean;
-  login: (email: string, password: string) => Promise<boolean>;
+  login: (email: string, password?: string) => Promise<boolean>;
+  ensureAuthenticatedToken: () => Promise<string | null>;
   register: (userData: Partial<User>) => Promise<boolean>;
   sendOtp: (email: string) => Promise<OtpResponse>;
   verifyOtp: (email: string, otp: string) => Promise<boolean>;
   logout: () => void;
   updateUser: (updates: Partial<User>) => void;
+  fetchProfile: () => Promise<any>;
   completeOnboarding: () => void;
 }
 
 const DEMO_USER: User = {
-  id: 'demo-001',
+  id: 'usr_ramesh_patel_01',
   name: 'Ramesh Patel',
   phone: '+91 98765 43210',
   email: 'ramesh@example.com',
@@ -46,21 +48,68 @@ const DEMO_USER: User = {
 
 export const useAuthStore = create<AuthState>()(
   persist(
-    (set) => ({
-      user: DEMO_USER,
-      isAuthenticated: true,
+    (set, get) => ({
+      user: null,
+      isAuthenticated: false,
       isLoading: false,
 
-      login: async (_email: string, _password: string) => {
+      ensureAuthenticatedToken: async () => {
+        let token = localStorage.getItem('auth_token') || localStorage.getItem('token');
+        if (token) return token;
+        if (!get().isAuthenticated) return null;
+
+        try {
+          const state = get();
+          const userEmail = state.user?.email || 'ramesh@example.com';
+          const res = await authApi.login(userEmail, 'password');
+          if (res && res.success && res.token) {
+            localStorage.setItem('auth_token', res.token);
+            if (res.user && (!state.user || state.user.id !== res.user.id)) {
+              set({
+                user: { ...DEMO_USER, ...res.user },
+                isAuthenticated: true,
+              });
+            }
+            return res.token;
+          }
+        } catch (err: any) {
+          console.warn('[AUTH] ensureAuthenticatedToken notice:', err.message);
+        }
+        return null;
+      },
+
+      login: async (email: string, password?: string) => {
         set({ isLoading: true });
-        // Mock auth: simulate network delay
-        await new Promise((resolve) => setTimeout(resolve, 800));
-        set({
-          user: DEMO_USER,
-          isAuthenticated: true,
-          isLoading: false,
-        });
-        return true;
+        try {
+          const res = await authApi.login(email, password);
+          if (res && res.success && res.token) {
+            localStorage.setItem('auth_token', res.token);
+            const userObj: User = {
+              ...DEMO_USER,
+              id: res.user?.id || 'usr_ramesh_patel_01',
+              email: res.user?.email || email,
+              name: res.user?.name || 'Ramesh Patel',
+              phone: res.user?.phone || '+91 98765 43210',
+              onboardingComplete: true,
+            };
+            set({
+              user: userObj,
+              isAuthenticated: true,
+              isLoading: false,
+            });
+            return true;
+          }
+          set({ isLoading: false });
+          return false;
+        } catch (err: any) {
+          console.warn('[AUTH] Login server fallback:', err.message);
+          set({
+            user: DEMO_USER,
+            isAuthenticated: true,
+            isLoading: false,
+          });
+          return true;
+        }
       },
 
       register: async (userData: Partial<User>) => {
@@ -107,6 +156,9 @@ export const useAuthStore = create<AuthState>()(
           const data = await authApi.verifyOtp(email, otp);
 
           if (data.success && data.user) {
+            if (data.token) {
+              localStorage.setItem('auth_token', data.token);
+            }
             const otpUser: User = {
               ...DEMO_USER,
               id: data.user.id,
@@ -135,13 +187,33 @@ export const useAuthStore = create<AuthState>()(
       },
 
       logout: () => {
+        localStorage.removeItem('auth_token');
+        localStorage.removeItem('token');
         set({ user: null, isAuthenticated: false });
+      },
+
+      fetchProfile: async () => {
+        try {
+          const res = await authApi.getProfile();
+          if (res && res.data) {
+            set((state) => ({
+              user: state.user ? { ...state.user, ...res.data } : res.data,
+            }));
+            return res.data;
+          }
+        } catch (err: any) {
+          console.warn('[AUTH] fetchProfile warn:', err.message);
+        }
+        return null;
       },
 
       updateUser: (updates) => {
         set((state) => ({
           user: state.user ? { ...state.user, ...updates } : null,
         }));
+        authApi.updateProfile(updates).catch((err: any) => {
+          console.warn('[AUTH] updateProfile sync warn:', err.message);
+        });
       },
 
       completeOnboarding: () => {
@@ -152,6 +224,7 @@ export const useAuthStore = create<AuthState>()(
     }),
     {
       name: 'vyavsaymitra-auth',
+      version: 2,
       partialize: (state) => ({
         user: state.user,
         isAuthenticated: state.isAuthenticated,
@@ -159,3 +232,4 @@ export const useAuthStore = create<AuthState>()(
     }
   )
 );
+

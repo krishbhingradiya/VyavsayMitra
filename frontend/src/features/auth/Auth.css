@@ -59,7 +59,9 @@
 .auth-brand__logo-img {
   height: 48px;
   width: auto;
-  filter: brightness(0) invert(1);
+  display: block;
+  object-fit: contain;
+  filter: none;
 }
 
 /* Handwritten tagline — Kalam font */

@@ -117,28 +117,28 @@ function reconcileMarketData(historical, current, options = {}) {
   if (!historical && !current) {
     return {
       commodity: options.commodity || 'Commodity',
-      modalPricePerQtl: 2200,
-      farmgatePricePerKg: 19.80,
-      dataStatus: 'insufficient',
+      modalPricePerQtl: null,
+      farmgatePricePerKg: null,
+      dataStatus: 'unavailable',
       current: null,
       historicalReference: null,
       comparison: null,
       trend: {
-        direction: 'STABLE',
-        seasonalContext: 'Market data unavailable for this commodity cluster.'
+        direction: 'UNKNOWN',
+        seasonalContext: 'Market observation data unavailable for this commodity in this district.'
       },
       prediction: {
         status: 'not_applicable',
         reason: 'Insufficient market data.'
       },
       provenance: {
-        source: 'Default MSP Minimum Fallback',
+        source: 'None — Data Unavailable',
         sourceUrl: null,
-        sourceDate: '2024-2026',
+        sourceDate: null,
         retrievedAt: new Date().toISOString(),
         datasetVersion: 'v1.1.0'
       },
-      warnings: ['No historical or current market observations found for this query.']
+      warnings: ['No historical or current market observations found for this query. Physical APMC verification required.']
     };
   }
 
